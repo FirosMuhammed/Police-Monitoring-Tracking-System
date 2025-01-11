@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Station Registration</title>
+    </head>
+
+    <body>
+        <center>
+            <h2>Station Registration</h2>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {{ log.as_p }}
+
+                <button type="submit">Register</button>
+            </form>
+        </center>
+    </body>
+</html>
