@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import StationForm,loginForm,login_check,station_profile_form,station_email_form
-from .models import login,police_station
+from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form
+from .models import login,police_station,user_reg
 from django.contrib  import messages
 
 
@@ -28,6 +28,26 @@ def Station_reg(request):
         logins = loginForm()
 
     return render(request, 'station_register.html', {'form': form, 'log': logins})
+
+def user_regs(request):
+    if request.method=='POST':
+        form=Userform(request.POST)
+        logins=loginForm(request.POST)
+        if form.is_valid() and logins.is_valid():
+            a=logins.save(commit=False)
+            a.usertype=3
+            a.save()
+            b=form.save(commit=False)
+            b.login_userid = a
+            b.save()
+            return redirect('home')
+    else:
+        form=Userform()
+        logins=loginForm()
+    return render(request,'user_registration.html',{'form':form,'log':logins})
+
+def user_home(request):
+    return render(request,'user_home.html')
 
 def station_home(request):
     return render(request,'station_home.html')
@@ -75,7 +95,7 @@ def station_profile(request):
 
 def staffreg(request):
     if request.method=='POST':
-        form=staffform(request.POST)
+        form=stafform(request.POST)
         logins=loginform(request.POST)
         if form.is_valid() and logins.is_valid():
             a=logins.save(commit=False)
@@ -139,5 +159,21 @@ def staff_profile(request):
 
 # def edit_station_profile(request,id):
     
+def user_profile(request):
+    loginid=request.session.get('userid')
+    login_details=get_object_or_404(login,id=loginid)
+    details = get_object_or_404(user_reg,login_userid=login_details)
+    if request.method == 'POST':
+        form = user_profile_form(request.POST, instance=details)
+        form2=user_email_form(request.POST,instance=login_details)
+        if form.is_valid() and form2.is_valid():
+            form.save()
+            form2.save()
+            return redirect('userhome')
+    else:
+        form = user_profile_form(instance = details)
+        form2=user_email_form(instance=login_details)
+    return render(request,'edit_user.html',{'form' : form,'form2':form2})
+
 
     

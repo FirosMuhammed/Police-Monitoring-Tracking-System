@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+    <center>
+    <h1>Edit User</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form2.as_p }}
+        <button type="submit">Edit</button>
+        
+    </form>
+</center>
+</body>
+</html>
