@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Add_criminals</title>
+    </head>
+    <body>
+    <center>
+        <h2>Add Criminals</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{forms.as_p}}
+            <button type="submit"> Upload</button>
+    </form>
+    </center>
+    </body>
+</html>

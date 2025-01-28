@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form
+from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form,criminal_form
 from .models import login,police_station,user_reg
 from django.contrib  import messages
 
@@ -162,6 +162,18 @@ def user_profile(request):
         form = user_profile_form(instance = details)
         form2=user_email_form(instance=login_details)
     return render(request,'edit_user.html',{'form' : form,'form2':form2})
+
+def form_criminal(request):
+    if request.method == 'POST':
+        form = criminal_form(request.POST)
+        form.save()
+        return redirect('staffhome')
+    else:
+        form = criminal_form()
+    return render(request,'add_criminals.html',{'forms' :form})
+
+    
+
 
 
     

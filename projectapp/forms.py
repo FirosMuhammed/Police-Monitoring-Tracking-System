@@ -1,5 +1,5 @@
 from django import forms
-from.models import police_station,login,user_reg
+from.models import police_station,login,user_reg,criminals
 
 class StationForm(forms.ModelForm):
 
@@ -46,3 +46,23 @@ class user_email_form(forms.ModelForm):
     class Meta:
         model=login
         fields=['email']
+
+class staffform(forms.ModelForm):
+    class Meta:
+        model=staff_reg
+        fields=['staff_name','staff_address','staff_district','staff_city','staff_contact','staff_dob','staff_designation','gender']
+
+class staff_profile_form(forms.ModelForm):
+    class Meta:
+        model=staff_reg
+        fields=['staff_name','staff_address','staff_district','staff_city','staff_contact','staff_dob','staff_designation','gender']
+
+class staff_email_form(forms.ModelForm):
+    class Meta:
+        model= login
+        fields=['email']      
+
+class criminal_form(forms.ModelForm):
+    class Meta:
+        model= criminals
+        fields=['photo','criminal_name','crime_details','criminal_age','gender']

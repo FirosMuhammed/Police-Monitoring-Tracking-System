@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Staff Profile</title>
+</head>
+<body>
+    <center>
+    <h1>Edit Staff</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ forms.as_p }}
+        <button type="submit">Edit</button>
+        
+    </form>
+</center>
+</body>
+</html>
