@@ -43,13 +43,13 @@ class staff_reg(models.Model):
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='Male')
 
     staff_login_id=models.ForeignKey('login',on_delete=models.CASCADE,null=True)
-    
+
 class criminals(models.Model):
    
-    photo= models.FileField(upload_to='criminalface/')
-    criminal_name= models.CharField(max_length=100) 
+    photo=models.FileField(upload_to='criminalface/')
+    criminal_name=models.CharField(max_length=100) 
     crime_details=models.CharField(max_length=500)
-    criminal_age=models.IntegerField(max_length=100)
+    criminal_age=models.IntegerField()
     GENDER_CHOICES = [
         ('Male', 'Male'),
         ('Female', 'Female'),

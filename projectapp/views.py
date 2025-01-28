@@ -163,17 +163,26 @@ def user_profile(request):
         form2=user_email_form(instance=login_details)
     return render(request,'edit_user.html',{'form' : form,'form2':form2})
 
+# def form_criminal(request):
+#     if request.method == 'POST':
+#         form = criminal_form(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('staffhome')
+#     else:
+#         form = criminal_form()
+#     return render(request,'add_criminals.html',{'forms' :form})
+
+   
 def form_criminal(request):
     if request.method == 'POST':
-        form = criminal_form(request.POST)
-        form.save()
-        return redirect('staffhome')
+        form = criminal_form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('staffhome') 
     else:
         form = criminal_form()
-    return render(request,'add_criminals.html',{'forms' :form})
-
-    
-
+    return render(request, 'add_criminals.html', {'forms': form})
 
 
     
