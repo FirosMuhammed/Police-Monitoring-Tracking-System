@@ -64,6 +64,17 @@ def login_page(request):
                     if user.usertype == 2:
                         request.session['userid']=user.id
                         return redirect('stationhome')
+                    elif user.usertype == 1:
+                        request.session['userid']=user.id
+                        return redirect('staffhome')
+                    elif user.usertype == 3:
+                        request.session['userid']=user.id
+                        return redirect('userhome')
+                    elif user.usertype == 4:
+                        request.session['userid']=user.id
+                        return redirect('adminhome')
+                    else:
+                        messages.error(request, 'Invalid user type')
                 else:
                     messages.error(request,'Invalid Password')
             except login.DoesNotExist:
@@ -113,29 +124,6 @@ def staffreg(request):
 
 def staff_home(request):
     return render(request,'staff_home.html')
-
-def login_page(request):
-    if request.method=='POST':
-        form= login_check(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            try:
-                user = login.objects.get(email=email)
-                if user.password == password:
-                    if user.usertype == 1:  
-                        request.session['userid']=user.id
-                        return redirect('staffhome')
-                else:
-                    messages.error(request,'Invalid Password')
-            except login.DoesNotExist:
-                messages.error(request,'user does not exist')
-    else:
-        form=login_check()            
-    return render(request,'login.html',{'form': form})
-
-
-
 
 
 def staff_profile(request):
