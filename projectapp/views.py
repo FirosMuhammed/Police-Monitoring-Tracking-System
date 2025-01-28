@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form,criminal_form
-from .models import login,police_station,user_reg
+from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form,criminal_form,stafform,staff_profile_form,staff_email_form
+from .models import login,police_station,user_reg,staff_reg
 from django.contrib  import messages
 
 
@@ -107,7 +107,7 @@ def station_profile(request):
 def staffreg(request):
     if request.method=='POST':
         form=stafform(request.POST)
-        logins=loginform(request.POST)
+        logins=loginForm(request.POST)
         if form.is_valid() and logins.is_valid():
             a=logins.save(commit=False)
             a.usertype=1
@@ -117,8 +117,8 @@ def staffreg(request):
             b.save()
             return redirect('home')
     else:
-         form=staffform()
-         logins=loginform()
+         form=stafform()
+         logins=loginForm()
     return render(request,'staff_reg.html',{'forms':form,'log':logins})
 
 

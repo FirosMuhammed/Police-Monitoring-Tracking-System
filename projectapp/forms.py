@@ -1,5 +1,5 @@
 from django import forms
-from.models import police_station,login,user_reg,criminals
+from.models import police_station,login,user_reg,criminals,staff_reg
 
 class StationForm(forms.ModelForm):
 
@@ -47,7 +47,7 @@ class user_email_form(forms.ModelForm):
         model=login
         fields=['email']
 
-class staffform(forms.ModelForm):
+class stafform(forms.ModelForm):
     class Meta:
         model=staff_reg
         fields=['staff_name','staff_address','staff_district','staff_city','staff_contact','staff_dob','staff_designation','gender']
