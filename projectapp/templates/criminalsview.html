@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<center><h2>Criminals Table</h2></center>
+<table>
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Criminal Name</th>
+            <th>Crime Details</th> 
+            <th>Age</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data %}
+        <tr>
+            <td><img src="{{ row.photo.url }}" width="90px" height="90px" /></td>
+            <td>{{ row.criminal_name }}</td>
+            <td>{{ row.crime_details }}</td>
+            <td>{{ row.criminal_age }}</td>
+            <td>{{ row.gender }}</td>
+
+            <td class="action-buttons">
+                <a href="criminal_edit/{{row.id}}" class="edit-btn">Edit</a>
+                    {% csrf_token %}
+
+                 <a href="criminal_delete/{{row.id}}" class="edit-btn">Delete</a>
+                
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
