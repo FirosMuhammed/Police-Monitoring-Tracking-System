@@ -56,4 +56,6 @@ class criminals(models.Model):
         ('Other', 'Other')
         ]
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='Male')
+
+    login_staffid=models.ForeignKey('staff_reg',on_delete=models.CASCADE,blank=True,null=True)
    

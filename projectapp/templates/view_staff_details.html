@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Staff Details</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<center><h2>Staff Details</h2></center>
+<table>
+    <thead>
+        <tr>
+            <th>Staff Name</th>
+            <th>Address</th>
+            <th>Gender</th> 
+            <th>District</th>
+            <th>City</th>
+            <th>Contact</th>
+            <th>DOB</th>
+            <th>Designation</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in details %}
+        
+        <tr>
+            
+            <td>{{ row.staff_name }}</td>
+            <td>{{ row.staff_address }}</td>
+            <td>{{ row.gender }}</td>
+            <td>{{ row.staff_district }}</td>
+            <td>{{ row.staff_city }}</td>
+            <td>{{ row.staff_contact }}</td>
+            <td>{{ row.staff_dob }}</td>
+            <td>{{ row.staff_designation }}</td>
+            <td>{{ row.staff_login_id.email }}</td>
+
+            <!-- <td class="action-buttons">
+                <a href="criminal_edit/{{row.id}}" class="edit-btn">Edit</a>
+                    {% csrf_token %}
+
+                 <a href="criminal_delete/{{row.id}}" class="edit-btn">Delete</a>
+                
+            </td> -->
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

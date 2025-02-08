@@ -1,17 +1,58 @@
+{% extends 'userheader.html' %}
+{% block content %}
+
 <html>
-<head>
-    <title>User Profile</title>
-</head>
-<body>
-    <center>
-    <h1>Edit User</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {{ form2.as_p }}
-        <button type="submit">Edit</button>
+    <head>
+        <title>User Profile</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+x   <body>
+    <center>   
+        <table class="form-class">
+        <h2>User Profile</h2>
+        <br><br>
+
+        <form method="POST">
+            {% csrf_token %}
+           
+        <tr>
+            <td><label>Name</label></td>
+            <td>{{form.name}}</td>
+        </tr>
+
+        <tr>
         
+            <td><label>Contact</label></td>
+            <td>{{form.contact}}</td>
+        </tr>
+
+        <tr>
+            <td><label>Email</label></td>
+            <td>{{form2.email}}</td>
+        </tr>
+
+        <!-- <tr>
+        
+            <td><label>Password</label></td>
+            <td>{{form2.password}}</td>
+        </tr> -->
+       
+        
+       
+        <tr>
+            
+            <td colspan="2">    
+                <div style="text-align: center;">
+                    <br><br>
+                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;"> Edit</button>
+            </div>
+
+            </td>
+        </tr>   
     </form>
-</center>
-</body>
+</table>   
+ </center>
+ 
+    </body>
 </html>
+{% endblock %}

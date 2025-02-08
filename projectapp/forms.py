@@ -25,7 +25,7 @@ class login_check(forms.Form):
 class station_profile_form(forms.ModelForm):
     class Meta:
         model = police_station
-        fields = ['addressline1','addressline2','district','city','contact']
+        fields = ['station_id','addressline1','addressline2','district','city','contact']
 
 class station_email_form(forms.ModelForm):
     class Meta:
@@ -65,4 +65,10 @@ class staff_email_form(forms.ModelForm):
 class criminal_form(forms.ModelForm):
     class Meta:
         model= criminals
+        fields=['photo','criminal_name','crime_details','criminal_age','gender']
+
+
+class CriminalEdit(forms.ModelForm):
+    class Meta:
+        model=criminals
         fields=['photo','criminal_name','crime_details','criminal_age','gender']
