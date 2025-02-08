@@ -43,7 +43,7 @@
         <!-- cursor end -->
 
         <!-- preloader -->
-        <div class="mil-preloader">
+        <!-- <div class="mil-preloader">
             <div class="mil-preloader-animation">
                 <div class="mil-pos-abs mil-animation-1">
                     <p class="mil-h3 mil-muted mil-thin">Police</p>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- preloader end -->
 
         <!-- scrollbar progress -->
@@ -92,7 +92,7 @@
                                         </ul>
                                     </li>
                                     <li class="mil-has-children">
-                                        <a href="{%url 'staffprofile' %}">Profile</a>
+                                        <a href="{% url 'staffprofile' %}">Profile</a>
                                         <!-- <ul>
                                             <li><a href="portfolio-1.html">Grid type 1</a></li>
                                             <li><a href="portfolio-2.html">Grid type 2</a></li>
@@ -100,14 +100,14 @@
                                         </ul> -->
                                     </li>
                                     <li class="mil-has-children">
-                                        <a href="#.">Services</a>
+                                        <a href="#.">Criminals</a>
                                         <ul>
-                                            <li><a href="services.html">Services List</a></li>
-                                            <li><a href="service.html">Single service</a></li>
+                                            <li><a href="{% url 'uploadcriminals' %}">Update Criminals</a></li>
+                                            <li><a href="{% url 'view_criminals' %}">View Criminals</a></li>
                                         </ul>
                                     </li>
                                     <li class="mil-has-children">
-                                        <a href="#.">Newsletter</a>
+                                        <a href="#.">News Letter</a>
                                         <ul>
                                             <li><a href="blog.html">Blog List</a></li>
                                             <li><a href="publication.html">Publication</a></li>

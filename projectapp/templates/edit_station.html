@@ -1,17 +1,84 @@
+{% extends 'station_header.html' %}
+{% block content %}
+
 <html>
-<head>
-    <title>Station Profile</title>
-</head>
-<body>
-    <center>
-    <h1>Edit Station</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {{ form2.as_p }}
-        <button type="submit">Edit</button>
+    <head>
+        <title>Station Profile</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+x   <body>
+    <center>   
+        <table class="form-class">
+        <h2>Station Profile</h2>
+        <br><br>
+
+        <form method="POST">
+            {% csrf_token %}
+           
+        <tr>
+            <td><label>Station ID</label></td>
+            <td>{{form.station_id}}</td>
+        </tr>
+
+        <tr>
         
+            <td><label>Address Line 1</label></td>
+            <td>{{form.addressline1}}</td>
+        </tr>
+
+        <tr>
+            <td><label>Address Line 2</label></td>
+            <td>{{form.addressline2}}</td>
+        </tr>
+
+        <tr>
+        
+            <td><label>District</label></td>
+            <td>{{form.district}}</td>
+        </tr>
+
+        <tr>
+        
+            <td><label>City</label></td>
+            <td>{{form.city}}</td>
+        </tr>
+
+        <tr>
+        
+            <td><label>Contact</label></td>
+            <td>{{form.contact}}</td>
+        </tr>
+
+        <tr>
+        
+            <td><label>Email</label></td>
+            <td>{{form2.email}}</td>
+        </tr>
+
+        <!-- <tr>
+        
+            <td><label>Password</label></td>
+            <td>{{form2.password}}</td>
+        </tr> -->
+       
+       
+       
+        
+       
+        <tr>
+            
+            <td colspan="2">    
+                <div style="text-align: center;">
+                    <br><br>
+                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;"> Edit</button>
+            </div>
+
+            </td>
+        </tr>   
     </form>
-</center>
-</body>
+</table>   
+ </center>
+ 
+    </body>
 </html>
+{% endblock %}

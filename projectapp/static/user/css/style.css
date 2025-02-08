@@ -143,6 +143,8 @@ section {
   overflow: hidden;
 }
 
+
+
 /* -------------------------------------------
 
 typography
@@ -672,20 +674,32 @@ button
 form
 
 ------------------------------------------- */
+.form-class{
+  width: 00px;
+  margin-left: 50px;
+  margin-right: 50px;
+
+}
 input,
-textarea {
+textarea,select {
   position: relative;
-  height: 70px;
+  height: 50px;
   padding: 0 30px;
-  width: 100%;
+  width: 70%;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 500;
   font-family: "Outfit", sans-serif;
   color: rgb(0, 0, 0);
-  border: none;
-  border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+  border: 2px;
+  border-radius: 8px;
+  border-color:aqua;
+
+  border-top: 1px solid #131312;
+  border-right: 1px solid #131312;
+  border-bottom: 1px solid #131312;
+  border-left: 1px solid #131312;
   margin-bottom: 30px;
 }
 input:focus,
@@ -698,6 +712,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   letter-spacing: 2px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 input::-moz-placeholder, textarea::-moz-placeholder {
   font-size: 12px;
@@ -4228,3 +4243,4 @@ html.is-animating .mil-menu-frame {
   -webkit-transition-delay: 0.3s;
           transition-delay: 0.3s;
 }
+

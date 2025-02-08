@@ -1,12 +1,16 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form,criminal_form,stafform,staff_profile_form,staff_email_form
-from .models import login,police_station,user_reg,staff_reg
+from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form,criminal_form,stafform,staff_profile_form,staff_email_form,CriminalEdit
+from .models import login,police_station,user_reg,staff_reg,criminals
 from django.contrib  import messages
 
 
 def home(request):
  
     return render (request,'home.html')
+
+def adminhome(request):
+ 
+    return render (request,'adminhome.html')
 
 def Station_reg(request):
     if request.method == 'POST':
@@ -44,7 +48,7 @@ def user_regs(request):
     else:
         form=Userform()
         logins=loginForm()
-    return render(request,'user_registration.html',{'form':form,'log':logins})
+    return render(request,'user_registration.html',{'form':form,'logins':logins})
 
 def user_home(request):
     return render(request,'user_home.html')
@@ -62,16 +66,16 @@ def login_page(request):
                 user = login.objects.get(email=email)
                 if user.password == password:
                     if user.usertype == 2:
-                        request.session['userid']=user.id
+                        request.session['stationid']=user.id
                         return redirect('stationhome')
                     elif user.usertype == 1:
-                        request.session['userid']=user.id
+                        request.session['staffid']=user.id
                         return redirect('staffhome')
                     elif user.usertype == 3:
                         request.session['userid']=user.id
                         return redirect('userhome')
                     elif user.usertype == 4:
-                        request.session['userid']=user.id
+                        request.session['adminid']=user.id
                         return redirect('adminhome')
                     else:
                         messages.error(request, 'Invalid user type')
@@ -89,7 +93,7 @@ def login_page(request):
 
 
 def station_profile(request):
-    loginid = request.session.get('userid')
+    loginid = request.session.get('stationid')
     login_details = get_object_or_404(login,id=loginid)
     details = get_object_or_404(police_station,login_id= login_details)
     if request.method == 'POST':
@@ -127,7 +131,7 @@ def staff_home(request):
 
 
 def staff_profile(request):
-    loginid = request.session.get('userid')
+    loginid = request.session.get('staffid')
     login_details = get_object_or_404(login,id=loginid)
     details = get_object_or_404(staff_reg,staff_login_id= login_details)
     if request.method == 'POST':
@@ -175,14 +179,55 @@ def user_profile(request):
 
    
 def form_criminal(request):
+    staff_login_id=request.session.get('staffid')
+    login_details=get_object_or_404(login,id=staff_login_id)
+    details = get_object_or_404(staff_reg,staff_login_id=login_details)
     if request.method == 'POST':
         form = criminal_form(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            a=form.save(commit=False)
+            a.login_staffid=details
+            a.save()
             return redirect('staffhome') 
     else:
         form = criminal_form()
     return render(request, 'add_criminals.html', {'forms': form})
 
 
-    
+
+
+def criminals_table(request):
+    data1 = request.session.get('staffid')
+    staffdata = get_object_or_404(login, id=data1)
+    staff=get_object_or_404(staff_reg,staff_login_id=staffdata)
+    data = criminals.objects.filter(login_staffid=staff)
+    return render(request, 'criminalsview.html' , {'data':data})
+
+
+def delete_criminals(request, id):
+    criminal = criminals.objects.get( id=id)
+    criminal.delete()
+    return redirect('view_criminals')  
+
+
+def edit_criminals(request,id):
+    data = get_object_or_404(criminals, id=id)
+    if request.method == 'POST':
+        form = CriminalEdit(request.POST,request.FILES,instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('view_criminals')
+    else:
+        form = CriminalEdit(instance=data)
+    return render(request, 'edit_criminals.html',{'form':form})
+
+
+def admin_userview(request):
+    admin = user_reg.objects.all()
+    return render(request,'admin_userview.html',{'data':admin})
+
+
+
+def user_criminal_view(request):
+    data = criminals.objects.all()
+    return render(request,'view_criminal_details.html',{'details' : data})
