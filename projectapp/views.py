@@ -228,11 +228,9 @@ def admin_userview(request):
 
 
 
-<<<<<<< HEAD
 def user_criminal_view(request):
     data = criminals.objects.all()
     return render(request,'view_criminal_details.html',{'details' : data})
-=======
 def staff_view(request):
     data = staff_reg.objects.all()
     return render(request,'view_staff_details.html',{'details' : data})
@@ -240,4 +238,3 @@ def staff_view(request):
 
 
     
->>>>>>> 862e42178a826132c3946d05ab90b6360d49d332

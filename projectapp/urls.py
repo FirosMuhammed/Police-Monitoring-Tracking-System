@@ -21,11 +21,8 @@ urlpatterns = [
     path('criminal_edit/<int:id>' ,views.edit_criminals, name='criminal_edit'),
     path('adminhome' ,views.adminhome, name='adminhome'),
     path('admin_userview' ,views.admin_userview, name='admin_userview'),
-<<<<<<< HEAD
     path('criminals_userview' ,views.user_criminal_view, name='criminals_userview'),
-=======
     path('staff_details' ,views.staff_view, name='staff_details'),
->>>>>>> 862e42178a826132c3946d05ab90b6360d49d332
 
 
     
