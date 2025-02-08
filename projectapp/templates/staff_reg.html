@@ -1,10 +1,13 @@
 {% extends 'home_header.html' %}
 {% block content %}
+{% load static %}
 
 <html>
     <head>
         <title>staff Registration</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+
     </head>
 x   <body>
     <center>   
@@ -49,7 +52,7 @@ x   <body>
         <tr>
 
             <td><label>DOB</label></td>
-            <td>{{forms.staff_dob}}</td>
+            <td><input type="date" name="staff_dob"></td>
         </tr>
         <tr>
 
