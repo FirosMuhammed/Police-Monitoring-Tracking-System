@@ -49,13 +49,13 @@
             <td>{{ row.staff_designation }}</td>
             <td>{{ row.staff_login_id.email }}</td>
 
-            <!-- <td class="action-buttons">
-                <a href="criminal_edit/{{row.id}}" class="edit-btn">Edit</a>
+            <td class="action-buttons">
+                <a href="{% url 'add_duty' id=row.id  %}" class="edit-btn">Add Duty</a>
                     {% csrf_token %}
 
-                 <a href="criminal_delete/{{row.id}}" class="edit-btn">Delete</a>
+                 <!-- <a href="criminal_delete/{{row.id}}" class="edit-btn">Delete</a> -->
                 
-            </td> -->
+            </td>
 
         </tr>
         {% endfor %}
