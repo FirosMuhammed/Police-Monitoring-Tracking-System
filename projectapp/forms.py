@@ -51,6 +51,7 @@ class stafform(forms.ModelForm):
     class Meta:
         model=staff_reg
         fields=['staff_name','staff_address','staff_district','staff_city','staff_contact','staff_dob','staff_designation','gender']
+        widget = {'staff_dob':forms.TextInput(attrs={'type':'date'}) }
 
 class staff_profile_form(forms.ModelForm):
     class Meta:
