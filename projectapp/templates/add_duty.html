@@ -1,10 +1,10 @@
-{% extends 'userheader.html' %}
+{% extends 'home_header.html' %}
 {% block content %}
 {% load static %}
 
 <html>
     <head>
-        <title>User Profile</title>
+        <title>Duty Updates</title>
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
 
@@ -12,42 +12,32 @@
 x   <body>
     <center>   
         <table class="form-class">
-        <h2>User Profile</h2>
+        <h2>Assign Duty to Staff</h2>
         <br><br>
 
         <form method="POST">
             {% csrf_token %}
            
         <tr>
-            <td><label>Name</label></td>
-            <td>{{form.name}}</td>
-        </tr>
-
-        <tr>
-        
-            <td><label>Contact</label></td>
-            <td>{{form.contact}}</td>
-        </tr>
-
-        <tr>
-            <td><label>Email</label></td>
-            <td>{{form2.email}}</td>
+            <td><label>Duty</label></td>
+            <td>{{forms.duty}}</td>
         </tr>
 
         <!-- <tr>
         
-            <td><label>Password</label></td>
-            <td>{{form2.password}}</td>
+            <td><label>Current Date</label></td>
+            <td>{{forms.current_date}}</td>
         </tr> -->
+
        
-        
+       
        
         <tr>
             
             <td colspan="2">    
                 <div style="text-align: center;">
                     <br><br>
-                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;"> Edit</button>
+                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;"> Assign</button>
             </div>
 
             </td>

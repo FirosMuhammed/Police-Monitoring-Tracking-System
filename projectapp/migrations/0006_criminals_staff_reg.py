@@ -38,4 +38,6 @@ class Migration(migrations.Migration):
                 ('staff_login_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='projectapp.login')),
             ],
         ),
+
+
     ]

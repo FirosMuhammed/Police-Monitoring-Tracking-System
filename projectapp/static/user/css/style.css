@@ -675,7 +675,7 @@ form
 
 ------------------------------------------- */
 .form-class{
-  width: 00px;
+  width: 500px;
   margin-left: 50px;
   margin-right: 50px;
 
@@ -685,7 +685,7 @@ textarea,select {
   position: relative;
   height: 50px;
   padding: 0 30px;
-  width: 70%;
+  width: 100%;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;

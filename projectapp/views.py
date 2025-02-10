@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form,criminal_form,stafform,staff_profile_form,staff_email_form,CriminalEdit
-from .models import login,police_station,user_reg,staff_reg,criminals
+from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form,criminal_form,stafform,staff_profile_form,staff_email_form,CriminalEdit,dutyform
+from .models import login,police_station,user_reg,staff_reg,criminals,duties
 from django.contrib  import messages
 
 
@@ -225,6 +225,52 @@ def edit_criminals(request,id):
 def admin_userview(request):
     admin = user_reg.objects.all()
     return render(request,'admin_userview.html',{'data':admin})
+
+
+
+def user_criminal_view(request):
+    data = criminals.objects.all()
+    return render(request,'view_criminal_details.html',{'details' : data})
+
+def staff_view(request):
+    # data = staff_reg.objects.all()
+    data1 = request.session.get('stationid')
+    staffdata = get_object_or_404(login, id=data1)
+    staff=get_object_or_404(police_station,login_id=staffdata)
+    data = staff_reg.objects.filter(staff_station=staff)
+    return render(request,'view_staff_details.html',{'details' : data})
+
+
+
+def add_duty(request,id):
+    stationid=request.session.get('stationid')
+    station=get_object_or_404(login,id=stationid)
+    staff = get_object_or_404(staff_reg,id=id)
+    if request.method=='POST':
+        form=dutyform(request.POST)
+       
+        if form.is_valid():
+            a=form.save(commit=False)
+            a.login_id=station
+            a.staff_login_id=staff 
+            a.save()
+            return redirect('staff_details')
+    else:
+        form=dutyform()
+    return render(request,'add_duty.html',{'forms':form})
+
+
+
+def my_duty(request):
+    # data = staff_reg.objects.all()
+    data1 = request.session.get('staffid')
+    staffdata = get_object_or_404(login, id=data1)
+    duty=get_object_or_404(staff_reg,staff_login_id=staffdata)
+    data = duties.objects.filter(staff_login_id=duty)
+    return render(request,'duty_view_staff.html',{'details' : data})
+
+
+
 
 
 
