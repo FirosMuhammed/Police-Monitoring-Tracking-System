@@ -264,6 +264,17 @@ def add_duty(request, id):
 
 
 
+def my_duty(request):
+    # data = staff_reg.objects.all()
+    data1 = request.session.get('staffid')
+    staffdata = get_object_or_404(login, id=data1)
+    duty=get_object_or_404(staff_reg,staff_login_id=staffdata)
+    data = duties.objects.filter(staff_login_id=duty)
+    return render(request,'duty_view_staff.html',{'details' : data})
+
+
+
+
 
 
 

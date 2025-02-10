@@ -24,6 +24,7 @@ urlpatterns = [
     path('criminals_userview' ,views.user_criminal_view, name='criminals_userview'),
     path('staff_details' ,views.staff_view, name='staff_details'),
     path('add_duty/<int:id>',views.add_duty,name='add_duty'),
+    path('myduty' ,views.my_duty, name='myduty'),
 
     path('view_duty/<int:id>' ,views.view_duties, name='view_duty'),
     path('duty_delete/<int:id>' ,views.delete_duty, name='duty_delete'),
