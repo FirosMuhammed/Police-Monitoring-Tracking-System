@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin_userview' ,views.admin_userview, name='admin_userview'),
     path('criminals_userview' ,views.user_criminal_view, name='criminals_userview'),
     path('staff_details' ,views.staff_view, name='staff_details'),
+    path('add_duty/<int:id>',views.add_duty,name='add_duty'),
+
 
 
     
