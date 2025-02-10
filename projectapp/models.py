@@ -69,8 +69,8 @@ class criminals(models.Model):
 
 class duties(models.Model):
     duty = models.CharField(max_length=100)
-    current_date= models.DateField(auto_now_add=True)
-    staff_login_id = models.ForeignKey(staff_reg,on_delete=models.CASCADE)
-    login_id=models.ForeignKey(login,on_delete=models.CASCADE,default=0)
-    
+    current_date = models.DateField(auto_now_add=True)
+    staff_login_id = models.ForeignKey(login, on_delete=models.CASCADE, related_name='duties_as_staff')
+    login_id = models.ForeignKey(login, on_delete=models.CASCADE, default=0, related_name='duties_as_login')
+
    

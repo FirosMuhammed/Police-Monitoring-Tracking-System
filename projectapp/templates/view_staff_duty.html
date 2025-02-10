@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Duties</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<center><h2>Staff Duties</h2></center>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Duty</th>
+          
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data %}
+        <tr>
+           
+            <td>{{ row.current_date }}</td>
+            <td>{{ row.duty }}</td>
+          
+
+            <td class="action-buttons">
+                <a href="{% url 'duty_edit' row.id %}" class="edit-btn">Edit</a>
+                    {% csrf_token %}
+
+                 <a href="{% url 'duty_delete' row.id %}" class="edit-btn">Delete</a>
+                
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
