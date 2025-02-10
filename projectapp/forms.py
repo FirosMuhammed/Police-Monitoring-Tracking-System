@@ -80,3 +80,8 @@ class dutyform(forms.ModelForm):
     class Meta:
         model = duties
         fields = ['duty']
+
+class DutyEdit(forms.ModelForm):
+    class Meta:
+        model=duties
+        fields=['duty']
