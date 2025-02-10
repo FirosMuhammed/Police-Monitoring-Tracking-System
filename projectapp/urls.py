@@ -26,6 +26,10 @@ urlpatterns = [
     path('add_duty/<int:id>',views.add_duty,name='add_duty'),
     path('myduty' ,views.my_duty, name='myduty'),
 
+    path('view_duty/<int:id>' ,views.view_duties, name='view_duty'),
+    path('duty_delete/<int:id>' ,views.delete_duty, name='duty_delete'),
+    path('duty_edit/<int:id>' ,views.edit_duty, name='duty_edit'),
+
 
 
     

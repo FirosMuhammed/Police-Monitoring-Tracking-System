@@ -50,8 +50,10 @@
             <td>{{ row.staff_login_id.email }}</td>
 
             <td class="action-buttons">
-                <a href="{% url 'add_duty' id=row.id  %}" class="edit-btn">Add Duty</a>
-                    {% csrf_token %}
+                <a href="{% url 'add_duty' id=row.staff_login_id_id  %}" class="edit-btn">Add Duty</a>&nbsp; &nbsp;
+                
+
+                <a href="{% url 'view_duty' id=row.staff_login_id_id  %}" class="edit-btn">View Duties</a>
 
                  <!-- <a href="criminal_delete/{{row.id}}" class="edit-btn">Delete</a> -->
                 

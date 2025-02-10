@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form,criminal_form,stafform,staff_profile_form,staff_email_form,CriminalEdit,dutyform
+from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form,criminal_form,stafform,staff_profile_form,staff_email_form,CriminalEdit,dutyform,DutyEdit
 from .models import login,police_station,user_reg,staff_reg,criminals,duties
 from django.contrib  import messages
 
@@ -242,22 +242,25 @@ def staff_view(request):
 
 
 
-def add_duty(request,id):
-    stationid=request.session.get('stationid')
-    station=get_object_or_404(login,id=stationid)
-    staff = get_object_or_404(staff_reg,id=id)
-    if request.method=='POST':
-        form=dutyform(request.POST)
-       
+def add_duty(request, id):
+    stationid = request.session.get('stationid')
+    station = get_object_or_404(login, id=stationid)   
+    staff = get_object_or_404(staff_reg, staff_login_id_id=id)  
+    print(staff)
+    
+    if request.method == 'POST':
+        form = dutyform(request.POST)
+        
         if form.is_valid():
-            a=form.save(commit=False)
-            a.login_id=station
-            a.staff_login_id=staff 
+            a = form.save(commit=False)
+            a.login_id = station
+            a.staff_login_id = staff.staff_login_id  
             a.save()
             return redirect('staff_details')
     else:
-        form=dutyform()
-    return render(request,'add_duty.html',{'forms':form})
+        form = dutyform()
+    
+    return render(request, 'add_duty.html', {'forms': form})
 
 
 
@@ -270,6 +273,42 @@ def my_duty(request):
     return render(request,'duty_view_staff.html',{'details' : data})
 
 
+
+
+
+
+
+
+def view_duties(request, id):
+    stationid = request.session.get('stationid')
+    station = get_object_or_404(login, id=stationid)
+    staff = get_object_or_404(staff_reg, staff_login_id=id)  
+    # print("dataaa...",staff)
+    data = duties.objects.filter(staff_login_id=staff.staff_login_id, login_id=station)
+    # print("dattaaaa...",data)
+    
+    return render(request, 'view_staff_duty.html', {'data': data})
+
+
+
+
+def delete_duty(request, id):
+    duty = duties.objects.get(id=id)
+    
+    duty.delete()
+    return redirect('staff_details')  
+
+
+def edit_duty(request,id):
+    data = get_object_or_404(duties, id=id)
+    if request.method == 'POST':
+        form = DutyEdit(request.POST,instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('staff_details')
+    else:
+        form = DutyEdit(instance=data)
+    return render(request, 'edit_duty.html',{'form':form})
 
 
 
