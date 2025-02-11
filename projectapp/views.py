@@ -269,7 +269,7 @@ def my_duty(request):
     data1 = request.session.get('staffid')
     staffdata = get_object_or_404(login, id=data1)
     duty=get_object_or_404(staff_reg,staff_login_id=staffdata)
-    data = duties.objects.filter(staff_login_id=duty)
+    data = duties.objects.filter(staff_login_id=duty.staff_login_id)
     return render(request,'duty_view_staff.html',{'details' : data})
 
 

@@ -13,6 +13,7 @@ class police_station(models.Model):
     login_id = models.ForeignKey('login',on_delete=models.CASCADE)
     
     def __str__(self):
+        
         return self.addressline1
 
 
