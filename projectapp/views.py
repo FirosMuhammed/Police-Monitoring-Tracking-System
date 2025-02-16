@@ -276,9 +276,6 @@ def my_duty(request):
 
 
 
-
-
-
 def view_duties(request, id):
     stationid = request.session.get('stationid')
     station = get_object_or_404(login, id=stationid)
