@@ -54,6 +54,22 @@
                     <td>{{ details_suspect }}</td>
                 </tr>
 
+
+                {% if properties_involved is None %}
+    <tr><td>Null</td></tr>
+{% else %}
+    <tr>
+        <td><label for="id_properties_involved">Properties of Interest</label></td>
+        <td>{{ properties_involved }}</td>
+    </tr>
+{% endif %}
+
+
+                <tr>
+                    <td><label for="id_total_value_property">Total Value of Properties</label></td>
+                    <td>{{ total_value_property }}</td>
+                </tr>
+
                 <!-- Now render the actual form fields for database saving -->
                 <tr>
                     <td><label for="id_district">District</label></td>
@@ -85,15 +101,7 @@
                     <td>{{ form.sections }}</td>
                 </tr>
 
-                <tr>
-                    <td><label for="id_properties_involved">Properties of Interest</label></td>
-                    <td>{{ form.properties_involved }}</td>
-                </tr>
-
-                <tr>
-                    <td><label for="id_total_value_property">Total Value of Properties</label></td>
-                    <td>{{ form.total_value_property }}</td>
-                </tr>
+              
 
                 <tr>
                     <td><label for="id_content_fir">FIR Contents</label></td>

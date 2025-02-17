@@ -90,15 +90,17 @@ class DutyEdit(forms.ModelForm):
 class petition_form(forms.ModelForm):
     class Meta:
         model=petition
-        fields=['case','case_details','day','date','place','time','suspect']
+        fields=['case','case_details','day','date','place','time','suspect','properties_involved','total_value_property']
+
+    properties_involved = forms.CharField(required=False)
+    total_value_property = forms.CharField(required=False)
 
 class fir_form(forms.ModelForm):
     class Meta:
         model = fir
-        fields = ['district','pstation','fir_no','year','acts', 'sections', 'properties_involved', 'total_value_property',
+        fields = ['district','pstation','fir_no','year','acts', 'sections',
                   'content_fir']
         
-    properties_involved = forms.CharField(required=False)
-    total_value_property = forms.CharField(required=False)
+    
 
        
