@@ -91,7 +91,9 @@ class petition(models.Model):
     place = models.CharField(max_length=100)
     current_date = models.DateField(auto_now_add=True)
     suspect = models.CharField(max_length=150)
-    
+    properties_involved = models.TextField()
+    total_value_property = models.CharField(max_length=100)
+
     login_userid = models.ForeignKey('login',on_delete=models.CASCADE,blank=True,null=True, related_name='petition_as_user')
     login_id = models.ForeignKey('login', on_delete=models.CASCADE,blank=True, null=True, related_name='petition_as_station',db_column='station_login_id' )
 
@@ -108,8 +110,7 @@ class fir(models.Model):
     date_time = models.DateTimeField(auto_now_add=True)
     acts = models.CharField(max_length=50)
     sections = models.CharField(max_length=40)
-    properties_involved = models.TextField()
-    total_value_property = models.CharField(max_length=100)
+    
     content_fir = models.TextField()
     staff_loginid = models.ForeignKey(login, on_delete=models.CASCADE, related_name='fir_as_staff')
     public_petition_id = models.ForeignKey(petition, on_delete=models.CASCADE, related_name='petition_as_id')

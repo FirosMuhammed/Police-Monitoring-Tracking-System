@@ -97,5 +97,8 @@ class fir_form(forms.ModelForm):
         model = fir
         fields = ['district','pstation','fir_no','year','acts', 'sections', 'properties_involved', 'total_value_property',
                   'content_fir']
+        
+    properties_involved = forms.CharField(required=False)
+    total_value_property = forms.CharField(required=False)
 
        

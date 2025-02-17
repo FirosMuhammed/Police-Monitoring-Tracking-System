@@ -462,10 +462,9 @@ def file_fir(request, id):
             fir_instance = form.save(commit=False)
             fir_instance.public_petition_id = petition_instance
             fir_instance.staff_loginid = staff_lg
-            fir_instance.details_suspect = petition_instance.case_details  
-            fir_instance.properties_involved = petition_instance.place  
+            fir_instance.details_suspect = petition_instance.case_details    
             fir_instance.save()
-            return redirect('petitionview', fir_id=fir_instance.id)
+            return redirect('staffhome', fir_id=fir_instance.i)
     else:
         form = fir_form()
 
@@ -479,6 +478,8 @@ def file_fir(request, id):
         'recieved_time': petition_instance.recieved_time1,
         'details_case': petition_instance.case_details,
         'details_suspect': petition_instance.suspect,
+        'properties_involved': petition_instance.properties_involved,
+        'total_value_property':petition_instance.total_value_property
     })
 
 
