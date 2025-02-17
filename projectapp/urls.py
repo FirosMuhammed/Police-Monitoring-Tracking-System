@@ -25,10 +25,14 @@ urlpatterns = [
     path('staff_details' ,views.staff_view, name='staff_details'),
     path('add_duty/<int:id>',views.add_duty,name='add_duty'),
     path('myduty' ,views.my_duty, name='myduty'),
-
     path('view_duty/<int:id>' ,views.view_duties, name='view_duty'),
     path('duty_delete/<int:id>' ,views.delete_duty, name='duty_delete'),
     path('duty_edit/<int:id>' ,views.edit_duty, name='duty_edit'),
+    path('station_search' ,views.search_stations, name='station_search'),
+    path('petition/<int:id>' ,views.file_petition, name='petition'),
+    path('petitionview' ,views.view_petition, name='petitionview'),
+    path('fir/<int:id>/', views.file_fir, name='file_fir'),
+
 
 
 

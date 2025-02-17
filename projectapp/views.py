@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import StationForm,Userform,loginForm,login_check,station_profile_form,station_email_form,user_profile_form,user_email_form,criminal_form,stafform,staff_profile_form,staff_email_form,CriminalEdit,dutyform,DutyEdit
-from .models import login,police_station,user_reg,staff_reg,criminals,duties
+from .forms import *
+from .models import *
 from django.contrib  import messages
+from django.db.models import Q
 
 
 def home(request):
@@ -117,6 +118,9 @@ def staffreg(request):
             a.usertype=1
             a.save()
             b=form.save(commit=False)
+            selected_station = form.cleaned_data['staff_station'] 
+            b.staff_station = selected_station
+            
             b.staff_login_id = a
             b.save()
             return redirect('home')
@@ -233,12 +237,14 @@ def user_criminal_view(request):
     return render(request,'view_criminal_details.html',{'details' : data})
 
 def staff_view(request):
-    # data = staff_reg.objects.all()
+    # Get the station ID from the session
     data1 = request.session.get('stationid')
+    # Retrieve the login record for the given station ID
     staffdata = get_object_or_404(login, id=data1)
-    staff=get_object_or_404(police_station,login_id=staffdata)
-    data = staff_reg.objects.filter(staff_station=staff)
-    return render(request,'view_staff_details.html',{'details' : data})
+    # Use staffdata directly (no need to fetch again)
+    data = staff_reg.objects.filter(staff_station=staffdata)
+    return render(request, 'view_staff_details.html', {'details': data})
+
 
 
 
@@ -246,7 +252,6 @@ def add_duty(request, id):
     stationid = request.session.get('stationid')
     station = get_object_or_404(login, id=stationid)   
     staff = get_object_or_404(staff_reg, staff_login_id_id=id)  
-    print(staff)
     
     if request.method == 'POST':
         form = dutyform(request.POST)
@@ -309,5 +314,173 @@ def edit_duty(request,id):
 
 
 
+def search_stations(request):
+    query=request.GET.get('q','')
+    results=police_station.objects.all()
+    if query:
+        results=results.filter(
+            Q(addressline1__icontains=query) |
+            Q(district__icontains=query) |
+            Q(city__icontains=query) 
+        )
+    return render(request,'search_station.html', {'results': results, 'query':query})
+    
+
+def file_petition(request, id):
+    user_id=request.session.get('userid')
+    login_details=get_object_or_404(login,id=user_id)
+    station = get_object_or_404(police_station,login_id_id=id)
+    print(login_details.id)
+    print(station.login_id_id)
+
+    if request.method == 'POST':
+        form = petition_form(request.POST, request.FILES)
+        if form.is_valid():
+            a=form.save(commit=False)
+            a.login_userid=login_details
+            a.login_id=station.login_id
+            a.save()
+            return redirect('userhome') 
+    else:
+        form = petition_form()
+    return render(request, 'file_petition.html', {'forms': form})
+
+
+
+# def file_petition(request, id):
+#     user_id = request.session.get('userid')
+    
+#     # Get the login details using the user ID from session
+#     login_details = get_object_or_404(login, id=user_id)
+    
+#     # Get the police station related to the provided ID
+#     station = get_object_or_404(police_station, login_id_id=id)
+    
+#     # Debugging: print the login IDs to make sure they are correct
+#     print(f"Login ID from session: {login_details.id}")
+#     print(f"Station Login ID: {station.login_id_id}")
+    
+#     # Handle POST request (form submission)
+#     if request.method == 'POST':
+#         form = petition_form(request.POST)
+        
+#         # Check if the form is valid
+#         if form.is_valid():
+#             a = form.save(commit=False)
+            
+#             # Assign the actual login ID (not the object) to the ForeignKey fields
+#             a.login_userid_id = login_details.id  # Use the ID, not the object
+#             a.login_id_id = station.login_id.id  # Use the ID, not the object
+            
+#             # Debugging: Print the values being saved
+#             print(f"Saving petition with login_userid_id: {a.login_userid_id}, login_id_id: {a.login_id_id}")
+            
+#             # Save the petition
+#             a.save()
+#             return redirect('userhome')
+#         else:
+#             # Print form errors for debugging
+#             print("Form Errors:", form.errors)
+#     else:
+#         # Initialize an empty form if it's a GET request
+#         form = petition_form()
+    
+#     # Render the petition form in the template
+#     return render(request, 'file_petition.html', {'forms': form})
+
+
+
+def view_petition(request):
+    staffid = request.session.get('staffid')
+    
+    # Retrieve the login record for the logged-in staff member
+    station = get_object_or_404(login, id=staffid)
+    
+    # Retrieve the staff record associated with the current login
+    staff = get_object_or_404(staff_reg, staff_login_id=station.id)
+    
+    # Get the staff's station from the staff record
+    staff_stations = staff.staff_station  # This is already a ForeignKey reference
+    
+    # Corrected filtering query
+    petitions = petition.objects.filter(login_id=staff_stations)
+ # Retrieve user details related to the petitions
+    user_details = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
+
+    return render(request, 'staffview_petition.html', {
+        'petitions': petitions,
+        'user_details': user_details
+    }
+    )
 
     
+
+
+# def file_fir(request,id):
+#     staff_id = request.session.get('staffid')
+#     staff_lg=get_object_or_404(login,id=staff_id)
+#     petition_instance = get_object_or_404(petition, id=id)
+#     # print(petition_instance)
+
+#     if request.method == "POST":
+#         form = fir_form(request.POST)
+#         # print(form)
+#         if form.is_valid():
+#             print('hii ')
+#             fir_instance = form.save(commit=False)
+#             fir_instance.public_petition_id = petition_instance
+#             fir_instance.staff_loginid = staff_lg
+#             fir_instance.details_suspect = petition_instance.case_details  
+#             fir_instance.properties_involved = petition_instance.place  
+#             fir_instance.save()
+            
+#             return redirect('petitionview', fir_id=fir_instance.id) 
+#     else:
+#         form = fir_form(initial={
+#             'occurrence_day': petition_instance.day,
+#             'occurrence_date': petition_instance.date,
+#             'occurrence_time': petition_instance.time,
+#             'occurrence_place': petition_instance.place,
+#             'recieved_time':petition_instance.recieved_time1,
+#             'date_time': petition_instance.date,
+#             'details_case' : petition_instance.case_details,
+#             'details_suspect': petition_instance.suspect,
+#             'staff_loginid': request.user, 
+#         })
+
+#     return render(request, 'file_fir.html', {'form': form, 'petition': petition_instance})
+
+
+def file_fir(request, id):
+    staff_id = request.session.get('staffid')
+    staff_lg = get_object_or_404(login, id=staff_id)
+    petition_instance = get_object_or_404(petition, id=id)
+
+    if request.method == "POST":
+        form = fir_form(request.POST)
+        if form.is_valid():
+            fir_instance = form.save(commit=False)
+            fir_instance.public_petition_id = petition_instance
+            fir_instance.staff_loginid = staff_lg
+            fir_instance.details_suspect = petition_instance.case_details  
+            fir_instance.properties_involved = petition_instance.place  
+            fir_instance.save()
+            return redirect('petitionview', fir_id=fir_instance.id)
+    else:
+        form = fir_form()
+
+    return render(request, 'file_fir.html', {
+        'form': form, 
+        'petition': petition_instance,
+        'occurrence_day': petition_instance.day,
+        'occurrence_date': petition_instance.date,
+        'occurrence_time': petition_instance.time,
+        'occurrence_place': petition_instance.place,
+        'recieved_time': petition_instance.recieved_time1,
+        'details_case': petition_instance.case_details,
+        'details_suspect': petition_instance.suspect,
+    })
+
+
+
+

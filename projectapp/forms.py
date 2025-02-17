@@ -1,5 +1,5 @@
 from django import forms
-from.models import police_station,login,user_reg,criminals,staff_reg,duties
+from.models import *
 
 class StationForm(forms.ModelForm):
 
@@ -53,7 +53,7 @@ class stafform(forms.ModelForm):
         station = forms.ModelChoiceField(queryset=police_station.objects.all(),empty_label="select station")
         fields=['staff_name','staff_address','staff_district','staff_city','staff_contact','staff_dob','staff_designation','gender','staff_station']
         widget = {'staff_dob':forms.TextInput(attrs={'type':'date'}) }
-
+    
 class staff_profile_form(forms.ModelForm):
     class Meta:
         model=staff_reg
@@ -85,3 +85,17 @@ class DutyEdit(forms.ModelForm):
     class Meta:
         model=duties
         fields=['duty']
+
+
+class petition_form(forms.ModelForm):
+    class Meta:
+        model=petition
+        fields=['case','case_details','day','date','place','time','suspect']
+
+class fir_form(forms.ModelForm):
+    class Meta:
+        model = fir
+        fields = ['district','pstation','fir_no','year','acts', 'sections', 'properties_involved', 'total_value_property',
+                  'content_fir']
+
+       

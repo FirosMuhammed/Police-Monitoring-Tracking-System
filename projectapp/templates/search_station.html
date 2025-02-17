@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Station</title>
+    <style>
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Search Stations</h1>
+        <form method="GET" action="{% url 'station_search' %}">
+            <input type="text" name="q" placeholder="search anything(addressline1,district,city)" value="{{ query }}">
+            <button type="submit">Search</button>
+        </form>
+
+        {% if results %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Station Address</th>
+                        <th>District</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for station in results %}
+                        <tr>
+                            <td>{{ station.addressline1 }}</td>
+                            <td>{{ station.district }}</td>
+                            <td>{{ station.city }}</td>
+
+
+
+                            <td class="action-buttons">
+                                <a href="petition/{{station.login_id_id}}" class="edit-btn">File Petition</a>
+                                    
+                
+                                 <!-- <a href="criminal_delete/{{row.id}}" class="edit-btn">Delete</a> -->
+                                
+                            </td> 
+                        </tr>
+
+
+                        
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No Results Found</p>
+        {% endif %}
+    </center>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Petitions</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<center><h2>Public Petitions</h2></center>
+<table border="1">
+    <tr>
+        <th>Case</th>
+        <th>Case Details</th>
+        <th>Place</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>User Name</th>
+        <th>User Contact</th>
+    </tr>
+    {% for petition in petitions %}
+        <tr>
+            <td>{{ petition.case }}</td>
+            <td>{{ petition.case_details }}</td>
+            <td>{{ petition.place }}</td>
+            <td>{{ petition.date }}</td>
+            <td>{{ petition.time }}</td>
+            {% with user_details|dictsort:"login_userid.id"|first as user %}
+            <td>{{ user.name }}</td>
+            <td>{{ user.contact }}</td>
+            {% endwith %}
+
+
+
+            <td class="action-buttons">
+                <a href="fir/{{petition.id}}" class="edit-btn">Create FIR</a>
+
+                
+
+                 <!-- <a href="criminal_delete/{{row.id}}" class="edit-btn">Delete</a> -->
+                
+            </td> 
+
+        </tr>
+
+
+    {% endfor %}
+</table>
+
+
+</body>
+</html>
