@@ -34,6 +34,14 @@ urlpatterns = [
     path('fir/<int:id>/', views.file_fir, name='file_fir'),
 
 
+    path('petitionview_station' ,views.station_view_petition, name='petitionview_station'),
+    path('stationview_fir' ,views.station_fir_view, name='stationview_fir'),
+
+    path('case_status/<int:petition_id>' ,views.case_status, name='case_status'),
+
+
+
+
 
 
     

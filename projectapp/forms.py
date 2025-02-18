@@ -102,5 +102,8 @@ class fir_form(forms.ModelForm):
                   'content_fir']
         
     
-
+class CaseStatus(forms.ModelForm):
+    class Meta:
+        model=petition
+        fields=['case_status']
        

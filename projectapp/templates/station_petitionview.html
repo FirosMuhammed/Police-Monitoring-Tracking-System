@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Petitions</title>
+    <title>Petitions & FIR</title>
     <style>
         table {
             width: 100%;
@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<center><h2>Public Petitions</h2></center>
+<center><h2>Public Petitions and FIR</h2></center>
 <table border="1">
     <tr>
         <th>Case</th>
@@ -45,10 +45,7 @@
 
 
             <td class="action-buttons">
-                <a href="fir/{{petition.id}}" class="edit-btn">Create FIR</a>
-                <a href="case_status/{{petition.id}}" class="edit-btn">Status</a>
-
-
+                <a href="{% url 'stationview_fir' %}" class="edit-btn">View FIR</a>
 
                 
 

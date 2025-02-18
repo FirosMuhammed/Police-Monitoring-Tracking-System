@@ -347,64 +347,13 @@ def file_petition(request, id):
 
 
 
-# def file_petition(request, id):
-#     user_id = request.session.get('userid')
-    
-#     # Get the login details using the user ID from session
-#     login_details = get_object_or_404(login, id=user_id)
-    
-#     # Get the police station related to the provided ID
-#     station = get_object_or_404(police_station, login_id_id=id)
-    
-#     # Debugging: print the login IDs to make sure they are correct
-#     print(f"Login ID from session: {login_details.id}")
-#     print(f"Station Login ID: {station.login_id_id}")
-    
-#     # Handle POST request (form submission)
-#     if request.method == 'POST':
-#         form = petition_form(request.POST)
-        
-#         # Check if the form is valid
-#         if form.is_valid():
-#             a = form.save(commit=False)
-            
-#             # Assign the actual login ID (not the object) to the ForeignKey fields
-#             a.login_userid_id = login_details.id  # Use the ID, not the object
-#             a.login_id_id = station.login_id.id  # Use the ID, not the object
-            
-#             # Debugging: Print the values being saved
-#             print(f"Saving petition with login_userid_id: {a.login_userid_id}, login_id_id: {a.login_id_id}")
-            
-#             # Save the petition
-#             a.save()
-#             return redirect('userhome')
-#         else:
-#             # Print form errors for debugging
-#             print("Form Errors:", form.errors)
-#     else:
-#         # Initialize an empty form if it's a GET request
-#         form = petition_form()
-    
-#     # Render the petition form in the template
-#     return render(request, 'file_petition.html', {'forms': form})
-
-
 
 def view_petition(request):
     staffid = request.session.get('staffid')
-    
-    # Retrieve the login record for the logged-in staff member
     station = get_object_or_404(login, id=staffid)
-    
-    # Retrieve the staff record associated with the current login
     staff = get_object_or_404(staff_reg, staff_login_id=station.id)
-    
-    # Get the staff's station from the staff record
-    staff_stations = staff.staff_station  # This is already a ForeignKey reference
-    
-    # Corrected filtering query
+    staff_stations = staff.staff_station  
     petitions = petition.objects.filter(login_id=staff_stations)
- # Retrieve user details related to the petitions
     user_details = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
 
     return render(request, 'staffview_petition.html', {
@@ -414,42 +363,6 @@ def view_petition(request):
     )
 
     
-
-
-# def file_fir(request,id):
-#     staff_id = request.session.get('staffid')
-#     staff_lg=get_object_or_404(login,id=staff_id)
-#     petition_instance = get_object_or_404(petition, id=id)
-#     # print(petition_instance)
-
-#     if request.method == "POST":
-#         form = fir_form(request.POST)
-#         # print(form)
-#         if form.is_valid():
-#             print('hii ')
-#             fir_instance = form.save(commit=False)
-#             fir_instance.public_petition_id = petition_instance
-#             fir_instance.staff_loginid = staff_lg
-#             fir_instance.details_suspect = petition_instance.case_details  
-#             fir_instance.properties_involved = petition_instance.place  
-#             fir_instance.save()
-            
-#             return redirect('petitionview', fir_id=fir_instance.id) 
-#     else:
-#         form = fir_form(initial={
-#             'occurrence_day': petition_instance.day,
-#             'occurrence_date': petition_instance.date,
-#             'occurrence_time': petition_instance.time,
-#             'occurrence_place': petition_instance.place,
-#             'recieved_time':petition_instance.recieved_time1,
-#             'date_time': petition_instance.date,
-#             'details_case' : petition_instance.case_details,
-#             'details_suspect': petition_instance.suspect,
-#             'staff_loginid': request.user, 
-#         })
-
-#     return render(request, 'file_fir.html', {'form': form, 'petition': petition_instance})
-
 
 def file_fir(request, id):
     staff_id = request.session.get('staffid')
@@ -464,7 +377,7 @@ def file_fir(request, id):
             fir_instance.staff_loginid = staff_lg
             fir_instance.details_suspect = petition_instance.case_details    
             fir_instance.save()
-            return redirect('staffhome', fir_id=fir_instance.i)
+            return redirect('staffhome')
     else:
         form = fir_form()
 
@@ -483,5 +396,45 @@ def file_fir(request, id):
     })
 
 
+
+
+def station_view_petition(request):
+    staffid = request.session.get('staffid')
+    station = get_object_or_404(login, id=staffid)
+    staff = get_object_or_404(staff_reg, staff_login_id=station.id)
+    staff_stations = staff.staff_station  
+    petitions = petition.objects.filter(login_id=staff_stations)
+    user_details = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
+    return render(request, 'station_petitionview.html', {
+        'petitions': petitions,
+        'user_details': user_details
+    }
+    )
+
+def station_fir_view(request):
+    station = request.session.get('stationid')
+    stationid = get_object_or_404(login, id=station)
+
+    petition_details = petition.objects.filter(login_id=stationid)
+
+    fir_details = fir.objects.filter(public_petition_id__in=petition_details)
+
+    return render(request, 'view_FIR.html', {'petition_details': petition_details, 'fir_details': fir_details,})
+
+
+def case_status(request, petition_id):
+    petition_instance = get_object_or_404(petition, id=petition_id)
+
+    if request.method == 'POST':
+        form = CaseStatus(request.POST)
+
+        if form.is_valid():
+            petition_instance.case_status = form.cleaned_data['case_status']
+            petition_instance.save()  
+            return redirect('petitionview')
+    else:
+        form = CaseStatus(initial={'case_status': petition_instance.case_status})
+
+    return render(request, 'case_status.html', {'form': form, 'petition': petition_instance})
 
 

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FIR</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<center><h2>FIR</h2></center>
+<table border="1">
+    <tr>
+        <!-- from FIR table -->
+        <th>FIR No:</th>
+        <th>District</th>
+        <th>Station</th>
+        <th>Date</th>
+        <th>Year</th>
+        <th>Date & Time of FIR</th>
+        <!-- from petition table -->
+        <th>Case</th>
+        <th>Case Details</th>
+        <th>Occurrence Day</th>
+        <th>Occurrence Date</th>
+        <th>Occurrence Time</th>
+        <th>Occurrence Place</th>
+        <th>Information Received Time</th>
+        <!-- from FIR table -->
+        <th>Acts</th>
+        <th>Sections</th>
+        <th>FIR Content</th>
+    </tr>
+
+    <!-- Loop through FIR details and display data -->
+    {% for fir_item in fir_details %}
+        <tr>
+            <!-- Display FIR fields -->
+            <td>{{ fir_item.fir_no }}</td>
+            <td>{{ fir_item.district }}</td>
+            <td>{{ fir_item.pstation }}</td>
+            <td>{{ fir_item.date_time|date:"Y-m-d" }}</td>
+            <td>{{ fir_item.year }}</td>
+            <td>{{ fir_item.date_time|date:"H:i:s" }}</td>
+            
+            <!-- Display petition details (via the related petition) -->
+            <td>{{ fir_item.public_petition_id.case }}</td>
+            <td>{{ fir_item.public_petition_id.case_details }}</td>
+            <td>{{ fir_item.public_petition_id.day }}</td>
+            <td>{{ fir_item.public_petition_id.date }}</td>
+            <td>{{ fir_item.public_petition_id.time }}</td>
+            <td>{{ fir_item.public_petition_id.place }}</td>
+            <td>{{ fir_item.public_petition_id.recieved_time1 }}</td>
+            
+            <!-- Display FIR specific fields -->
+            <td>{{ fir_item.acts }}</td>
+            <td>{{ fir_item.sections }}</td>
+            <td>{{ fir_item.content_fir }}</td>
+
+        </tr>
+    {% endfor %}
+</table>
+
+
+</body>
+</html>

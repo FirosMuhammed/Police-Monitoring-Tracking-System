@@ -85,7 +85,7 @@ class petition(models.Model):
     case = models.CharField(max_length=100)
     case_details = models.CharField(max_length=100)
     day = models.CharField(max_length=15)
-    date = models.DateField()
+    date = models.DateField(null=True, blank=True)
     time = models.TimeField(blank=True, null=True)
     recieved_time1 = models.TimeField(auto_now_add=True)
     place = models.CharField(max_length=100)
@@ -96,6 +96,9 @@ class petition(models.Model):
 
     login_userid = models.ForeignKey('login',on_delete=models.CASCADE,blank=True,null=True, related_name='petition_as_user')
     login_id = models.ForeignKey('login', on_delete=models.CASCADE,blank=True, null=True, related_name='petition_as_station',db_column='station_login_id' )
+    case_status = models.CharField(max_length=200,null=True)
+
+
 
     def __str__(self):
         return f"Petition for {self.case} - {self.place}"
