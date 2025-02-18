@@ -464,7 +464,7 @@ def file_fir(request, id):
             fir_instance.staff_loginid = staff_lg
             fir_instance.details_suspect = petition_instance.case_details    
             fir_instance.save()
-            return redirect('staffhome', fir_id=fir_instance.i)
+            return redirect('staffhome')
     else:
         form = fir_form()
 
