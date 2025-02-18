@@ -106,4 +106,9 @@ class CaseStatus(forms.ModelForm):
     class Meta:
         model=petition
         fields=['case_status']
+
+class ComplaintForm(forms.ModelForm):
+    class Meta:
+        model=complaints
+        fields=['complaint']
        

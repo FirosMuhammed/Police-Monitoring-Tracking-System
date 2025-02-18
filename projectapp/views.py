@@ -438,3 +438,45 @@ def case_status(request, petition_id):
     return render(request, 'case_status.html', {'form': form, 'petition': petition_instance})
 
 
+
+def public_view_petition(request):
+    userid = request.session.get('userid')
+    user = get_object_or_404(login, id=userid)
+    petitions = petition.objects.filter(login_userid=user)
+    return render(request, 'public_viewpetition.html', {'petitions': petitions })
+
+
+def edit_petition(request,id):
+    data = get_object_or_404(petition, id=id)
+    if request.method == 'POST':
+        form = petition_form(request.POST,request.FILES,instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('petitionview_public')
+    else:
+        form = petition_form(instance=data)
+    return render(request, 'edit_petitionpublic.html',{'form':form})
+
+
+
+def delete_petition(request, id):
+    petition_details = petition.objects.get( id=id)
+    petition_details.delete()
+    return redirect('petitionview_public')
+
+
+def file_complaint(request):
+    userid = request.session.get('userid')
+    user = get_object_or_404(login,id=userid)
+    if request.method == 'POST':
+        form = ComplaintForm(request.POST)
+
+        if form.is_valid():
+            a = form.save(commit=False)
+            a.user_logid=user
+            a.save()
+            return redirect('userhome')
+    else:
+        form = ComplaintForm()
+
+    return render(request, 'file_complaint.html', {'form': form})

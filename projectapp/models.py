@@ -122,6 +122,16 @@ class fir(models.Model):
 
 
 
+class complaints(models.Model):
+    complaint = models.TextField()
+    current_date = models.DateField(auto_now_add=True)
+    user_logid =models.ForeignKey(login, on_delete=models.CASCADE)
+
+  
+
+
+
+
 
 
 

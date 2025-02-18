@@ -1,10 +1,10 @@
-{% extends 'station_header.html' %}
+{% extends 'userheader.html' %}
 {% block content %}
 {% load static %}
 
 <html>
     <head>
-        <title>Edit Duty</title>
+        <title>File Complaint</title>
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
 
@@ -12,25 +12,23 @@
 x   <body>
     <center>   
         <table class="form-class">
-        <h2>Edit Duty</h2>
+        <h2>File Your Complaint</h2>
         <br><br>
 
         <form method="POST">
             {% csrf_token %}
            
         <tr>
-            <td><label>Duty</label></td>
-            <td>{{form.duty}}</td>
+            <td><label>Complaint</label></td>
+            <td>{{form.complaint}}</td>
         </tr>
 
-        
-       
         <tr>
             
             <td colspan="2">    
                 <div style="text-align: center;">
                     <br><br>
-                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;"> Edit</button>
+                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;">File Complaint</button>
             </div>
 
             </td>

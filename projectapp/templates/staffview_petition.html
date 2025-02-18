@@ -25,8 +25,13 @@
         <th>Case</th>
         <th>Case Details</th>
         <th>Place</th>
+        <th>Day</th>
         <th>Date</th>
         <th>Time</th>
+        <th>Involved Persons/Suspects</th>
+        <th>Properties Involved</th>
+        <th>Total Value of Properties</th>
+        <th>Case Status</th>
         <th>User Name</th>
         <th>User Contact</th>
     </tr>
@@ -35,8 +40,14 @@
             <td>{{ petition.case }}</td>
             <td>{{ petition.case_details }}</td>
             <td>{{ petition.place }}</td>
+            <td>{{ petition.day }}</td>
             <td>{{ petition.date }}</td>
             <td>{{ petition.time }}</td>
+            <td>{{ petition.suspect }}</td>
+            <td>{{ petition.properties_involved }}</td>
+            <td>{{ petition.total_value_property }}</td>
+            <td>{{ petition.case_status }}</td>
+
             {% with user_details|dictsort:"login_userid.id"|first as user %}
             <td>{{ user.name }}</td>
             <td>{{ user.contact }}</td>

@@ -43,7 +43,7 @@
         <!-- cursor end -->
 
         <!-- preloader -->
-        <div class="mil-preloader">
+        <!-- <div class="mil-preloader">
             <div class="mil-preloader-animation">
                 <div class="mil-pos-abs mil-animation-1">
                     <p class="mil-h3 mil-muted mil-thin">Pioneering</p>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- preloader end -->
 
         <!-- scrollbar progress -->
@@ -112,6 +112,14 @@
                                             <li><a href="blog.html">Blog List</a></li>
                                             <li><a href="publication.html">Publication</a></li>
                                         </ul> -->
+                                    </li>
+
+                                    <li class="mil-has-children">
+                                        <a href="#">Public Petitions</a>
+                                        <ul>
+                                            <li><a href="{% url 'petitionview' %}">View Petitions</a></li>
+                                            <!-- <li><a href="publication.html">Publication</a></li> -->
+                                        </ul>
                                     </li>
                                     <li class="mil-has-children">
                                         <a href="#.">Other pages</a>
