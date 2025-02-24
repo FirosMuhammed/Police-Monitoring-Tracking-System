@@ -230,6 +230,14 @@ def admin_userview(request):
     admin = user_reg.objects.all()
     return render(request,'admin_userview.html',{'data':admin})
 
+def admin_stationview(request):
+    admin = police_station.objects.all()
+    return render(request,'admin_stationview.html',{'data':admin})
+
+def admin_staffview(request):
+    admin = staff_reg.objects.all()
+    return render(request,'admin_staffview.html',{'data':admin})
+
 
 
 def user_criminal_view(request):

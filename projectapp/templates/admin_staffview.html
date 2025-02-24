@@ -640,15 +640,30 @@
 
                             <table align="center" border="1" class="table table-striped">
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Staff Name</th>
+                                    <th>Address</th>
+                                    <th>Gender</th>
+                                    <th>District</th>
+                                    <th>City</th>
                                     <th>Contact</th>
+                                    <th>DOB</th>
+                                    <th>Station</th>
+                                    <th>Designation</th>
                                     <th>Email</th>
                                 </tr>
                                 {% for a in data %}
                                 <tr>
-                                    <td>{{a.name}}</td>
-                                    <td>{{a.contact}}</td>
-                                    <td>{{a.login_userid.email}}</td>
+                                    <td>{{a.staff_name}}</td>
+                                    <td>{{a.staff_address}}</td>
+                                    <td>{{a.gender}}</td>
+                                    <td>{{a.staff_district}}</td>
+                                    <td>{{a.staff_city}}</td>
+                                    <td>{{a.staff_contact}}</td>
+                                    <td>{{a.staff_dob}}</td>
+                                    <td>{{a.staff_station}}</td>
+                                    <td>{{a.staff_designation}}</td>
+
+                                    <td>{{a.staff_login_id.email}}</td>
                                 </tr>
                                 {% endfor %}
                             </table>

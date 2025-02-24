@@ -640,15 +640,23 @@
 
                             <table align="center" border="1" class="table table-striped">
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Station ID</th>
+                                    <th>Address Line 1</th>
+                                    <th>Address Line 2</th>
+                                    <th>District</th>
+                                    <th>City</th>
                                     <th>Contact</th>
                                     <th>Email</th>
                                 </tr>
                                 {% for a in data %}
                                 <tr>
-                                    <td>{{a.name}}</td>
+                                    <td>{{a.station_id}}</td>
+                                    <td>{{a.addressline1}}</td>
+                                    <td>{{a.addressline2}}</td>
+                                    <td>{{a.district}}</td>
+                                    <td>{{a.city}}</td>
                                     <td>{{a.contact}}</td>
-                                    <td>{{a.login_userid.email}}</td>
+                                    <td>{{a.login_id.email}}</td>
                                 </tr>
                                 {% endfor %}
                             </table>
