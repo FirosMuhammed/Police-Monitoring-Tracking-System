@@ -480,3 +480,34 @@ def file_complaint(request):
         form = ComplaintForm()
 
     return render(request, 'file_complaint.html', {'form': form})
+
+
+
+
+
+
+def view_complaints(request):
+    userid = request.session.get('userid')  
+    user = get_object_or_404(login, id=userid)  
+    data = complaints.objects.filter(user_logid=user)  
+    return render(request, 'view_complaint.html', {'data': data})
+
+
+def edit_complaint(request,id):
+    data = get_object_or_404(complaints, id=id)
+    if request.method == 'POST':
+        form = ComplaintForm(request.POST,request.FILES,instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('view_complaint')
+    else:
+        form = ComplaintForm(instance=data)
+    return render(request, 'edit_complaint.html',{'form':form})
+
+
+
+def delete_complaint(request, id):
+    complaint_details = complaints.objects.get( id=id)
+    complaint_details.delete()
+    return redirect('view_complaint')
+
