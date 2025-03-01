@@ -1,36 +1,35 @@
-{% extends 'station_header.html' %}
+{% extends 'staff_header.html' %}
 {% block content %}
 {% load static %}
 
 <html>
     <head>
-        <title>Edit Duty</title>
+        <title>Case Status</title>
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
 
     </head>
-x   <body>
+  <body>
     <center>   
         <table class="form-class">
-        <h2>Edit Duty</h2>
+        <h2>Case Status Update</h2>
         <br><br>
 
         <form method="POST">
             {% csrf_token %}
            
         <tr>
-            <td><label>Duty</label></td>
-            <td>{{form.duty}}</td>
+            <td><label>Case Status</label></td>
+            <td>{{form.case_status}}</td>
         </tr>
 
         
-       
         <tr>
             
             <td colspan="2">    
                 <div style="text-align: center;">
                     <br><br>
-                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;"> Edit</button>
+                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;">Update Status</button>
             </div>
 
             </td>

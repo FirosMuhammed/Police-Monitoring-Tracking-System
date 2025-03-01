@@ -702,6 +702,7 @@ textarea,select {
   border-left: 1px solid #131312;
   margin-bottom: 30px;
 }
+
 input:focus,
 textarea:focus {
   outline: inherit;
