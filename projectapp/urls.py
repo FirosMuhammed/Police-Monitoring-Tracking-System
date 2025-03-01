@@ -64,6 +64,10 @@ urlpatterns = [
 
     path('reply_enquiry/<int:id>' ,views.reply_enquiry, name='reply_enquiry'),
     path('enquiry_viewuser' ,views.enquiry_viewuser, name='enquiry_viewuser'),
+    path('edit_enquiry/<int:id>' ,views.edit_enquiry, name='edit_enquiry'),
+    path('delete_enquiry/<int:id>' ,views.delete_enquiry, name='delete_enquiry'),
+
+
 
 
 

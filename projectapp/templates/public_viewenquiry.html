@@ -45,6 +45,8 @@
                         <th>Date</th>
                         <th>Enquiry</th>
                         <th>Staff Response</th>
+                        <th></th>
+                        <th></th>
                         
 
                     </tr>
@@ -55,6 +57,14 @@
                             <td>{{ enquiry.current_date }}</td>
                             <td>{{ enquiry.enquiry }}</td>
                             <td>{{ enquiry.staff_reply }}</td>
+                            
+                            <td>
+                                <a href="{% url 'edit_enquiry' enquiry.id %}" class="btn btn-custom btn-edit">Edit</a>
+                            </td>
+
+                            <td>
+                                <a href="{% url 'delete_enquiry' enquiry.id %}" class="btn btn-custom btn-edit">Delete</a>
+                            </td>
                             
                         </tr>
                     {% endfor %}

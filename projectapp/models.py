@@ -11,9 +11,7 @@ class police_station(models.Model):
     district = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     contact = models.CharField(max_length=15)
-    
-    # Change ForeignKey to OneToOneField
-    login_id = models.OneToOneField('login', on_delete=models.CASCADE)
+    login_id = models.OneToOneField('login', on_delete=models.CASCADE, related_name='station_as_loginid')
 
     def __str__(self):
         

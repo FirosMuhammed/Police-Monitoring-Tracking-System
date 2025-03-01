@@ -546,16 +546,16 @@ def reply_complaint(request,id):
 def make_enquiry(request, login_id):
     user_id=request.session.get('userid')
     login_details=get_object_or_404(login,id=user_id)
-    station = get_object_or_404(police_station,login_id__id=login_id)
-    print(login_details.id)
-    print(station.login_id_id)
+    station = get_object_or_404(login,id=login_id)
+    # print(login_details.id)
+    # print(station.login_id)
 
     if request.method == 'POST':
         form = EnquiryForm(request.POST, request.FILES)
         if form.is_valid():
             a=form.save(commit=False)
             a.user_id=login_details
-            a.login_id=station.login_id
+            a.station_id=station
             a.save()
             return redirect('station_search') 
     else:
@@ -600,6 +600,26 @@ def enquiry_viewuser(request):
     user = get_object_or_404(login, id=userid)
     enquiry = enquiries.objects.filter(user_id=user)
     return render(request, 'public_viewenquiry.html', {'enquiries': enquiry })
+
+
+
+def edit_enquiry(request,id):
+    data = get_object_or_404(enquiries, id=id)
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST,request.FILES,instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('enquiry_viewuser')
+    else:
+        form = EnquiryForm(instance=data)
+    return render(request, 'edit_enquirypublic.html',{'form':form})
+
+
+
+def delete_enquiry(request, id):
+    enquiry_details = enquiries.objects.get( id=id)
+    enquiry_details.delete()
+    return redirect('enquiry_viewuser')
   
 
 
