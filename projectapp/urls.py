@@ -56,10 +56,6 @@ urlpatterns = [
     path('petition_delete/<int:id>' ,views.delete_petition, name='petition_delete'),
 
     path('complaint_form' ,views.file_complaint, name='complaint_form'),
-
-
-
-
     path('view_complaint/', views.view_complaints, name='view_complaint'),
     path('complaint_delete/<int:id>' ,views.delete_complaint, name='complaint_delete'),
     path('complaint_edit/<int:id>' ,views.edit_complaint, name='complaint_edit'),
@@ -67,6 +63,9 @@ urlpatterns = [
     path('view_enquiry' ,views.view_enquiry, name='view_enquiry'),
 
     path('reply_enquiry/<int:id>' ,views.reply_enquiry, name='reply_enquiry'),
+    path('enquiry_viewuser' ,views.enquiry_viewuser, name='enquiry_viewuser'),
+
+
 
 
 

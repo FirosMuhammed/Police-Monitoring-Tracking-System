@@ -591,6 +591,15 @@ def reply_enquiry(request,id):
         form = ReplyEnquiry(initial={'staff_reply':enquiry.staff_reply})
     
     return render(request, 'reply_enquiry.html', {'forms': form,'enquiries':enquiry})
+
+
+
+
+def enquiry_viewuser(request):
+    userid = request.session.get('userid')
+    user = get_object_or_404(login, id=userid)
+    enquiry = enquiries.objects.filter(user_id=user)
+    return render(request, 'public_viewenquiry.html', {'enquiries': enquiry })
   
 
 
