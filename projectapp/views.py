@@ -230,6 +230,18 @@ def admin_userview(request):
     admin = user_reg.objects.all()
     return render(request,'admin_userview.html',{'data':admin})
 
+def admin_stationview(request):
+    admin = police_station.objects.all()
+    return render(request,'admin_stationview.html',{'data':admin})
+
+def admin_staffview(request):
+    admin = staff_reg.objects.all()
+    return render(request,'admin_staffview.html',{'data':admin})
+
+def admin_complaintview(request):
+    admin = complaints.objects.all()
+    return render(request,'admin_complaintview.html',{'data':admin})
+
 
 
 def user_criminal_view(request):
@@ -480,3 +492,136 @@ def file_complaint(request):
         form = ComplaintForm()
 
     return render(request, 'file_complaint.html', {'form': form})
+
+
+
+
+
+
+def view_complaints(request):
+    userid = request.session.get('userid')  
+    user = get_object_or_404(login, id=userid)  
+    data = complaints.objects.filter(user_logid=user)  
+    return render(request, 'view_complaint.html', {'data': data})
+
+
+def edit_complaint(request,id):
+    data = get_object_or_404(complaints, id=id)
+    if request.method == 'POST':
+        form = ComplaintForm(request.POST,request.FILES,instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('view_complaint')
+    else:
+        form = ComplaintForm(instance=data)
+    return render(request, 'edit_complaint.html',{'form':form})
+
+
+
+def delete_complaint(request, id):
+    complaint_details = complaints.objects.get( id=id)
+    complaint_details.delete()
+    return redirect('view_complaint')
+
+
+def reply_complaint(request,id):  
+    complaint = get_object_or_404(complaints,id=id)
+    if request.method == 'POST':
+        form = ReplyComplaint(request.POST)
+        
+        if form.is_valid():
+            complaint.reply=form.cleaned_data['reply']
+            complaint.save()
+            return redirect('admin_complaintview')
+    else:
+        form = ReplyComplaint(initial={'reply':complaint.reply})
+    
+    return render(request, 'reply_complaint.html', {'forms': form,'complaint':complaint})
+
+
+
+
+
+
+def make_enquiry(request, login_id):
+    user_id=request.session.get('userid')
+    login_details=get_object_or_404(login,id=user_id)
+    station = get_object_or_404(login,id=login_id)
+    # print(login_details.id)
+    # print(station.login_id)
+
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST, request.FILES)
+        if form.is_valid():
+            a=form.save(commit=False)
+            a.user_id=login_details
+            a.station_id=station
+            a.save()
+            return redirect('station_search') 
+    else:
+        form = EnquiryForm()
+    return render(request, 'make_enquiry.html', {'forms': form})
+
+
+
+
+def view_enquiry(request):
+    staffid = request.session.get('staffid')  
+    station = get_object_or_404(login, id=staffid) 
+    staff = get_object_or_404(staff_reg, staff_login_id=station.id) 
+    staff_stations = staff.staff_station 
+    enquiries_list = enquiries.objects.filter(station_id=staff_stations).select_related('user_id__user_as_loginid') 
+    # user_details = user_reg.objects.filter(user_id__in=enquiries.enquiries_list('user_id', flat=True))
+
+
+    return render(request, 'enquiries_viewstaff.html', {'enquiries': enquiries_list})
+
+
+
+def reply_enquiry(request,id):  
+    enquiry = get_object_or_404(enquiries,id=id)
+    if request.method == 'POST':
+        form = ReplyEnquiry(request.POST)
+        
+        if form.is_valid():
+            enquiry.staff_reply=form.cleaned_data['staff_reply']
+            enquiry.save()
+            return redirect('view_enquiry')
+    else:
+        form = ReplyEnquiry(initial={'staff_reply':enquiry.staff_reply})
+    
+    return render(request, 'reply_enquiry.html', {'forms': form,'enquiries':enquiry})
+
+
+
+
+def enquiry_viewuser(request):
+    userid = request.session.get('userid')
+    user = get_object_or_404(login, id=userid)
+    enquiry = enquiries.objects.filter(user_id=user)
+    return render(request, 'public_viewenquiry.html', {'enquiries': enquiry })
+
+
+
+def edit_enquiry(request,id):
+    data = get_object_or_404(enquiries, id=id)
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST,request.FILES,instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('enquiry_viewuser')
+    else:
+        form = EnquiryForm(instance=data)
+    return render(request, 'edit_enquirypublic.html',{'form':form})
+
+
+
+def delete_enquiry(request, id):
+    enquiry_details = enquiries.objects.get( id=id)
+    enquiry_details.delete()
+    return redirect('enquiry_viewuser')
+  
+
+
+
+
