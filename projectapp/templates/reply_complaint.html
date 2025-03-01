@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Review Complaint</title>
+</head>
+<body>
+    <center>   
+        {% if not forms.reply.value %}
+        <h2>Review Complaint</h2>
+        {% else %}
+        <h2>Edit Response</h2>
+        {% endif %}
+
+
+
+        <br><br>
+
+        <form method="POST">
+            {% csrf_token %}
+            <table class="form-class">
+                {{ complaint.as_p }}
+
+                <tr>
+                    <td><label>Reply</label></td>
+                    <td>{{ forms.reply }}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">    
+                        <div style="text-align: center;">
+                            <br><br>
+                            {% if not forms.reply.value %}
+                                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;">Add Reply</button>
+                            {% else %}
+                                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;">Edit Reply</button>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>   
+            </table>
+        </form>
+    </center>
+</body>
+</html>

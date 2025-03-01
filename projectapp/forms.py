@@ -111,4 +111,23 @@ class ComplaintForm(forms.ModelForm):
     class Meta:
         model=complaints
         fields=['complaint']
+
+
+class ReplyComplaint(forms.ModelForm):
+    class Meta:
+        model=complaints
+        fields=['reply']
+
+
+class EnquiryForm(forms.ModelForm):
+    class Meta:
+        model=enquiries
+        fields=['enquiry']
+
+
+class ReplyEnquiry(forms.ModelForm):
+    class Meta:
+        model=enquiries
+        fields=['staff_reply']
+        
        

@@ -238,6 +238,10 @@ def admin_staffview(request):
     admin = staff_reg.objects.all()
     return render(request,'admin_staffview.html',{'data':admin})
 
+def admin_complaintview(request):
+    admin = complaints.objects.all()
+    return render(request,'admin_complaintview.html',{'data':admin})
+
 
 
 def user_criminal_view(request):
@@ -518,4 +522,77 @@ def delete_complaint(request, id):
     complaint_details = complaints.objects.get( id=id)
     complaint_details.delete()
     return redirect('view_complaint')
+
+
+def reply_complaint(request,id):  
+    complaint = get_object_or_404(complaints,id=id)
+    if request.method == 'POST':
+        form = ReplyComplaint(request.POST)
+        
+        if form.is_valid():
+            complaint.reply=form.cleaned_data['reply']
+            complaint.save()
+            return redirect('admin_complaintview')
+    else:
+        form = ReplyComplaint(initial={'reply':complaint.reply})
+    
+    return render(request, 'reply_complaint.html', {'forms': form,'complaint':complaint})
+
+
+
+
+
+
+def make_enquiry(request, login_id):
+    user_id=request.session.get('userid')
+    login_details=get_object_or_404(login,id=user_id)
+    station = get_object_or_404(police_station,login_id__id=login_id)
+    print(login_details.id)
+    print(station.login_id_id)
+
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST, request.FILES)
+        if form.is_valid():
+            a=form.save(commit=False)
+            a.user_id=login_details
+            a.login_id=station.login_id
+            a.save()
+            return redirect('station_search') 
+    else:
+        form = EnquiryForm()
+    return render(request, 'make_enquiry.html', {'forms': form})
+
+
+
+
+def view_enquiry(request):
+    staffid = request.session.get('staffid')  
+    station = get_object_or_404(login, id=staffid) 
+    staff = get_object_or_404(staff_reg, staff_login_id=station.id) 
+    staff_stations = staff.staff_station 
+    enquiries_list = enquiries.objects.filter(station_id=staff_stations).select_related('user_id__user_as_loginid') 
+    # user_details = user_reg.objects.filter(user_id__in=enquiries.enquiries_list('user_id', flat=True))
+
+
+    return render(request, 'enquiries_viewstaff.html', {'enquiries': enquiries_list})
+
+
+
+def reply_enquiry(request,id):  
+    enquiry = get_object_or_404(enquiries,id=id)
+    if request.method == 'POST':
+        form = ReplyEnquiry(request.POST)
+        
+        if form.is_valid():
+            enquiry.staff_reply=form.cleaned_data['staff_reply']
+            enquiry.save()
+            return redirect('view_enquiry')
+    else:
+        form = ReplyEnquiry(initial={'staff_reply':enquiry.staff_reply})
+    
+    return render(request, 'reply_enquiry.html', {'forms': form,'enquiries':enquiry})
+  
+
+
+
 

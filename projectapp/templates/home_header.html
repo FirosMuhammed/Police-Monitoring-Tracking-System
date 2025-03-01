@@ -84,13 +84,13 @@
                             <nav class="mil-main-menu" id="swupMenu">
                                 <ul>
                                     <li class="mil-has-children mil-active">
-                                        <a href="#.">Homepage</a>
-                                        <ul>
-                                            <li><a href="home-1.html">Landing page</a></li>
+                                        <a href="{% url 'home' %}">Homepage</a>
+                                        <!-- <ul>
+                                            <li><a href="">Landing page</a></li>
                                             <li><a href="home-2.html">Personal</a></li>
                                             <li><a href="portfolio-3.html">Portfolio slider</a></li>
-                                        </ul>
-</li>
+                                        </ul> -->
+                                    </li>
                                     <li class="mil-has-children">
                                         <a href="#.">Portfolio</a>
                                         <ul>
@@ -100,18 +100,20 @@
                                         </ul>
                                     </li>
                                     <li class="mil-has-children">
-                                        <a href="#.">Services</a>
+                                        <a href="#.">Registration</a>
                                         <ul>
-                                            <li><a href="services.html">Services List</a></li>
-                                            <li><a href="service.html">Single service</a></li>
+                                            <li><a href="{% url 'Station_reg' %}">Station Registration</a></li>
+                                            <li><a href="{% url 'staff_reg' %}">Staff Registration</a></li>
+                                            <li><a href="{% url 'userreg' %}">User Registration</a></li>
+
                                         </ul>
                                     </li>
                                     <li class="mil-has-children">
-                                        <a href="#.">Newsletter</a>
-                                        <ul>
+                                        <a href="{% url 'login' %}">Login</a>
+                                        <!-- <ul>
                                             <li><a href="blog.html">Blog List</a></li>
                                             <li><a href="publication.html">Publication</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                     <li class="mil-has-children">
                                         <a href="#.">Other pages</a>

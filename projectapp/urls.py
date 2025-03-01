@@ -24,6 +24,10 @@ urlpatterns = [
     path('admin_userview' ,views.admin_userview, name='admin_userview'),
     path('admin_stationview' ,views.admin_stationview, name='admin_stationview'),
     path('admin_staffview' ,views.admin_staffview, name='admin_staffview'),
+    path('admin_complaintview' ,views.admin_complaintview, name='admin_complaintview'),
+
+    path('reply_complaint/<int:id>/' ,views.reply_complaint, name='reply_complaint'),
+
 
 
 
@@ -59,6 +63,13 @@ urlpatterns = [
     path('view_complaint/', views.view_complaints, name='view_complaint'),
     path('complaint_delete/<int:id>' ,views.delete_complaint, name='complaint_delete'),
     path('complaint_edit/<int:id>' ,views.edit_complaint, name='complaint_edit'),
+    path('make_enquiry/<int:login_id>' ,views.make_enquiry, name='make_enquiry'),
+    path('view_enquiry' ,views.view_enquiry, name='view_enquiry'),
+
+    path('reply_enquiry/<int:id>' ,views.reply_enquiry, name='reply_enquiry'),
+
+
+
 
 
 
