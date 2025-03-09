@@ -1,16 +1,56 @@
+{% extends 'staff_header.html' %}
+{% block content %}
+{% load static %}
+
 <html>
-<head>
-    <title>Edit Criminals</title>
-</head>
-<body>
-    <center>
-    <h1>Edit Criminal</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Edit</button>
-        
-    </form>
-</center>
-</body>
+    <head>
+        <title>Edit Criminals</title>
+        <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    </head>
+    <body>
+        <center>   
+            <table class="form-class">
+                <h2>Edit Criminals</h2>
+                <br><br><br>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <tr>
+                        <td><label>Photo</label></td>
+                        <td>{{ form.photo }}</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Criminal Name</label></td>
+                        <td>{{ form.criminal_name }}</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Crime Details</label></td>
+                        <td>{{ form.crime_details }}</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Age</label></td>
+                        <td>{{ form.criminal_age }}</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Gender</label></td>
+                        <td>{{ form.gender }}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">    
+                            <div style="text-align: center;">
+                                <br><br>
+                                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;"> Register</button>
+                            </div>
+                        </td>
+                    </tr>   
+                </form>
+            </table>   
+        </center>
+    </body>
 </html>
+{% endblock %}

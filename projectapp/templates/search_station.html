@@ -1,0 +1,89 @@
+{% extends 'userheader.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Station</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .table-container {
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .btn-custom {
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn-file-petition {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-file-petition:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4 text-center">
+        <h1>Search Stations</h1>
+        <br><br>
+        
+        <form method="GET" action="{% url 'station_search' %}" class="search-box">
+            <input type="text" name="q" class="form-control d-inline-block w-50" placeholder="Search by Address, District, or City" value="{{ query }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
+
+        {% if results %}
+            <div class="table-container">
+                <table class="table table-bordered table-striped text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Station Address</th>
+                            <th>District</th>
+                            <th>City</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for station in results %}
+                            <tr>
+                                <td>{{ station.addressline1 }}</td>
+                                <td>{{ station.district }}</td>
+                                <td>{{ station.city }}</td>
+                                <td>
+                                    <a href="{% url 'petition' station.login_id_id %}" class="btn btn-custom btn-file-petition">
+                                        File Petition
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <a href="{% url 'make_enquiry' station.login_id.id %}" class="btn btn-custom btn-file-petition">
+                                        Enquiries
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-danger">No Results Found</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+{% endblock %}

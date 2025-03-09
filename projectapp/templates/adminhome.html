@@ -444,11 +444,20 @@
                             <div class="collapse" id="sidebarTables">
                                  <ul class="nav sub-navbar-nav">
                                       <li class="sub-nav-item">
-                                           <a class="sub-nav-link" href="{% static 'admin/tables-basic.html' %}">Basic Tables</a>
+                                           <a class="sub-nav-link" href="{% url 'admin_userview' %}">Users</a>
                                       </li>
+
                                       <li class="sub-nav-item">
-                                           <a class="sub-nav-link" href="{% static 'admin/tables-gridjs.html' %}">Grid Js</a>
+                                        <a class="sub-nav-link" href="{% url 'admin_stationview' %}">Police Stations</a>
+                                   </li>
+
+                                      <li class="sub-nav-item">
+                                           <a class="sub-nav-link" href="{% url 'admin_staffview' %}">Staffs</a>
                                       </li>
+
+                                      <li class="sub-nav-item">
+                                        <a class="sub-nav-link" href="{% url 'admin_complaintview' %}">User Complaints</a>
+                                   </li>
                                  </ul>
                             </div>
                        </li>

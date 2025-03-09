@@ -1,0 +1,90 @@
+{% extends 'home_header.html' %}
+{% block content %}
+{% load static %}
+
+<html>
+    <head>
+        <title>User Petition</title>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+
+    </head>
+  <body>
+    <center>   
+        <table class="form-class">
+        <h2>File a Petition</h2>
+        <br><br>
+
+        <form method="POST">
+            {% csrf_token %}
+           
+        <tr>
+            <td><label>Case</label></td>
+            <td>{{forms.case}}</td>
+        </tr>
+
+        <tr>
+        
+            <td><label>Case Details</label></td>
+            <td>{{forms.case_details}}</td>
+        </tr>
+
+        <tr>
+            <td><label>Occurrence Day</label></td>
+            <td>{{forms.day}}</td>
+        </tr>
+
+        <tr>
+
+            <td><label>Occurrence Date</label></td>
+            <td>{{forms.date}}</td>
+        </tr>
+
+        <tr>
+        
+            <td><label>Occurrence Place</label></td>
+            <td>{{forms.place}}</td>
+        </tr>
+
+        <tr>
+        
+            <td><label>Occurrence Time</label></td>
+            <td>{{forms.time}}</td>
+        </tr>
+
+        <tr>
+        
+            <td><label>Suspects</label></td>
+            <td>{{forms.suspect}}</td>
+        </tr>
+
+
+        <tr>
+        
+            <td><label>Properties Involved</label></td>
+            <td>{{forms.properties_involved}}</td>
+        </tr>
+
+        <tr>
+        
+            <td><label>Toatal Value of Properties</label></td>
+            <td>{{forms.total_value_property}}</td>
+        </tr>
+       
+        <tr>
+            
+            <td colspan="2">    
+                <div style="text-align: center;">
+                    <br><br>
+                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;">File Now</button>
+            </div>
+
+            </td>
+        </tr>   
+    </form>
+</table>   
+ </center>
+ 
+    </body>
+</html>
+{% endblock %}

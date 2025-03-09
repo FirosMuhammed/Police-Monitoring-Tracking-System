@@ -1,0 +1,124 @@
+{% extends 'home_header.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File FIR</title>
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+</head>
+
+<body>
+    <center>
+        <h2>File FIR for Petition: {{ petition.case }}</h2>
+        <br><br>
+
+        <form method="POST">
+            {% csrf_token %}
+            <table class="form-class">
+
+                <!-- Display pre-filled values (non-submitting fields) -->
+                <tr>
+                    <td><label for="id_occurrence_day">Occurrence Day</label></td>
+                    <td>{{ occurrence_day }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_occurrence_date">Occurrence Date</label></td>
+                    <td>{{ occurrence_date }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_occurrence_time">Occurrence Time</label></td>
+                    <td>{{ occurrence_time }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_occurrence_place">Occurrence Place</label></td>
+                    <td>{{ occurrence_place }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_recieved_time">Received Time</label></td>
+                    <td>{{ recieved_time }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_details_case">Case Details</label></td>
+                    <td>{{ details_case }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_details_suspect">Details of Known/Unknown Suspects</label></td>
+                    <td>{{ details_suspect }}</td>
+                </tr>
+
+
+                {% if properties_involved is None %}
+    <tr><td>Null</td></tr>
+{% else %}
+    <tr>
+        <td><label for="id_properties_involved">Properties of Interest</label></td>
+        <td>{{ properties_involved }}</td>
+    </tr>
+{% endif %}
+
+
+                <tr>
+                    <td><label for="id_total_value_property">Total Value of Properties</label></td>
+                    <td>{{ total_value_property }}</td>
+                </tr>
+
+                <!-- Now render the actual form fields for database saving -->
+                <tr>
+                    <td><label for="id_district">District</label></td>
+                    <td>{{ form.district }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_pstation">Police Station</label></td>
+                    <td>{{ form.pstation }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_fir_no">FIR Number</label></td>
+                    <td>{{ form.fir_no }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_year">Year</label></td>
+                    <td>{{ form.year }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_acts">Acts</label></td>
+                    <td>{{ form.acts }}</td>
+                </tr>
+
+                <tr>
+                    <td><label for="id_sections">Sections</label></td>
+                    <td>{{ form.sections }}</td>
+                </tr>
+
+              
+
+                <tr>
+                    <td><label for="id_content_fir">FIR Contents</label></td>
+                    <td>{{ form.content_fir }}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <br><br>
+                        <button type="submit" class="btn btn-primary" style="width: 100px;">File Now</button>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </center>
+</body>
+</html>
+
+{% endblock %}

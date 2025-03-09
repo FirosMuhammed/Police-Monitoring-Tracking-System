@@ -43,7 +43,7 @@
         <!-- cursor end -->
 
         <!-- preloader -->
-        <div class="mil-preloader">
+        <!-- <div class="mil-preloader">
             <div class="mil-preloader-animation">
                 <div class="mil-pos-abs mil-animation-1">
                     <p class="mil-h3 mil-muted mil-thin">Pioneering</p>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- preloader end -->
 
         <!-- scrollbar progress -->
@@ -86,39 +86,41 @@
                                     <li class="mil-has-children mil-active">
                                         <a href="#.">Homepage</a>
                                         <ul>
-                                            <li><a href="home-1.html">Landing page</a></li>
+                                            <li><a href="{% url 'userhome' %}">Landing page</a></li>
                                             <li><a href="home-2.html">Personal</a></li>
                                             <li><a href="portfolio-3.html">Portfolio slider</a></li>
                                         </ul>
-</li>
+                                    </li>
                                     <li class="mil-has-children">
-                                        <a href="#.">Portfolio</a>
-                                        <ul>
+                                        <a href="{% url 'userprofile' %}">Profile</a>
+                                        <!-- <ul>
                                             <li><a href="portfolio-1.html">Grid type 1</a></li>
                                             <li><a href="portfolio-2.html">Grid type 2</a></li>
                                             <li><a href="portfolio-3.html">Slider</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                     <li class="mil-has-children">
-                                        <a href="#.">Services</a>
-                                        <ul>
+                                        <a href="{% url 'criminals_userview' %}">Criminals</a>
+                                        <!-- <ul>
                                             <li><a href="services.html">Services List</a></li>
                                             <li><a href="service.html">Single service</a></li>
+                                        </ul> -->
+                                    </li>
+                                    <li class="mil-has-children">
+                                        <a href="#.">File Petition</a>
+                                        <ul>
+                                            <li><a href="{% url 'station_search' %}">Police Stations</a></li>
+                                            <li><a href="{% url 'petitionview_public' %}">View Your Petitions</a></li>
+                                            <li><a href="{% url 'enquiry_viewuser' %}">View Enquiries</a></li>
+
                                         </ul>
                                     </li>
                                     <li class="mil-has-children">
-                                        <a href="#.">Newsletter</a>
+                                        <a href="#.">Complaints</a>
                                         <ul>
-                                            <li><a href="blog.html">Blog List</a></li>
-                                            <li><a href="publication.html">Publication</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mil-has-children">
-                                        <a href="#.">Other pages</a>
-                                        <ul>
-                                            <li><a href="team.html">Team</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="404.html">404</a></li>
+                                            <li><a href="{% url 'complaint_form' %}">File Complaint</a></li>
+                                            <li><a href="{% url 'view_complaint' %}">View Complaints</a></li>
+                                            
                                         </ul>
                                     </li>
                                 </ul>

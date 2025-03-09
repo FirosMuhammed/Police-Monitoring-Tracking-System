@@ -1,0 +1,105 @@
+{% extends 'staff_header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Petitions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-custom {
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-create-fir {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-create-fir:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-status {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-status:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <center><h2>Public Petitions</h2></center>
+    <br><br><br>
+    
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Case</th>
+                    <th>Case Details</th>
+                    <th>Place</th>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Involved Persons/Suspects</th>
+                    <th>Properties Involved</th>
+                    <th>Total Value of Properties</th>
+                    <th>Case Status</th>
+                    <th>User Name</th>
+                    <th>User Contact</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for petition in petitions %}
+                <tr>
+                    <td>{{ petition.case }}</td>
+                    <td>{{ petition.case_details }}</td>
+                    <td>{{ petition.place }}</td>
+                    <td>{{ petition.day }}</td>
+                    <td>{{ petition.date }}</td>
+                    <td>{{ petition.time }}</td>
+                    <td>{{ petition.suspect }}</td>
+                    <td>{{ petition.properties_involved }}</td>
+                    <td>{{ petition.total_value_property }}</td>
+                    <td>{{ petition.case_status }}</td>
+
+                    {% with user_details|dictsort:"login_userid.id"|first as user %}
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.contact }}</td>
+                    {% endwith %}
+
+                    <td >
+                        <a href="fir/{{ petition.id }}" class="btn btn-custom btn-create-fir">Create FIR</a>
+                        </td>
+                        <td>
+                        <a href="case_status/{{ petition.id }}" class="btn btn-custom btn-status">Status</a>
+                    </td> 
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+
+{% endblock %}

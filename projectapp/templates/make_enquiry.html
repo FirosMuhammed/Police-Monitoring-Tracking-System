@@ -1,0 +1,44 @@
+{% extends 'userheader.html' %}
+{% block content %}
+{% load static %}
+
+<html>
+    <head>
+        <title>Enquiries</title>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+
+    </head>
+x   <body>
+    <center>   
+        <table class="form-class">
+        <h2>Enquiries</h2>
+        <br><br>
+
+        <form method="POST">
+            {% csrf_token %}
+           
+        <tr>
+            <td><label>Enquiry</label></td>
+            <td>{{forms.enquiry}}</td>
+        </tr>
+
+       
+       
+        <tr>
+            
+            <td colspan="2">    
+                <div style="text-align: center;">
+                    <br><br>
+                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;">Submit</button>
+            </div>
+
+            </td>
+        </tr>   
+    </form>
+</table>   
+ </center>
+ 
+    </body>
+</html>
+{% endblock %}
