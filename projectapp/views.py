@@ -3,7 +3,7 @@ from .forms import *
 from .models import *
 from django.contrib  import messages
 from django.db.models import Q
-
+from datetime import date
 
 def home(request):
  
@@ -620,8 +620,43 @@ def delete_enquiry(request, id):
     enquiry_details = enquiries.objects.get( id=id)
     enquiry_details.delete()
     return redirect('enquiry_viewuser')
-  
 
 
 
 
+def staff_attendance(request):
+    data1 = request.session.get('stationid')
+    staffdata = get_object_or_404(login, id=data1)
+    staff_list = staff_reg.objects.filter(staff_station=staffdata)
+
+    staff_details = []
+    for staff in staff_list:
+        is_marked = attendance.objects.filter(staff_id=staff, current_date=date.today()).exists()
+        staff_details.append({'staff': staff, 'is_marked': is_marked})
+
+    return render(request, 'staff_attendance.html', {'staff_details': staff_details})
+
+
+def mark_attendance(request, id):
+    staff = get_object_or_404(staff_reg, id=id)
+
+    if attendance.objects.filter(staff_id=staff, current_date=date.today()).exists():
+        messages.warning(request, 'Attendance already marked for this staff!')
+    else:
+        attendance.objects.create(staff_id=staff)
+        messages.success(request, 'Attendance marked successfully!')
+
+    return redirect('staff_attendance')
+
+
+def search_attendance(request):
+
+    station_id = request.session.get('stationid')  
+    station = get_object_or_404(login, id=station_id)
+    query = request.GET.get('q', '')  
+    results = []
+
+    if query:
+        results = attendance.objects.filter(current_date=query, staff_id__staff_station=station ).select_related('staff_id')
+
+    return render(request, 'search_attendance.html', {'results': results, 'query': query})

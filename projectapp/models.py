@@ -135,6 +135,12 @@ class enquiries(models.Model):
     staff_reply =  models.TextField()
 
 
+class attendance(models.Model):
+    current_date = models.DateField(auto_now_add=True)
+    staff_id =models.ForeignKey(staff_reg, on_delete=models.CASCADE)
+   
+
+
   
 
 
