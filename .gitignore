@@ -1,0 +1,53 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+*.pdb
+
+# Django
+*.log
+*.pot
+*.pyc
+*.db
+db.sqlite3  # Ensure db.sqlite3 is ignored
+*.sqlite3
+local_settings.py
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+.virtualenv/
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# PyCharm
+*.iml
+.idea/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Distribution / Packaging
+*.egg-info/
+*.dist-info/
+dist/
+build/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+
+# Static files (if you want to ignore the local build of static files)
+staticfiles/
