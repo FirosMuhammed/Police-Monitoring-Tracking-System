@@ -1,0 +1,44 @@
+{% extends 'station_header.html' %}
+
+{% block content %}
+
+<div class="container mt-4 text-center">
+    <h1>Search Attendance</h1>
+    <br><br>
+
+    <form method="GET" action="{% url 'month_attendance' %}" class="search-box">
+        <input type="text" name="name" class="form-control d-inline-block w-50" placeholder="Search by Staff Name" value="{{ query }}">
+        <br><br>
+
+        <input type="text" maxlength="2" name="date" class="form-control d-inline-block w-50" placeholder="Search by Month" value="{{ query2 }}">
+                
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if results %}
+        <div class="table-container">
+            <table class="table table-bordered table-striped text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Staff Name</th>
+                        <th>Designation</th>
+                        <th>Present Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for staff in results %}
+                        <tr>
+                            <td>{{ staff.staff_id.staff_name }}</td>
+                            <td>{{ staff.staff_id.staff_designation }}</td>
+                            <td>{{ staff.present_days }}</td> 
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-danger">No Results Found</p>
+    {% endif %}
+</div>
+
+{% endblock %}

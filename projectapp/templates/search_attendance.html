@@ -40,7 +40,7 @@
         <br><br>
         
         <form method="GET" action="{% url 'search_attendance' %}" class="search-box">
-            <input type="text" name="q" class="form-control d-inline-block w-50" placeholder="Search by Date" value="{{ query }}">
+            <input type="date" name="q" class="form-control d-inline-block w-50" placeholder="Search by Date" value="{{ query }}">
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
         

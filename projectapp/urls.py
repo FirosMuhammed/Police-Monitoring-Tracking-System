@@ -69,6 +69,8 @@ urlpatterns = [
     path('staff_attendance' ,views.staff_attendance, name='staff_attendance'),
     path('mark_attendance/<int:id>' ,views.mark_attendance, name='mark_attendance'),
     path('search_attendance' ,views.search_attendance, name='search_attendance'),
+    path('month_attendance' ,views.month_attendance, name='month_attendance'),
+
 
 
 
