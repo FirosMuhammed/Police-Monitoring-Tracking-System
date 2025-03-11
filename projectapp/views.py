@@ -4,6 +4,9 @@ from .models import *
 from django.contrib  import messages
 from django.db.models import Q
 from datetime import date
+from django.db.models import Count
+from datetime import datetime
+
 
 def home(request):
  
@@ -660,3 +663,41 @@ def search_attendance(request):
         results = attendance.objects.filter(current_date=query, staff_id__staff_station=station ).select_related('staff_id')
 
     return render(request, 'search_attendance.html', {'results': results, 'query': query})
+
+
+def month_attendance(request):
+    station_id = request.session.get('stationid')  
+    station = get_object_or_404(login, id=station_id)
+    name = request.GET.get('name', '')  
+    date = request.GET.get('date', '')  
+
+    results = []
+
+    if name and date:
+        try:
+            month = int(date)  
+            if 1 <= month <= 12: 
+                current_year = datetime.now().year
+
+                
+                results = attendance.objects.filter(
+                    current_date__month=month,
+                    current_date__year=current_year,
+                    staff_id__staff_name__icontains=name,
+                    
+
+                ).select_related('staff_id__staff_name__station_as_loginid')  # Get the staff info as well
+
+                results = results.values('staff_id').annotate(present_days=Count('id'))
+
+            print(results)
+            
+        except ValueError:
+            results = []
+
+    return render(request, 'month_attendance.html', {
+        'results': results, 
+        'query': name, 
+        'query2': date
+    })
+
