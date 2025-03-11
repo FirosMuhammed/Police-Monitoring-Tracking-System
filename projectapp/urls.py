@@ -35,7 +35,7 @@ urlpatterns = [
     path('staff_details' ,views.staff_view, name='staff_details'),
     path('add_duty/<int:id>',views.add_duty,name='add_duty'),
     path('myduty' ,views.my_duty, name='myduty'),
-    path('view_duty/<int:id>' ,views.view_duties, name='view_duty'),
+    path('view_duty/<int:id>' ,views.view_duties, name='view_duty'),x 
     path('duty_delete/<int:id>' ,views.delete_duty, name='duty_delete'),
     path('duty_edit/<int:id>' ,views.edit_duty, name='duty_edit'),
     path('station_search' ,views.search_stations, name='station_search'),
@@ -66,6 +66,12 @@ urlpatterns = [
     path('enquiry_viewuser' ,views.enquiry_viewuser, name='enquiry_viewuser'),
     path('edit_enquiry/<int:id>' ,views.edit_enquiry, name='edit_enquiry'),
     path('delete_enquiry/<int:id>' ,views.delete_enquiry, name='delete_enquiry'),
+    path('staff_attendance' ,views.staff_attendance, name='staff_attendance'),
+    path('mark_attendance/<int:id>' ,views.mark_attendance, name='mark_attendance'),
+    path('search_attendance' ,views.search_attendance, name='search_attendance'),
+
+
+
 
 
 
