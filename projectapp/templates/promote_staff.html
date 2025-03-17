@@ -1,0 +1,57 @@
+{% extends 'station_header.html' %}
+{% block content %}
+{% load static %}
+
+<html>
+    <head>
+        <title>staff Promotion</title>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+
+    </head>
+x   <body>
+    <center>   
+        <table class="form-class">
+        <h2>Staff Promotion</h2>
+        <br><br><br><br>
+        <tr>
+            <td><label>Staff Name</label></td>
+            <td><h5>{{staff.staff_name}}</h5><br><br></td>
+        </tr>
+        
+        <form method="POST">
+            {% csrf_token %}
+           
+      
+        
+
+        <tr>
+
+            <td><label>Designation</label></td>
+            <td>{{form.staff_designation}}</td>
+        </tr>
+
+      
+
+        
+
+
+        
+       
+        <tr>
+            
+            <td colspan="2">    
+                <div style="text-align: center;">
+                    <br><br>
+                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;">Promote</button>
+            </div>
+
+            </td>
+        </tr>   
+    </form>
+</table>   
+ </center>
+ 
+    </body>
+</html>
+{% endblock %}

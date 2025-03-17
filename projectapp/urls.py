@@ -71,6 +71,9 @@ urlpatterns = [
     path('search_attendance' ,views.search_attendance, name='search_attendance'),
     path('month_attendance' ,views.month_attendance, name='month_attendance'),
 
+    path('staff_promotion/<int:id>',views.staff_promotion,name='staff_promotion'),
+
+
 
 
 

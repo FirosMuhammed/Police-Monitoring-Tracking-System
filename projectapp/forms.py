@@ -58,6 +58,18 @@ class staff_profile_form(forms.ModelForm):
     class Meta:
         model=staff_reg
         fields=['staff_name','staff_address','staff_district','staff_city','staff_contact','staff_dob','staff_designation','gender']
+        widgets = {'staff_designation':forms.TextInput(attrs={'disabled':'disabled'})}
+
+
+
+class StaffPromoteForm(forms.ModelForm):
+    class Meta:
+        model = staff_reg
+        fields = ['staff_designation']
+        widgets = {
+            'staff_designation': forms.Select(attrs={'class': 'form-control'})
+        }
+        
 
 class staff_email_form(forms.ModelForm):
     class Meta:
@@ -129,5 +141,8 @@ class ReplyEnquiry(forms.ModelForm):
     class Meta:
         model=enquiries
         fields=['staff_reply']
+
+
+
         
        
