@@ -16,6 +16,9 @@ def adminhome(request):
  
     return render (request,'adminhome.html')
 
+def services(request):
+    return render(request,'services.html')
+
 def Station_reg(request):
     if request.method == 'POST':
         form = StationForm(request.POST)
