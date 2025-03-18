@@ -657,6 +657,11 @@
                                     <td>{{a.city}}</td>
                                     <td>{{a.contact}}</td>
                                     <td>{{a.login_id.email}}</td>
+                                    <td><a href="{% url 'adminstationapprove' a.login_id.id %}">Approve</a></td>
+                                    <td><a href="{% url 'adminstationreject' a.login_id.id %}">Reject</a></td>
+
+
+
                                 </tr>
                                 {% endfor %}
                             </table>

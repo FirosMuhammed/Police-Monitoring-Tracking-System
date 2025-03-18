@@ -16,6 +16,9 @@ def adminhome(request):
  
     return render (request,'adminhome.html')
 
+def services(request):
+    return render(request,'services.html')
+
 def Station_reg(request):
     if request.method == 'POST':
         form = StationForm(request.POST)
@@ -679,7 +682,7 @@ def month_attendance(request):
             if 1 <= month <= 12: 
                 current_year = datetime.now().year
 
-                
+ 
                 results = attendance.objects.filter(
                     current_date__month=month,
                     current_date__year=current_year,
@@ -701,3 +704,33 @@ def month_attendance(request):
         'query2': date
     })
 
+
+
+def staff_promotion(request,id):
+   
+    staff = get_object_or_404(staff_reg,staff_login_id=id)  
+
+    if request.method == 'POST':
+        form = StaffPromoteForm(request.POST,instance=staff)
+        print(form)
+        if form.is_valid():
+            a=form.cleaned_data['staff_designation']
+            staff.staff_designation=a
+            staff.save()
+           
+            return redirect('staff_details')
+    else:
+        form = StaffPromoteForm(instance=staff)
+    return render(request , 'promote_staff.html',{'form': form,'staff':staff})
+
+def adminstationapprove(request,id):
+    data=get_object_or_404(login,id=id)
+    data.status=1
+    data.save()
+    return redirect('admin_stationview')
+
+def adminstationreject(request,id):
+    data=get_object_or_404(login,id=id)
+    data.status=2
+    data.save()
+    return redirect('admin_stationview')

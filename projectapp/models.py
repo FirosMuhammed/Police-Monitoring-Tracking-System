@@ -38,7 +38,24 @@ class staff_reg(models.Model):
     staff_city=models.CharField(max_length=100)
     staff_contact=models.CharField(max_length=100)
     staff_dob=models.CharField(max_length=100)
-    staff_designation=models.CharField(max_length=100)
+    # staff_designation=models.CharField(max_length=100)
+
+    ROLE_CHOICES = [
+        ('Constable', 'Constable'),
+        ('Head Constable', 'Head Constable'),
+        ('SHO', 'SHO'),
+        ('ASI', 'ASI'),
+        ('Sub Inspector', 'Sub Inspector'),
+        ('Inspector', 'Inspector'),
+        ('DYSP', 'DYSP'),
+        
+
+
+
+    ]
+
+    staff_designation = models.CharField(max_length=30, choices=ROLE_CHOICES, default='Constable')
+
     staff_station= models.ForeignKey('login',on_delete=models.CASCADE,blank=True,null=True,related_name='station_staff')
 
     GENDER_CHOICES = [
