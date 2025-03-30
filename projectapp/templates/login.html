@@ -37,6 +37,7 @@
                             <a href="login24.html" class="active">Login</a><a href="register24.html">Register</a>
                         </div>
                         <form method="POST">
+                            
                             {% csrf_token %}
                             {{ form.as_p }}
                             <div class="form-button">

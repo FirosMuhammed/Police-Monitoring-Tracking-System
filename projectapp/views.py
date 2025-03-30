@@ -33,6 +33,10 @@ def Station_reg(request):
             b.save() 
             
             return redirect('home') 
+        else:
+            return render(request, 'station_register.html', {'form': form, 'log': logins})
+
+
             
     else:
         form = StationForm()
@@ -90,6 +94,10 @@ def login_page(request):
                     messages.error(request,'Invalid Password')
             except login.DoesNotExist:
                 messages.error(request,'User does not exist')
+        else:
+            return render(request,'login.html',{'form': form})
+
+
     else:
         form=login_check()
     return render(request,'login.html',{'form': form})
@@ -257,6 +265,10 @@ def user_criminal_view(request):
 def staff_view(request):
     # Get the station ID from the session
     data1 = request.session.get('stationid')
+
+    if not data1:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+
     # Retrieve the login record for the given station ID
     staffdata = get_object_or_404(login, id=data1)
     # Use staffdata directly (no need to fetch again)
