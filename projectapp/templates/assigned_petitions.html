@@ -65,40 +65,37 @@
                     <th>User Contact</th>
                     <th></th>
                     <th></th>
-                    <th></th>
+                    
                 </tr>
             </thead>
             <tbody>
-                {% for petition in petitions %}
+                {% for petition in data %}
                 <tr>
-                    <td>{{ petition.case }}</td>
-                    <td>{{ petition.case_details }}</td>
-                    <td>{{ petition.place }}</td>
-                    <td>{{ petition.day }}</td>
-                    <td>{{ petition.date }}</td>
-                    <td>{{ petition.time }}</td>
-                    <td>{{ petition.suspect }}</td>
-                    <td>{{ petition.properties_involved }}</td>
-                    <td>{{ petition.total_value_property }}</td>
-                    <td>{{ petition.case_status }}</td>
-
-                    {% with user_details|dictsort:"login_userid.id"|first as user %}
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.contact }}</td>
-                    {% endwith %}
-
-                    <td >
-                        <a href="fir/{{ petition.id }}" class="btn btn-custom btn-create-fir">Create FIR</a>
+                    <td>{{ petition.petition_id.case }}</td>
+                    <td>{{ petition.petition_id.case_details }}</td>
+                    <td>{{ petition.petition_id.place }}</td>
+                    <td>{{ petition.petition_id.day }}</td>
+                    <td>{{ petition.petition_id.date }}</td>
+                    <td>{{ petition.petition_id.time }}</td>
+                    <td>{{ petition.petition_id.suspect }}</td>
+                    <td>{{ petition.petition_id.properties_involved }}</td>
+                    <td>{{ petition.petition_id.total_value_property }}</td>
+                    <td>{{ petition.petition_id.case_status }}</td>
+            
+                    <!-- Directly accessing user data -->
+                    <td>{{ petition.petition_id.login_userid.user_as_loginid.name }}</td>
+                    <td>{{ petition.petition_id.login_userid.user_as_loginid.contact }}</td>
+            
+                    <td>
+                        <a href="fir/{{ petition.petition_id.id }}" class="btn btn-custom btn-create-fir">Create FIR</a>
                     </td>
                     <td>
-                        <a href="case_status/{{ petition.id }}" class="btn btn-custom btn-status">Status</a>
-                    </td> 
-                    <td >
-                        <a href="{% url 'assign_staff' petition.id %}" class="btn btn-custom btn-create-fir">Assign Staff</a>
+                        <a href="case_status/{{ petition.petition_id.id }}" class="btn btn-custom btn-status">Status</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
+            
         </table>
     </div>
 </div>

@@ -13,6 +13,7 @@
         <input type="text" maxlength="2" name="date" class="form-control d-inline-block w-50" placeholder="Search by Month" value="{{ query2 }}">
                 
         <button type="submit" class="btn btn-primary">Search</button>
+        <br><br>
     </form>
 
     {% if results %}
@@ -20,16 +21,14 @@
             <table class="table table-bordered table-striped text-center">
                 <thead class="table-dark">
                     <tr>
-                        <th>Staff Name</th>
-                        <th>Designation</th>
+                        
                         <th>Present Days</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for staff in results %}
                         <tr>
-                            <td>{{ staff.staff_id.staff_name }}</td>
-                            <td>{{ staff.staff_id.staff_designation }}</td>
+                            
                             <td>{{ staff.present_days }}</td> 
                         </tr>
                     {% endfor %}

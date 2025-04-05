@@ -84,12 +84,8 @@
                             <nav class="mil-main-menu" id="swupMenu">
                                 <ul>
                                     <li class="mil-has-children mil-active">
-                                        <a href="#.">Homepage</a>
-                                        <ul>
-                                            <li><a href="{% url 'stationhome' %}">Landing page</a></li>
-                                            <li><a href="home-2.html">Personal</a></li>
-                                            <li><a href="portfolio-3.html">Portfolio slider</a></li>
-                                        </ul>
+                                        <a href="{% url 'stationhome' %}">Homepage</a>
+                            
                                     </li>
                                     <li class="mil-has-children">
                                         <a href="{% url 'stationprofile' %}">Profile</a>
@@ -120,14 +116,20 @@
                                         </ul>
                                     </li>
 
-
+                                    <li class="mil-has-children">
+                                        <a href="#">Public Petitions</a>
+                                        <ul>
+                                            <li><a href="{% url 'petitionview' %}">View Petitions</a></li>
+                                            <!-- <li><a href="publication.html">Publication</a></li> -->
+                                        </ul>
+                                    </li>
 
                                     <li class="mil-has-children">
                                         <a href="{% url 'petitionview_station' %}">Crime Files and Petitions</a>
                                     </li>
                                 </li>
                                 <li class="mil-has-children">
-                                    <a href="{% url 'login' %}">Logout</a>
+                                    <a href="{% url 'logout' %}">Logout</a>
                                    
                                 </li>
 
@@ -216,7 +218,7 @@
         <!-- frame -->
         <div class="mil-frame">
             <div class="mil-frame-top">
-                <a href="home-1.html" class="mil-logo">A.</a>
+                <a href="{% url 'stationhome' %}" class="mil-logo">KP.</a>
                 <div class="mil-menu-btn">
                     <span></span>
                 </div>
@@ -297,16 +299,15 @@
                             <div class="col-lg-6 col-xl-5">
 
                                 <div class="mil-mb-90">
-                                    <h2 class="mil-up mil-mb-60">Discover <br>Our <span class="mil-thin">Studio</span></h2>
-                                    <p class="mil-up mil-mb-30">At our design studio, we are a collective of talented individuals ignited by our unwavering passion for transforming ideas into reality. With a harmonious blend of diverse backgrounds and a vast array of skill sets, we join forces to create compelling solutions for our esteemed clients.</p>
+                                    <h2 class="mil-up mil-mb-60">Know <br>About <span class="mil-thin">Us</span></h2>
+                                    <p class="mil-up mil-mb-30">Kerala Police has a reputation for being one of the best-managed state police forces in the country and is one of the top-ranking states in terms of maintenance of law and order. Kerala Police is also one of the first Police departments in South Asia to implement community policing through an enactment. It is popularly known as 'Janamaithri' Policing, which literally translates to people-friendly Policing Kerala Police registers the highest number of cognizable offences in the country, next only to the National Capital Territory of Delhi. This has to be viewed in perspective of the relatively peaceful image of the state. This is a reflection of the good practice adopted by the state in registering every cognizable instance reported at the Police station level and dealing with the crimes and offenders legally.</p>
 
-                                    <p class="mil-up mil-mb-60">Collaboration is at the heart of what we do. Our team thrives on the synergy that arises when unique perspectives converge, fostering an environment of boundless creativity. By harnessing our collective expertise, we produce extraordinary results that consistently surpass expectations.</p>
 
                                     <div class="mil-about-quote">
                                         <div class="mil-avatar mil-up">
                                             <img src="{% static 'user/img/faces/customers/2.jpg' %}" alt="Founder">
                                         </div>
-                                        <h6 class="mil-quote mil-up">Passionately Creating <span class="mil-thin">Design Wonders:</span> Unleashing <span class="mil-thin">Boundless Creativity</span></h6>
+                                        <h6 class="mil-quote mil-up">"Mridhu Bhave Dhrida Kruthye"  <span class="mil-thin"></span><br>  <span class="mil-thin">"Soft in Temperament, Yet Firm in Action"</span></h6>
                                     </div>
                                 </div>
 
@@ -316,7 +317,7 @@
                                 <div class="mil-about-photo mil-mb-90">
                                     <div class="mil-lines-place"></div>
                                     <div class="mil-up mil-img-frame" style="padding-bottom: 160%;">
-                                        <img src="{% static 'user/img/photo/1.jpg' %}" alt="img" class="mil-scale" data-value-1="1" data-value-2="1.2">
+                                        <img src="{% static 'user/img/photo/3.jpg' %}" alt="img" class="mil-scale" data-value-1="1" data-value-2="1.2">
                                     </div>
                                 </div>
 

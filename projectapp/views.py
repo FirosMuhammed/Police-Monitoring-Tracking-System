@@ -6,6 +6,8 @@ from django.db.models import Q
 from datetime import date
 from django.db.models import Count
 from datetime import datetime
+from django.contrib.auth import logout
+
 
 
 def home(request):
@@ -109,19 +111,22 @@ def login_page(request):
 
 def station_profile(request):
     loginid = request.session.get('stationid')
-    login_details = get_object_or_404(login,id=loginid)
-    details = get_object_or_404(police_station,login_id= login_details)
-    if request.method == 'POST':
-        form = station_profile_form(request.POST, instance=details)
-        form2 = station_email_form(request.POST,instance=login_details)
-        if form.is_valid() and form2.is_valid():
-            form.save()
-            form2.save()
-            return redirect('stationhome')
+    if not loginid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
     else:
-        form = station_profile_form(instance = details)
-        form2 = station_email_form(instance=login_details)
-    return render(request,'edit_station.html',{'form' : form,'form2' : form2})
+        login_details = get_object_or_404(login,id=loginid)
+        details = get_object_or_404(police_station,login_id= login_details)
+        if request.method == 'POST':
+            form = station_profile_form(request.POST, instance=details)
+            form2 = station_email_form(request.POST,instance=login_details)
+            if form.is_valid() and form2.is_valid():
+                form.save()
+                form2.save()
+                return redirect('stationhome')
+        else:
+            form = station_profile_form(instance = details)
+            form2 = station_email_form(instance=login_details)
+        return render(request,'edit_station.html',{'form' : form,'form2' : form2})
 
 def staffreg(request):
     if request.method=='POST':
@@ -150,19 +155,23 @@ def staff_home(request):
 
 def staff_profile(request):
     loginid = request.session.get('staffid')
-    login_details = get_object_or_404(login,id=loginid)
-    details = get_object_or_404(staff_reg,staff_login_id= login_details)
-    if request.method == 'POST':
-        form = staff_profile_form(request.POST, instance=details)
-        forms = staff_email_form(request.POST,instance=login_details)
-        if form.is_valid() and forms.is_valid():
-            form.save()
-            forms.save()
-            return redirect('staffhome')
+    if not loginid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
     else:
-        form = staff_profile_form(instance = details)
-        forms = staff_email_form(instance = login_details)
-    return render(request , 'edit_staff.html',{'form': form,'forms' : forms})
+   
+        login_details = get_object_or_404(login,id=loginid)
+        details = get_object_or_404(staff_reg,staff_login_id= login_details)
+        if request.method == 'POST':
+            form = staff_profile_form(request.POST, instance=details)
+            forms = staff_email_form(request.POST,instance=login_details)
+            if form.is_valid() and forms.is_valid():
+                form.save()
+                forms.save()
+                return redirect('staffhome')
+        else:
+            form = staff_profile_form(instance = details)
+            forms = staff_email_form(instance = login_details)
+        return render(request , 'edit_staff.html',{'form': form,'forms' : forms})
 
 
 
@@ -171,19 +180,22 @@ def staff_profile(request):
     
 def user_profile(request):
     loginid=request.session.get('userid')
-    login_details=get_object_or_404(login,id=loginid)
-    details = get_object_or_404(user_reg,login_userid=login_details)
-    if request.method == 'POST':
-        form = user_profile_form(request.POST, instance=details)
-        form2=user_email_form(request.POST,instance=login_details)
-        if form.is_valid() and form2.is_valid():
-            form.save()
-            form2.save()
-            return redirect('userhome')
+    if not loginid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
     else:
-        form = user_profile_form(instance = details)
-        form2=user_email_form(instance=login_details)
-    return render(request,'edit_user.html',{'form' : form,'form2':form2})
+        login_details=get_object_or_404(login,id=loginid)
+        details = get_object_or_404(user_reg,login_userid=login_details)
+        if request.method == 'POST':
+            form = user_profile_form(request.POST, instance=details)
+            form2=user_email_form(request.POST,instance=login_details)
+            if form.is_valid() and form2.is_valid():
+                form.save()
+                form2.save()
+                return redirect('userhome')
+        else:
+            form = user_profile_form(instance = details)
+            form2=user_email_form(instance=login_details)
+        return render(request,'edit_user.html',{'form' : form,'form2':form2})
 
 # def form_criminal(request):
 #     if request.method == 'POST':
@@ -198,28 +210,34 @@ def user_profile(request):
    
 def form_criminal(request):
     staff_login_id=request.session.get('staffid')
-    login_details=get_object_or_404(login,id=staff_login_id)
-    details = get_object_or_404(staff_reg,staff_login_id=login_details)
-    if request.method == 'POST':
-        form = criminal_form(request.POST, request.FILES)
-        if form.is_valid():
-            a=form.save(commit=False)
-            a.login_staffid=details
-            a.save()
-            return redirect('staffhome') 
+    if not staff_login_id:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
     else:
-        form = criminal_form()
-    return render(request, 'add_criminals.html', {'forms': form})
+        login_details=get_object_or_404(login,id=staff_login_id)
+        details = get_object_or_404(staff_reg,staff_login_id=login_details)
+        if request.method == 'POST':
+            form = criminal_form(request.POST, request.FILES)
+            if form.is_valid():
+                a=form.save(commit=False)
+                a.login_staffid=details
+                a.save()
+                return redirect('staffhome') 
+        else:
+            form = criminal_form()
+        return render(request, 'add_criminals.html', {'forms': form})
 
 
 
 
 def criminals_table(request):
     data1 = request.session.get('staffid')
-    staffdata = get_object_or_404(login, id=data1)
-    staff=get_object_or_404(staff_reg,staff_login_id=staffdata)
-    data = criminals.objects.filter(login_staffid=staff)
-    return render(request, 'criminalsview.html' , {'data':data})
+    if not data1:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        staffdata = get_object_or_404(login, id=data1)
+        staff=get_object_or_404(staff_reg,staff_login_id=staffdata)
+        data = criminals.objects.filter(login_staffid=staff)
+        return render(request, 'criminalsview.html' , {'data':data})
 
 
 def delete_criminals(request, id):
@@ -268,44 +286,50 @@ def staff_view(request):
 
     if not data1:  # If user is not logged in
         return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
-
-    # Retrieve the login record for the given station ID
-    staffdata = get_object_or_404(login, id=data1)
-    # Use staffdata directly (no need to fetch again)
-    data = staff_reg.objects.filter(staff_station=staffdata)
-    return render(request, 'view_staff_details.html', {'details': data})
+    else:
+        # Retrieve the login record for the given station ID
+        staffdata = get_object_or_404(login, id=data1)
+        # Use staffdata directly (no need to fetch again)
+        data = staff_reg.objects.filter(staff_station=staffdata)
+        return render(request, 'view_staff_details.html', {'details': data})
 
 
 
 
 def add_duty(request, id):
     stationid = request.session.get('stationid')
-    station = get_object_or_404(login, id=stationid)   
-    staff = get_object_or_404(staff_reg, staff_login_id_id=id)  
-    
-    if request.method == 'POST':
-        form = dutyform(request.POST)
-        
-        if form.is_valid():
-            a = form.save(commit=False)
-            a.login_id = station
-            a.staff_login_id = staff.staff_login_id  
-            a.save()
-            return redirect('staff_details')
+    if not stationid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
     else:
-        form = dutyform()
-    
-    return render(request, 'add_duty.html', {'forms': form})
+        station = get_object_or_404(login, id=stationid)   
+        staff = get_object_or_404(staff_reg, staff_login_id_id=id)  
+        
+        if request.method == 'POST':
+            form = dutyform(request.POST)
+            
+            if form.is_valid():
+                a = form.save(commit=False)
+                a.login_id = station
+                a.staff_login_id = staff.staff_login_id  
+                a.save()
+                return redirect('staff_details')
+        else:
+            form = dutyform()
+        
+        return render(request, 'add_duty.html', {'forms': form})
 
 
 
 def my_duty(request):
     # data = staff_reg.objects.all()
     data1 = request.session.get('staffid')
-    staffdata = get_object_or_404(login, id=data1)
-    duty=get_object_or_404(staff_reg,staff_login_id=staffdata)
-    data = duties.objects.filter(staff_login_id=duty.staff_login_id)
-    return render(request,'duty_view_staff.html',{'details' : data})
+    if not data1:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        staffdata = get_object_or_404(login, id=data1)
+        duty=get_object_or_404(staff_reg,staff_login_id=staffdata)
+        data = duties.objects.filter(staff_login_id=duty.staff_login_id)
+        return render(request,'duty_view_staff.html',{'details' : data})
 
 
 
@@ -313,13 +337,16 @@ def my_duty(request):
 
 def view_duties(request, id):
     stationid = request.session.get('stationid')
-    station = get_object_or_404(login, id=stationid)
-    staff = get_object_or_404(staff_reg, staff_login_id=id)  
-    # print("dataaa...",staff)
-    data = duties.objects.filter(staff_login_id=staff.staff_login_id, login_id=station)
-    # print("dattaaaa...",data)
-    
-    return render(request, 'view_staff_duty.html', {'data': data})
+    if not stationid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        station = get_object_or_404(login, id=stationid)
+        staff = get_object_or_404(staff_reg, staff_login_id=id)  
+        # print("dataaa...",staff)
+        data = duties.objects.filter(staff_login_id=staff.staff_login_id, login_id=station)
+        # print("dattaaaa...",data)
+        
+        return render(request, 'view_staff_duty.html', {'data': data})
 
 
 
@@ -358,98 +385,114 @@ def search_stations(request):
 
 def file_petition(request, id):
     user_id=request.session.get('userid')
-    login_details=get_object_or_404(login,id=user_id)
-    station = get_object_or_404(police_station,login_id_id=id)
-    print(login_details.id)
-    print(station.login_id_id)
-
-    if request.method == 'POST':
-        form = petition_form(request.POST, request.FILES)
-        if form.is_valid():
-            a=form.save(commit=False)
-            a.login_userid=login_details
-            a.login_id=station.login_id
-            a.save()
-            return redirect('userhome') 
+    if not user_id:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
     else:
-        form = petition_form()
-    return render(request, 'file_petition.html', {'forms': form})
+        login_details=get_object_or_404(login,id=user_id)
+        station = get_object_or_404(police_station,login_id_id=id)
+        print(login_details.id)
+        print(station.login_id_id)
+
+        if request.method == 'POST':
+            form = petition_form(request.POST, request.FILES)
+            if form.is_valid():
+                a=form.save(commit=False)
+                a.login_userid=login_details
+                a.login_id=station.login_id
+                a.save()
+                return redirect('userhome') 
+        else:
+            form = petition_form()
+        return render(request, 'file_petition.html', {'forms': form})
 
 
 
 
 def view_petition(request):
     staffid = request.session.get('staffid')
-    station = get_object_or_404(login, id=staffid)
-    staff = get_object_or_404(staff_reg, staff_login_id=station.id)
-    staff_stations = staff.staff_station  
-    petitions = petition.objects.filter(login_id=staff_stations)
-    user_details = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
+    if not staffid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        station = get_object_or_404(login, id=staffid)
+        staff = get_object_or_404(staff_reg, staff_login_id=station.id)
+        staff_stations = staff.staff_station  
+        petitions = petition.objects.filter(login_id=staff_stations)
+        user_details = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
 
-    return render(request, 'staffview_petition.html', {
-        'petitions': petitions,
-        'user_details': user_details
-    }
-    )
+        return render(request, 'staffview_petition.html', {
+            'petitions': petitions,
+            'user_details': user_details
+        }
+        )
 
     
 
 def file_fir(request, id):
     staff_id = request.session.get('staffid')
-    staff_lg = get_object_or_404(login, id=staff_id)
-    petition_instance = get_object_or_404(petition, id=id)
-
-    if request.method == "POST":
-        form = fir_form(request.POST)
-        if form.is_valid():
-            fir_instance = form.save(commit=False)
-            fir_instance.public_petition_id = petition_instance
-            fir_instance.staff_loginid = staff_lg
-            fir_instance.details_suspect = petition_instance.case_details    
-            fir_instance.save()
-            return redirect('staffhome')
+    if not staff_id:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
     else:
-        form = fir_form()
+        staff_lg = get_object_or_404(login, id=staff_id)
+        petition_instance = get_object_or_404(petition, id=id)
 
-    return render(request, 'file_fir.html', {
-        'form': form, 
-        'petition': petition_instance,
-        'occurrence_day': petition_instance.day,
-        'occurrence_date': petition_instance.date,
-        'occurrence_time': petition_instance.time,
-        'occurrence_place': petition_instance.place,
-        'recieved_time': petition_instance.recieved_time1,
-        'details_case': petition_instance.case_details,
-        'details_suspect': petition_instance.suspect,
-        'properties_involved': petition_instance.properties_involved,
-        'total_value_property':petition_instance.total_value_property
-    })
+        if request.method == "POST":
+            form = fir_form(request.POST)
+            if form.is_valid():
+                fir_instance = form.save(commit=False)
+                fir_instance.public_petition_id = petition_instance
+                fir_instance.staff_loginid = staff_lg
+                fir_instance.details_suspect = petition_instance.case_details    
+                fir_instance.save()
+                return redirect('staffhome')
+        else:
+            form = fir_form()
+
+        return render(request, 'file_fir.html', {
+            'form': form, 
+            'petition': petition_instance,
+            'occurrence_day': petition_instance.day,
+            'occurrence_date': petition_instance.date,
+            'occurrence_time': petition_instance.time,
+            'occurrence_place': petition_instance.place,
+            'recieved_time': petition_instance.recieved_time1,
+            'details_case': petition_instance.case_details,
+            'details_suspect': petition_instance.suspect,
+            'properties_involved': petition_instance.properties_involved,
+            'total_value_property':petition_instance.total_value_property
+        })
 
 
 
 
 def station_view_petition(request):
     staffid = request.session.get('staffid')
-    station = get_object_or_404(login, id=staffid)
-    staff = get_object_or_404(staff_reg, staff_login_id=station.id)
-    staff_stations = staff.staff_station  
-    petitions = petition.objects.filter(login_id=staff_stations)
-    user_details = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
-    return render(request, 'station_petitionview.html', {
-        'petitions': petitions,
-        'user_details': user_details
-    }
-    )
+
+    if not staffid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        station = get_object_or_404(login, id=staffid)
+        staff = get_object_or_404(staff_reg, staff_login_id=station.id)
+        staff_stations = staff.staff_station  
+        petitions = petition.objects.filter(login_id=staff_stations)
+        user_details = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
+        return render(request, 'station_petitionview.html', {
+            'petitions': petitions,
+            'user_details': user_details
+        }
+        )
 
 def station_fir_view(request):
     station = request.session.get('stationid')
-    stationid = get_object_or_404(login, id=station)
+    if not station:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        stationid = get_object_or_404(login, id=station)
 
-    petition_details = petition.objects.filter(login_id=stationid)
+        petition_details = petition.objects.filter(login_id=stationid)
 
-    fir_details = fir.objects.filter(public_petition_id__in=petition_details)
+        fir_details = fir.objects.filter(public_petition_id__in=petition_details)
 
-    return render(request, 'view_FIR.html', {'petition_details': petition_details, 'fir_details': fir_details,})
+        return render(request, 'view_FIR.html', {'petition_details': petition_details, 'fir_details': fir_details,})
 
 
 def case_status(request, petition_id):
@@ -471,9 +514,12 @@ def case_status(request, petition_id):
 
 def public_view_petition(request):
     userid = request.session.get('userid')
-    user = get_object_or_404(login, id=userid)
-    petitions = petition.objects.filter(login_userid=user)
-    return render(request, 'public_viewpetition.html', {'petitions': petitions })
+    if not userid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        user = get_object_or_404(login, id=userid)
+        petitions = petition.objects.filter(login_userid=user)
+        return render(request, 'public_viewpetition.html', {'petitions': petitions })
 
 
 def edit_petition(request,id):
@@ -497,19 +543,22 @@ def delete_petition(request, id):
 
 def file_complaint(request):
     userid = request.session.get('userid')
-    user = get_object_or_404(login,id=userid)
-    if request.method == 'POST':
-        form = ComplaintForm(request.POST)
-
-        if form.is_valid():
-            a = form.save(commit=False)
-            a.user_logid=user
-            a.save()
-            return redirect('userhome')
+    if not userid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
     else:
-        form = ComplaintForm()
+        user = get_object_or_404(login,id=userid)
+        if request.method == 'POST':
+            form = ComplaintForm(request.POST)
 
-    return render(request, 'file_complaint.html', {'form': form})
+            if form.is_valid():
+                a = form.save(commit=False)
+                a.user_logid=user
+                a.save()
+                return redirect('userhome')
+        else:
+            form = ComplaintForm()
+
+        return render(request, 'file_complaint.html', {'form': form})
 
 
 
@@ -518,9 +567,12 @@ def file_complaint(request):
 
 def view_complaints(request):
     userid = request.session.get('userid')  
-    user = get_object_or_404(login, id=userid)  
-    data = complaints.objects.filter(user_logid=user)  
-    return render(request, 'view_complaint.html', {'data': data})
+    if not userid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        user = get_object_or_404(login, id=userid)  
+        data = complaints.objects.filter(user_logid=user)  
+        return render(request, 'view_complaint.html', {'data': data})
 
 
 def edit_complaint(request,id):
@@ -563,36 +615,42 @@ def reply_complaint(request,id):
 
 def make_enquiry(request, login_id):
     user_id=request.session.get('userid')
-    login_details=get_object_or_404(login,id=user_id)
-    station = get_object_or_404(login,id=login_id)
-    # print(login_details.id)
-    # print(station.login_id)
-
-    if request.method == 'POST':
-        form = EnquiryForm(request.POST, request.FILES)
-        if form.is_valid():
-            a=form.save(commit=False)
-            a.user_id=login_details
-            a.station_id=station
-            a.save()
-            return redirect('station_search') 
+    if not user_id:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
     else:
-        form = EnquiryForm()
-    return render(request, 'make_enquiry.html', {'forms': form})
+        login_details=get_object_or_404(login,id=user_id)
+        station = get_object_or_404(login,id=login_id)
+        # print(login_details.id)
+        # print(station.login_id)
+
+        if request.method == 'POST':
+            form = EnquiryForm(request.POST, request.FILES)
+            if form.is_valid():
+                a=form.save(commit=False)
+                a.user_id=login_details
+                a.station_id=station
+                a.save()
+                return redirect('station_search') 
+        else:
+            form = EnquiryForm()
+        return render(request, 'make_enquiry.html', {'forms': form})
 
 
 
 
 def view_enquiry(request):
     staffid = request.session.get('staffid')  
-    station = get_object_or_404(login, id=staffid) 
-    staff = get_object_or_404(staff_reg, staff_login_id=station.id) 
-    staff_stations = staff.staff_station 
-    enquiries_list = enquiries.objects.filter(station_id=staff_stations).select_related('user_id__user_as_loginid') 
-    # user_details = user_reg.objects.filter(user_id__in=enquiries.enquiries_list('user_id', flat=True))
+    if not staffid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        station = get_object_or_404(login, id=staffid) 
+        staff = get_object_or_404(staff_reg, staff_login_id=station.id) 
+        staff_stations = staff.staff_station 
+        enquiries_list = enquiries.objects.filter(station_id=staff_stations).select_related('user_id__user_as_loginid') 
+        # user_details = user_reg.objects.filter(user_id__in=enquiries.enquiries_list('user_id', flat=True))
 
 
-    return render(request, 'enquiries_viewstaff.html', {'enquiries': enquiries_list})
+        return render(request, 'enquiries_viewstaff.html', {'enquiries': enquiries_list})
 
 
 
@@ -615,9 +673,12 @@ def reply_enquiry(request,id):
 
 def enquiry_viewuser(request):
     userid = request.session.get('userid')
-    user = get_object_or_404(login, id=userid)
-    enquiry = enquiries.objects.filter(user_id=user)
-    return render(request, 'public_viewenquiry.html', {'enquiries': enquiry })
+    if not userid:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        user = get_object_or_404(login, id=userid)
+        enquiry = enquiries.objects.filter(user_id=user)
+        return render(request, 'public_viewenquiry.html', {'enquiries': enquiry })
 
 
 
@@ -644,15 +705,18 @@ def delete_enquiry(request, id):
 
 def staff_attendance(request):
     data1 = request.session.get('stationid')
-    staffdata = get_object_or_404(login, id=data1)
-    staff_list = staff_reg.objects.filter(staff_station=staffdata)
+    if not data1:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        staffdata = get_object_or_404(login, id=data1)
+        staff_list = staff_reg.objects.filter(staff_station=staffdata)
 
-    staff_details = []
-    for staff in staff_list:
-        is_marked = attendance.objects.filter(staff_id=staff, current_date=date.today()).exists()
-        staff_details.append({'staff': staff, 'is_marked': is_marked})
+        staff_details = []
+        for staff in staff_list:
+            is_marked = attendance.objects.filter(staff_id=staff, current_date=date.today()).exists()
+            staff_details.append({'staff': staff, 'is_marked': is_marked})
 
-    return render(request, 'staff_attendance.html', {'staff_details': staff_details})
+        return render(request, 'staff_attendance.html', {'staff_details': staff_details})
 
 
 def mark_attendance(request, id):
@@ -669,52 +733,58 @@ def mark_attendance(request, id):
 
 def search_attendance(request):
 
-    station_id = request.session.get('stationid')  
-    station = get_object_or_404(login, id=station_id)
-    query = request.GET.get('q', '')  
-    results = []
+    station_id = request.session.get('stationid')
+    if not station_id:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)  
+    else:
+        station = get_object_or_404(login, id=station_id)
+        query = request.GET.get('q', '')  
+        results = []
 
-    if query:
-        results = attendance.objects.filter(current_date=query, staff_id__staff_station=station ).select_related('staff_id')
+        if query:
+            results = attendance.objects.filter(current_date=query, staff_id__staff_station=station ).select_related('staff_id')
 
-    return render(request, 'search_attendance.html', {'results': results, 'query': query})
+        return render(request, 'search_attendance.html', {'results': results, 'query': query})
 
 
 def month_attendance(request):
     station_id = request.session.get('stationid')  
-    station = get_object_or_404(login, id=station_id)
-    name = request.GET.get('name', '')  
-    date = request.GET.get('date', '')  
+    if not station_id:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        station = get_object_or_404(login, id=station_id)
+        name = request.GET.get('name', '')  
+        date = request.GET.get('date', '')  
 
-    results = []
+        results = []
 
-    if name and date:
-        try:
-            month = int(date)  
-            if 1 <= month <= 12: 
-                current_year = datetime.now().year
+        if name and date:
+            try:
+                month = int(date)  
+                if 1 <= month <= 12: 
+                    current_year = datetime.now().year
 
- 
-                results = attendance.objects.filter(
-                    current_date__month=month,
-                    current_date__year=current_year,
-                    staff_id__staff_name__icontains=name,
-                    
+    
+                    results = attendance.objects.filter(
+                        current_date__month=month,
+                        current_date__year=current_year,
+                        staff_id__staff_name__icontains=name,
+                        
 
-                ).select_related('staff_id__staff_name__station_as_loginid')  # Get the staff info as well
+                    ).select_related('staff_id__staff_name__station_as_loginid')  # Get the staff info as well
 
-                results = results.values('staff_id').annotate(present_days=Count('id'))
+                    results = results.values('staff_id').annotate(present_days=Count('id'))
 
-            print(results)
-            
-        except ValueError:
-            results = []
+                print(results)
+                
+            except ValueError:
+                results = []
 
-    return render(request, 'month_attendance.html', {
-        'results': results, 
-        'query': name, 
-        'query2': date
-    })
+        return render(request, 'month_attendance.html', {
+            'results': results, 
+            'query': name, 
+            'query2': date
+        })
 
 
 
@@ -746,3 +816,46 @@ def adminstationreject(request,id):
     data.status=2
     data.save()
     return redirect('admin_stationview')
+
+def logouts(request):
+    logout(request)
+    return redirect('home')
+
+
+def assign_staff(request,id):
+    # Get the station ID from the session
+    data1 = request.session.get('stationid')
+    petitionid = get_object_or_404(petition,id=id)  
+
+
+    if not data1:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        staffdata = get_object_or_404(login, id=data1)
+        data = staff_reg.objects.filter(staff_station=staffdata)
+        return render(request, 'assign_staff.html', {'details': data , 'petition':petitionid.id} )
+    
+def assign_staff_process(request,staffid,petitionid):
+    id_petition = get_object_or_404(petition,id=petitionid)
+    staff = get_object_or_404(staff_reg,id=staffid) 
+    staff_assign.objects.create(
+        staff_id = staff,
+        petition_id = id_petition
+    )
+
+    return redirect('petitionview') 
+
+
+
+
+def view_assigned_petition(request):
+    data = request.session.get('staffid')
+    staff = get_object_or_404(staff_reg, staff_login_id=data)
+    petition_data = staff_assign.objects.filter(staff_id=staff).select_related('petition_id__login_userid')
+    return render(request, 'assigned_petitions.html', {'data': petition_data})
+  
+    
+    
+
+
+    

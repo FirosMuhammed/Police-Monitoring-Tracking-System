@@ -155,6 +155,15 @@ class enquiries(models.Model):
 class attendance(models.Model):
     current_date = models.DateField(auto_now_add=True)
     staff_id =models.ForeignKey(staff_reg, on_delete=models.CASCADE)
+
+class staff_assign(models.Model):
+    current_date = models.DateField(auto_now_add=True)
+    staff_id =models.ForeignKey(staff_reg, on_delete=models.CASCADE)
+    petition_id = models.ForeignKey(petition, on_delete=models.CASCADE, related_name='userpetition_as_id')
+
+
+
+
    
 
 

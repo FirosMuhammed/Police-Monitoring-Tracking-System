@@ -72,7 +72,7 @@
         <div class="mil-menu-frame">
             <!-- frame clone -->
              <div class="mil-frame-top">
-                <a href="home-1.html" class="mil-logo">A.</a>
+                <a href="{% url 'stationhome' %}" class="mil-logo">KP.</a>
                 <div class="mil-menu-btn">
                     <span></span>
                 </div>
@@ -86,12 +86,12 @@
                             <nav class="mil-main-menu" id="swupMenu">
                                 <ul>
                                     <li class="mil-has-children mil-active">
-                                        <a href="#.">Homepage</a>
-                                        <ul>
+                                        <a href="{% url 'stationhome' %}">Homepage</a>
+                                        <!-- <ul>
                                             <li><a href="{% url 'stationhome' %}">Landing page</a></li>
                                             <li><a href="home-2.html">Personal</a></li>
                                             <li><a href="portfolio-3.html">Portfolio slider</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                     <li class="mil-has-children">
                                         <a href="{% url 'stationprofile' %}">Profile</a>
@@ -129,7 +129,7 @@
                                     </li>
                                 </li>
                                 <li class="mil-has-children">
-                                    <a href="{% url 'login' %}">Logout</a>
+                                    <a href="{% url 'logout' %}">Logout</a>
                                    
                                 </li>
 
@@ -217,7 +217,7 @@
         <!-- frame -->
         <div class="mil-frame">
             <div class="mil-frame-top">
-                <a href="home-1.html" class="mil-logo">A.</a>
+                <a href="{% url 'stationhome' %}" class="mil-logo">KP.</a>
                 <div class="mil-menu-btn">
                     <span></span>
                 </div>
