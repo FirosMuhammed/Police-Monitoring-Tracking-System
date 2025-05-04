@@ -53,7 +53,7 @@
                 <div class="mil-pos-abs mil-animation-2">
                     <div class="mil-reveal-frame">
                         <p class="mil-reveal-box"></p>
-                        <p class="mil-h3 mil-muted mil-thin">Tracker.com</p>
+                        <p class="mil-h3 mil-muted mil-thin">police.com</p>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
         <div class="mil-menu-frame">
             <!-- frame clone -->
             <div class="mil-frame-top">
-                <a href="{% static 'user/home-1.html' %}" class="mil-logo">A.</a>
+                <a href="#top" class="mil-logo">KP.</a>
                 <div class="mil-menu-btn">
                     <span></span>
                 </div>
@@ -125,7 +125,7 @@
                                     </li>
 
                                     <li class="mil-has-children">
-                                        <a href="{% url 'petitionview_station' %}">Crime Files and Petitions</a>
+                                        <a href="{% url 'petitionview_station' %}">Crime Files and FIR</a>
                                     </li>
                                 </li>
                                 <li class="mil-has-children">
@@ -134,14 +134,14 @@
                                 </li>
 
                                     
-                                    <li class="mil-has-children">
+                                    <!-- <li class="mil-has-children">
                                         <a href="#.">Other pages</a>
                                         <ul>
                                             <li><a href="team.html">Team</a></li>
                                             <li><a href="contact.html">Contact</a></li>
                                             <li><a href="404.html">404</a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </nav>
 
@@ -256,17 +256,19 @@
                                 <div class="row">
                                     <div class="col-md-7 col-lg-5">
 
-                                        <p class="mil-light-soft mil-mb-60">Welcome to our world of endless imagination and boundless creativity. Together, let's embark on a remarkable journey where dreams become tangible realities.</p>
+                                        <p class="mil-light-soft mil-mb-60">Stay Ahead of Crime with Smart Policing.  
+
+                                            Our advanced police monitoring and crime matching platform empowers law enforcement with real-time analytics, crime pattern detection, and instant data matching. Enhance investigations, streamline case management, and keep communities safer with cutting-edge technology. Stay informed, stay proactive—because every second counts.</p>
 
                                     </div>
                                 </div>
 
-                                <a href="services.html" class="mil-button mil-arrow-place mil-btn-space">
-                                    <span>What we do</span>
+                                <a href="#about" class="mil-button mil-arrow-place mil-btn-space">
+                                    <span>About Us</span>
                                 </a>
 
-                                <a href="portfolio-1.html" class="mil-link mil-muted mil-arrow-place">
-                                    <span>View works</span>
+                                <a href="#works" class="mil-link mil-muted mil-arrow-place">
+                                    <span>Works</span>
                                 </a>
 
                                 <div class="mil-circle-text">
@@ -328,7 +330,7 @@
                 <!-- about end -->
 
                 <!-- services -->
-                <section class="mil-dark-bg">
+                <section class="mil-dark-bg" id="works">
                     <div class="mi-invert-fix">
                         <div class="mil-animation-frame">
                             <div class="mil-animation mil-position-1 mil-scale" data-value-1="2.4" data-value-2="1.4" style="top: 300px; right: -100px"></div>
@@ -340,7 +342,7 @@
                                 <div class="row">
                                     <div class="col-lg-10">
 
-                                        <span class="mil-suptitle mil-light-soft mil-suptitle-right mil-up">Professionals focused on helping your brand<br> grow and move forward.</span>
+                                        <span class="mil-suptitle mil-light-soft mil-suptitle-right mil-up">Professional desktop tools help<br> station manage staffs and petitions.</span>
 
                                     </div>
                                 </div>
@@ -348,13 +350,13 @@
                                 <div class="mil-complex-text justify-content-center mil-up mil-mb-15">
 
                                     <span class="mil-text-image"><img src="img/photo/2.jpg" alt="team"></span>
-                                    <h2 class="mil-h1 mil-muted mil-center">Unique <span class="mil-thin">Ideas</span></h2>
+                                    <h2 class="mil-h1 mil-muted mil-center">Proffesional <span class="mil-thin">Tools</span></h2>
 
                                 </div>
                                 <div class="mil-complex-text justify-content-center mil-up">
 
-                                    <h2 class="mil-h1 mil-muted mil-center">For Your <span class="mil-thin">Business.</span></h2>
-                                    <a href="services.html" class="mil-services-button mil-button mil-arrow-place"><span>What we do</span></a>
+                                    <h2 class="mil-h1 mil-muted mil-center">For Your <span class="mil-thin">Station.</span></h2>
+                                    <a href="#about" class="mil-services-button mil-button mil-arrow-place"><span>What we do</span></a>
 
                                 </div>
                             </div>
@@ -362,36 +364,36 @@
                             <div class="row mil-services-grid m-0">
                                 <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
 
-                                    <a href="service.html" class="mil-service-card-sm mil-up">
-                                        <h5 class="mil-muted mil-mb-30">Branding and <br>Identity Design</h5>
-                                        <p class="mil-light-soft mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                    <a href="{% url 'staff_details' %}" class="mil-service-card-sm mil-up">
+                                        <h5 class="mil-muted mil-mb-30">Management of <br>Station Staffs</h5>
+                                        <p class="mil-light-soft mil-mb-30">Manage officers and staffs -Station heads can assign duties to staffs , designation management.</p>
                                         <div class="mil-button mil-icon-button-sm mil-arrow-place"></div>
                                     </a>
 
                                 </div>
                                 <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
 
-                                    <a href="service.html" class="mil-service-card-sm mil-up">
-                                        <h5 class="mil-muted mil-mb-30">Website Design <br>and Development</h5>
-                                        <p class="mil-light-soft mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                    <a href="{% url 'staff_attendance' %}" class="mil-service-card-sm mil-up">
+                                        <h5 class="mil-muted mil-mb-30">Manage Staff's <br>Attendance</h5>
+                                        <p class="mil-light-soft mil-mb-30">Update staff's daily attendance details.</p>
                                         <div class="mil-button mil-icon-button-sm mil-arrow-place"></div>
                                     </a>
 
                                 </div>
                                 <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
 
-                                    <a href="service.html" class="mil-service-card-sm mil-up">
-                                        <h5 class="mil-muted mil-mb-30">Advertising and <br>Marketing Campaigns</h5>
-                                        <p class="mil-light-soft mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                    <a href="{% url 'petitionview' %}" class="mil-service-card-sm mil-up">
+                                        <h5 class="mil-muted mil-mb-30">View and <br>Manage Petitions</h5>
+                                        <p class="mil-light-soft mil-mb-30">Manage petitions and assign case to staffs.</p>
                                         <div class="mil-button mil-icon-button-sm mil-arrow-place"></div>
                                     </a>
 
                                 </div>
                                 <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
 
-                                    <a href="service.html" class="mil-service-card-sm mil-up">
-                                        <h5 class="mil-muted mil-mb-30">Creative Consulting <br>and Development</h5>
-                                        <p class="mil-light-soft mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                    <a href="{% url 'petitionview_station' %}" class="mil-service-card-sm mil-up">
+                                        <h5 class="mil-muted mil-mb-30">View Petitions <br>and Created FIR</h5>
+                                        <p class="mil-light-soft mil-mb-30">Verify assingned petitions and created FIR.</p>
                                         <div class="mil-button mil-icon-button-sm mil-arrow-place"></div>
                                     </a>
 
@@ -409,14 +411,18 @@
                             <div class="col-lg-5 col-xl-4">
 
                                 <div class="mil-mb-90">
-                                    <h2 class="mil-up mil-mb-60">Meet <br>Our Team</h2>
-                                    <p class="mil-up mil-mb-30">We are talented individuals who are passionate about bringing ideas to life. With a diverse range of backgrounds and skill sets, we collaborate to produce effective solutions for our clients.</p>
+                                    <h2 class="mil-up mil-mb-60">Meet <br>Our Former Chiefs</h2>
+                                    <p class="mil-up mil-mb-30">Honoring Leadership, Upholding Legacy
 
-                                    <p class="mil-up mil-mb-60">Together, our creative team is committed to delivering impactful work that exceeds expectations.</p>
+                                        The former chiefs of Kerala Police have been distinguished leaders who shaped the course of law enforcement in the state. With their extensive experience, unwavering integrity, and visionary approach, they laid the foundation for a modern and accountable policing system.
+                                        
+                                        Each former chief brought unique strengths and perspectives to the role, guiding the force through evolving challenges with resilience and foresight. Their leadership not only ensured public safety but also inspired generations of officers to uphold justice and serve with dedication..</p>
+
+                                    <p class="mil-up mil-mb-60">Together, our  team is committed to delivering impactful work that exceeds expectations.</p>
 
                                     <div class="mil-up"><a href="team.html" class="mil-button mil-arrow-place mil-mb-60"><span>Read more</span></a></div>
 
-                                    <h4 class="mil-up"><span class="mil-thin">We</span> delivering <br><span class="mil-thin">exceptional</span> results.</h4>
+                                    <h4 class="mil-up"><span class="mil-thin">"Mridhu </span> Bhave  <br><span class="mil-thin">Dhrida </span> Kruthye"</h4>
                                 </div>
 
                             </div>
@@ -429,11 +435,12 @@
                                         <div class="col-sm-6">
 
                                             <div class="mil-team-card mil-up mil-mb-30">
-                                                <img src="{% static 'user/img/faces/1.jpg' %}" alt="Team member">
+                                                <img src="{% static 'user/img/faces/anil-kant.jpg' %}" alt="Team member">
                                                 <div class="mil-description">
                                                     <div class="mil-secrc-text">
-                                                        <h5 class="mil-muted mil-mb-5"><a href="home-2.html">Anna Oldman</a></h5>
-                                                        <p class="mil-link mil-light-soft mil-mb-10">Art Director</p>
+                                                        <h5 class="mil-muted mil-mb-5"><a href="">Anil Kant IPS</a></h5>
+                                                        <p class="mil-link mil-light-soft mil-mb-10">DGP</p><br>
+                                                        <p class="mil-link mil-light-soft mil-mb-10">2021-23</p>
                                                         <ul class="mil-social-icons mil-center">
                                                             <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-behance"></i></a></li>
                                                             <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-dribbble"></i></a></li>
@@ -445,11 +452,12 @@
                                             </div>
 
                                             <div class="mil-team-card mil-up mil-mb-30">
-                                                <img src="{% static 'user/img/faces/3.jpg' %}" alt="Team member">
+                                                <img src="{% static 'user/img/faces/behera.jpg' %}" alt="Team member">
                                                 <div class="mil-description">
                                                     <div class="mil-secrc-text">
-                                                        <h5 class="mil-muted mil-mb-5"><a href="home-2.html">Oscar Freeman</a></h5>
-                                                        <p class="mil-link mil-light-soft mil-mb-10">Frontend Dev</p>
+                                                        <h5 class="mil-muted mil-mb-5"><a href="">Loknath Behera IPS</a></h5>
+                                                        <p class="mil-link mil-light-soft mil-mb-10">DGP</p><br>
+                                                        <p class="mil-link mil-light-soft mil-mb-10">2016-17 & 2017-21</p>
                                                         <ul class="mil-social-icons mil-center">
                                                             <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-behance"></i></a></li>
                                                             <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-dribbble"></i></a></li>
@@ -463,14 +471,16 @@
                                         </div>
                                         <div class="col-sm-6">
 
-                                            <p class="mil-mobile-hidden mil-text-sm mil-mb-30" style="height: 30px;"><span class="mil-accent">*</span> The founders of our agency</p>
+                                            <p class="mil-mobile-hidden mil-text-sm mil-mb-30" style="height: 30px;"><span class="mil-accent">*</span> The former chiefs of our Kerala Police</p>
 
                                             <div class="mil-team-card mil-up mil-mb-30">
-                                                <img src="{% static 'user/img/faces/2.jpg' %}" alt="Team member">
+                                                <img src="{% static 'user/img/faces/sen.jpg' %}" alt="Team member">
                                                 <div class="mil-description">
                                                     <div class="mil-secrc-text">
-                                                        <h5 class="mil-muted mil-mb-5"><a href="home-2.html">Emma Newman</a></h5>
-                                                        <p class="mil-link mil-light-soft mil-mb-10">Founder</p>
+                                                        <h5 class="mil-muted mil-mb-5"><a href="">Dr. T.P Senkumar IPS</a></h5>
+                                                        <p class="mil-link mil-light-soft mil-mb-10">DGP</p><br>
+                                                        <p class="mil-link mil-light-soft mil-mb-10">2015-16 & 2017</p>
+
                                                         <ul class="mil-social-icons mil-center">
                                                             <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-behance"></i></a></li>
                                                             <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-dribbble"></i></a></li>
@@ -482,11 +492,12 @@
                                             </div>
 
                                             <div class="mil-team-card mil-up mil-mb-30">
-                                                <img src="{% static 'user/img/faces/4.jpg' %}" alt="Team member">
+                                                <img src="{% static 'user/img/faces/bala.jpg' %}" alt="Team member">
                                                 <div class="mil-description">
                                                     <div class="mil-secrc-text">
-                                                        <h5 class="mil-muted mil-mb-5"><a href="home-2.html">Lisa Trueman</a></h5>
-                                                        <p class="mil-link mil-light-soft mil-mb-10">UI/UX Designer</p>
+                                                        <h5 class="mil-muted mil-mb-5"><a href="">K.S Balasubramanian IPS</a></h5>
+                                                        <p class="mil-link mil-light-soft mil-mb-10">DGP</p><br>
+                                                        <p class="mil-link mil-light-soft mil-mb-10">2012-15</p>
                                                         <ul class="mil-social-icons mil-center">
                                                             <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-behance"></i></a></li>
                                                             <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-dribbble"></i></a></li>
@@ -509,7 +520,7 @@
                 <!-- team end -->
 
                 <!-- reviews -->
-                <section class="mil-soft-bg">
+                <!-- <section class="mil-soft-bg">
                     <div class="container mil-p-120-120">
 
                         <div class="row">
@@ -594,11 +605,11 @@
                         </div>
 
                     </div>
-                </section>
+                </section> -->
                 <!-- reviews end -->
 
                 <!-- partners -->
-                <div class="mil-soft-bg">
+                <!-- <div class="mil-soft-bg">
                     <div class="container mil-p-0-120">
 
                         <div class="swiper-container mil-infinite-show mil-up">
@@ -619,7 +630,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
                 <!-- partners end -->
 
                 <!-- blog -->
@@ -707,20 +718,28 @@
                                             <nav class="mil-footer-menu mil-mb-60">
                                                 <ul>
                                                     <li class="mil-up mil-active">
-                                                        <a href="home-1.html">Home</a>
+                                                        <a href="#top">Homepage</a>
                                                     </li>
                                                     <li class="mil-up">
-                                                        <a href="portfolio-1.html">Portfolio</a>
+                                                        <a href="{% url 'stationprofile' %}">Profile</a>
                                                     </li>
                                                     <li class="mil-up">
-                                                        <a href="services.html">Services</a>
+                                                        <a href="{% url 'staff_details' %}">Staffs</a>
                                                     </li>
                                                     <li class="mil-up">
-                                                        <a href="contact.html">Contact</a>
+                                                        <a href="staff_attendance">Staff Attendance</a>
                                                     </li>
                                                     <li class="mil-up">
-                                                        <a href="blog.html">Blog</a>
+                                                        <a href="{% url 'petitionview' %}">Public Petitions </a>
                                                     </li>
+                                                    <li class="mil-up">
+                                                        <a href="{% url 'petitionview_station' %}">Crime Files and FIR </a>
+                                                    </li>
+                                                    <li class="mil-up">
+                                                        <a href="{% url 'logout' %}">Logout </a>
+                                                    </li>
+                                                    
+                                                    
                                                 </ul>
                                             </nav>
 
@@ -746,16 +765,16 @@
 
                                         <div class="col-md-6 col-lg-5 mil-mb-60">
 
-                                            <h6 class="mil-muted mil-up mil-mb-30">Canada</h6>
+                                            <h6 class="mil-muted mil-up mil-mb-30">Kerala</h6>
 
-                                            <p class="mil-light-soft mil-up">71 South Los Carneros Road, California <span class="mil-no-wrap">+51 174 705 812</span></p>
+                                            <!-- <p class="mil-light-soft mil-up">71 South Los Carneros Road, California <span class="mil-no-wrap">+51 174 705 812</span></p> -->
 
                                         </div>
                                         <div class="col-md-6 col-lg-5 mil-mb-60">
 
-                                            <h6 class="mil-muted mil-up mil-mb-30">Germany</h6>
+                                            <h6 class="mil-muted mil-up mil-mb-30">India</h6>
 
-                                            <p class="mil-light-soft mil-up">Leehove 40, 2678 MC De Lier, Netherlands <span class="mil-no-wrap">+31 174 705 811</span></p>
+                                            <!-- <p class="mil-light-soft mil-up">Leehove 40, 2678 MC De Lier, Netherlands <span class="mil-no-wrap">+31 174 705 811</span></p> -->
 
                                         </div>
                                     </div>
@@ -772,7 +791,7 @@
                                                 <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-github"></i></a></li>
                                             </ul>
                                         </div>
-                                        <p class="mil-light-soft mil-up">© Copyright 2023 - Mil. All Rights Reserved.</p>
+                                        <p class="mil-light-soft mil-up">© Copyright 2023 -  All Rights Reserved.</p>
                                     </div>
 
                                 </div>

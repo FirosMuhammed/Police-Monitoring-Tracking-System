@@ -7,7 +7,7 @@
 <head>
     <!-- Title Meta -->
     <meta charset="utf-8" />
-    <title>Dashboard | Darkone - Dark Admin & UI Kit Template</title>
+    <title>Dashboard | POLICE MONITORING & TRACKING SYSTEM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Darkone: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
     <meta name="author" content="StackBros" />
@@ -225,7 +225,7 @@
 
                                       <div class="dropdown-divider my-1"></div>
 
-                                      <a class="dropdown-item text-danger" href="auth-signin.html">
+                                      <a class="dropdown-item text-danger" href="{% url 'logout' %}">
                                            <iconify-icon icon="solar:logout-3-outline"
                                                 class="align-middle me-2 fs-18"></iconify-icon><span
                                                 class="align-middle">Logout</span>
@@ -249,7 +249,7 @@
 
                   <a href="{% static 'admin/index.html' %}" class="logo-light">
                        <img src="{% static 'admin/assets/images/logo-sm.png' %}" class="logo-sm" alt="logo sm">
-                       <img src="{% static 'admin/assets/images/logo-light.png' %}" class="logo-lg" alt="logo light">
+                       <img src="{% static 'admin/assets/images/kplogo.png' %}" class="logo-lg" alt="logo light">
                   </a>
              </div>
 
@@ -260,16 +260,16 @@
                        <li class="menu-title">Menu...</li>
 
                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="{% url 'adminhome' %}">
                                  <span class="nav-icon">
                                       <iconify-icon icon="mingcute:home-3-line"></iconify-icon>
                                  </span>
-                                 <span class="nav-text"> Dashboard </span>
+                                 <span class="nav-text"> Homepage </span>
                                  <span class="badge bg-primary badge-pill text-end">03</span>
                             </a>
                        </li>
 
-                       <li class="nav-item">
+                       <!-- <li class="nav-item">
                             <a class="nav-link menu-arrow" href="#sidebarAuthentication" data-bs-toggle="collapse" role="button"
                                  aria-expanded="false" aria-controls="sidebarAuthentication">
                                  <span class="nav-icon">
@@ -293,9 +293,9 @@
                                       </li>
                                  </ul>
                             </div>
-                       </li>
+                       </li> -->
 
-                       <li class="nav-item">
+                       <!-- <li class="nav-item">
                             <a class="nav-link menu-arrow" href="#sidebarError" data-bs-toggle="collapse" role="button"
                                  aria-expanded="false" aria-controls="sidebarError">
                                  <span class="nav-icon">
@@ -313,11 +313,11 @@
                                       </li>
                                  </ul>
                             </div>
-                       </li>
+                       </li> -->
 
-                       <li class="menu-title">UI Kit...</li>
+                       <!-- <li class="menu-title">UI Kit...</li> -->
 
-                       <li class="nav-item">
+                       <!-- <li class="nav-item">
                             <a class="nav-link menu-arrow" href="#sidebarBaseUI" data-bs-toggle="collapse" role="button"
                                  aria-expanded="false" aria-controls="sidebarBaseUI">
                                  <span class="nav-icon"><iconify-icon icon="mingcute:leaf-line"></iconify-icon></span>
@@ -393,9 +393,9 @@
                                       </li>
                                  </ul>
                             </div>
-                       </li>
+                       </li> -->
 
-                       <li class="nav-item">
+                       <!-- <li class="nav-item">
                             <a class="nav-link" href="{% static 'admin/charts.html' %}">
                                  <span class="nav-icon">
                                       <iconify-icon icon="mingcute:chart-bar-line"></iconify-icon>
@@ -431,7 +431,7 @@
                                       </li>
                                  </ul>
                             </div>
-                       </li>
+                       </li> -->
 
                        <li class="nav-item">
                             <a class="nav-link menu-arrow" href="#sidebarTables" data-bs-toggle="collapse" role="button"
@@ -462,7 +462,7 @@
                             </div>
                        </li>
 
-                       <li class="nav-item">
+                       <!-- <li class="nav-item">
                             <a class="nav-link menu-arrow" href="#sidebarIcons" data-bs-toggle="collapse" role="button"
                                  aria-expanded="false" aria-controls="sidebarIcons">
                                  <span class="nav-icon">
@@ -500,11 +500,11 @@
                                       </li>
                                  </ul>
                             </div>
-                       </li>
+                       </li> -->
 
-                       <li class="menu-title">Other</li>
+                       <!-- <li class="menu-title">Other</li> -->
 
-                       <li class="nav-item">
+                       <!-- <li class="nav-item">
                             <a class="nav-link menu-arrow" href="#sidebarLayouts" data-bs-toggle="collapse" role="button"
                                  aria-expanded="false" aria-controls="sidebarLayouts">
                                  <span class="nav-icon">
@@ -538,8 +538,8 @@
                                       </li>
                                  </ul>
                             </div>
-                       </li>
-
+                       </li> -->
+<!-- 
                        <li class="nav-item">
                             <a class="nav-link menu-arrow" href="#sidebarMultiLevelDemo" data-bs-toggle="collapse" role="button"
                                  aria-expanded="false" aria-controls="sidebarMultiLevelDemo">
@@ -569,16 +569,16 @@
                                       </li>
                                  </ul>
                             </div>
-                       </li>
+                       </li> -->
 
-                       <li class="nav-item">
+                       <!-- <li class="nav-item">
                             <a class="nav-link disabled" href="javascript:void(0);">
                                  <span class="nav-icon">
                                       <iconify-icon icon="mingcute:close-circle-line"></iconify-icon>
                                  </span>
                                  <span class="nav-text"> Disable Item </span>
                             </a>
-                       </li>
+                       </li> -->
                   </ul>
              </div>
         </div>

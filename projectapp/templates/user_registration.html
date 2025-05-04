@@ -3,13 +3,45 @@
 {% load static %}
 
 <html>
-    <head>
-        <title>User Registration</title>
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-        <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+<head>
+    <title>User Registration</title>
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <style>
+        .alert {
+          padding: 10px;
+          margin: 20px auto;
+          width: 80%;
+          border: 1px solid transparent;
+          border-radius: 4px;
+          text-align: center;
+        }
+      
+        .alert-success {
+          background-color: #d4edda;
+          border-color: #c3e6cb;
+          color: #155724;
+        }
+      
+        .alert-error, .alert-danger {
+          background-color: #f8d7da;
+          border-color: #f5c6cb;
+          color: #721c24;
+        }
+      </style>
+      
+</head>
 
-    </head>
-x   <body>
+<body>
+
+    <!-- ✅ Message Alerts -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
     <center>   
         <table class="form-class">
         <h2>User Registration</h2>
@@ -18,7 +50,6 @@ x   <body>
         <form method="POST">
             {% if form.errors or logins.errors %}
             <ul>
-                {# Loop through errors for the first form (form) #}
                 {% for field in form %}
                     {% if field.errors %}
                         <li><strong>{{ field.label }}:</strong>
@@ -31,7 +62,6 @@ x   <body>
                     {% endif %}
                 {% endfor %}
         
-                {# Loop through errors for the second form (log) #}
                 {% for field in logins %}
                     {% if field.errors %}
                         <li><strong>{{ field.label }}:</strong>
@@ -44,7 +74,7 @@ x   <body>
                     {% endif %}
                 {% endfor %}
             </ul>
-        {% endif %}
+            {% endif %}
 
             {% csrf_token %}
            
@@ -54,7 +84,6 @@ x   <body>
         </tr>
 
         <tr>
-        
             <td><label>Contact</label></td>
             <td>{{form.contact}}</td>
         </tr>
@@ -65,27 +94,22 @@ x   <body>
         </tr>
 
         <tr>
-        
             <td><label>Password</label></td>
             <td>{{logins.password}}</td>
         </tr>
        
-        
-       
         <tr>
-            
             <td colspan="2">    
                 <div style="text-align: center;">
                     <br><br>
-                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;"> Register</button>
-            </div>
-
+                    <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;">Register</button>
+                </div>
             </td>
         </tr>   
-    </form>
-</table>   
- </center>
+        </form>
+        </table>   
+    </center>
  
-    </body>
+</body>
 </html>
 {% endblock %}

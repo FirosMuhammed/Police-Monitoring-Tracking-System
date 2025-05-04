@@ -1,4 +1,4 @@
-{% extends 'staff_header.html' %}
+{% extends 'station_header.html' %}
 {% block content %}
 {% load static %}
 <!DOCTYPE html>
@@ -39,6 +39,16 @@
         .btn-status:hover {
             background-color: #218838;
         }
+
+        a {
+    text-decoration: none;
+    color: black; /* Optional: Set a color for the link */
+}
+
+/* Optional: Remove underline on hover */
+a:hover {
+    text-decoration: none;
+}
     </style>
 </head>
 <body>
@@ -64,8 +74,8 @@
                     <th>User Name</th>
                     <th>User Contact</th>
                     <th></th>
-                    <th></th>
-                    <th></th>
+                    <!-- <th></th>
+                    <th></th> -->
                 </tr>
             </thead>
             <tbody>
@@ -87,15 +97,26 @@
                     <td>{{ user.contact }}</td>
                     {% endwith %}
 
-                    <td >
+                    <!-- <td >
                         <a href="fir/{{ petition.id }}" class="btn btn-custom btn-create-fir">Create FIR</a>
                     </td>
                     <td>
                         <a href="case_status/{{ petition.id }}" class="btn btn-custom btn-status">Status</a>
-                    </td> 
-                    <td >
+                    </td>  -->
+                    <!-- <td >
                         <a href="{% url 'assign_staff' petition.id %}" class="btn btn-custom btn-create-fir">Assign Staff</a>
+                    </td> -->
+
+
+                    <td>
+                        {% if petition. %}
+                            <button class="btn btn-secondary" disabled>Staff Assigned</button>
+                        {% else %}
+                            <a href="{% url 'assign_staff' petition.id %}" class="btn btn-custom btn-create-fir">Assign Staff</a>
+                        {% endif %}
                     </td>
+
+
                 </tr>
                 {% endfor %}
             </tbody>

@@ -6,18 +6,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iofrm</title>
+    <title>Police Monitoring & Tracking </title>
     <link rel="stylesheet" type="text/css" href="{% static 'login/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'login/css/fontawesome-all.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'login/css/iofrm-style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'login/css/iofrm-theme28.css' %}">
+    <style>
+        .alert {
+          padding: 10px;
+          margin: 20px auto;
+          width: 80%;
+          border: 1px solid transparent;
+          border-radius: 4px;
+          text-align: center;
+        }
+      
+        .alert-success {
+          background-color: #d4edda;
+          border-color: #c3e6cb;
+          color: #155724;
+        }
+      
+        .alert-error, .alert-danger {
+          background-color: #f8d7da;
+          border-color: #f5c6cb;
+          color: #721c24;
+        }
+      </style>
 </head>
 <body>
+    <!-- ✅ Message Alerts -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class="form-body">
         <div class="website-logo">
             <a href="index.html">
                 <div class="logo">
-                    <img class="logo-size" src="{% static 'login/images/logo-light.svg' %}" alt="">
+                    <img class="logo-size" src="{% static 'login/images/logoo.png' %}" alt="">
                 </div>
             </a>
         </div>
@@ -31,11 +61,11 @@
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <h3>Get more things done with Loggin platform.</h3>
-                        <p>Access to the most powerfull tool in the entire design and web industry.</p>
-                        <div class="page-links">
+                        <h3>Get to Our Platform using Your Provided Login Credentials.</h3>
+                        <p>Access to the most user friendly Police Management System in the entire Web Industry.</p>
+                        <!-- <div class="page-links">
                             <a href="login24.html" class="active">Login</a><a href="register24.html">Register</a>
-                        </div>
+                        </div> -->
                         <form method="POST">
                             
                             {% csrf_token %}
@@ -45,7 +75,7 @@
                             </div>
                         </form>
                         <div class="other-links">
-                            <span>Or login with</span><a href="#">Facebook</a><a href="#">Google</a><a href="#">Linkedin</a>
+                            <span>Or login with</span><a href="#">Google</a>
                         </div>
                     </div>
                 </div>

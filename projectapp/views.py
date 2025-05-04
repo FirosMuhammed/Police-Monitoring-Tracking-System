@@ -21,47 +21,60 @@ def adminhome(request):
 def services(request):
     return render(request,'services.html')
 
+from django.contrib import messages  # make sure this is imported
+
 def Station_reg(request):
     if request.method == 'POST':
         form = StationForm(request.POST)
         logins = loginForm(request.POST)
-        
+
         if form.is_valid() and logins.is_valid():
-            a = logins.save(commit=False)
-            a.usertype = 2 
-            a.save()
-            b = form.save(commit=False)
-            b.login_id = a 
-            b.save() 
-            
-            return redirect('home') 
+            try:
+                a = logins.save(commit=False)
+                a.usertype = 2
+                a.save()
+                b = form.save(commit=False)
+                b.login_id = a
+                b.save()
+                messages.success(request, 'Station registration successful!')
+                return redirect('home')
+            except Exception as e:
+                messages.error(request, f'Station registration failed: {e}')
         else:
-            return render(request, 'station_register.html', {'form': form, 'log': logins})
+            messages.error(request, 'Form validation failed. Please check the input fields.')
 
-
-            
     else:
         form = StationForm()
         logins = loginForm()
 
     return render(request, 'station_register.html', {'form': form, 'log': logins})
 
+from django.contrib import messages
+
 def user_regs(request):
-    if request.method=='POST':
-        form=Userform(request.POST)
-        logins=loginForm(request.POST)
+    if request.method == 'POST':
+        form = Userform(request.POST)
+        logins = loginForm(request.POST)
         if form.is_valid() and logins.is_valid():
-            a=logins.save(commit=False)
-            a.usertype=3
-            a.save()
-            b=form.save(commit=False)
-            b.login_userid = a
-            b.save()
-            return redirect('home')
+            try:
+                a = logins.save(commit=False)
+                a.usertype = 3
+                a.save()
+                b = form.save(commit=False)
+                b.login_userid = a
+                b.save()
+                messages.success(request, ' Registration successful!')
+                return redirect('home')  # redirect back to form or 'home' as needed
+            except Exception as e:
+                messages.error(request, f' Registration failed: {e}')
+        else:
+            messages.error(request, ' Form validation failed. Please correct the errors below.')
     else:
-        form=Userform()
-        logins=loginForm()
-    return render(request,'user_registration.html',{'form':form,'logins':logins})
+        form = Userform()
+        logins = loginForm()
+
+    return render(request, 'user_registration.html', {'form': form, 'logins': logins})
+
 
 def user_home(request):
     return render(request,'user_home.html')
@@ -70,39 +83,40 @@ def station_home(request):
     return render(request,'station_home.html')
 
 def login_page(request):
-    if request.method=='POST':
-        form= login_check(request.POST)
+    if request.method == 'POST':
+        form = login_check(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             try:
                 user = login.objects.get(email=email)
+                # Check if user status is approved
                 if user.password == password:
-                    if user.usertype == 2:
-                        request.session['stationid']=user.id
+                    if user.usertype == 2 and user.status == 1:
+                        request.session['stationid'] = user.id
                         return redirect('stationhome')
                     elif user.usertype == 1:
-                        request.session['staffid']=user.id
+                        request.session['staffid'] = user.id
                         return redirect('staffhome')
                     elif user.usertype == 3:
-                        request.session['userid']=user.id
+                        request.session['userid'] = user.id
                         return redirect('userhome')
-                    elif user.usertype == 4:
-                        request.session['adminid']=user.id
+                    elif user.usertype == 0:
+                        request.session['adminid'] = user.id
                         return redirect('adminhome')
                     else:
-                        messages.error(request, 'Invalid user type')
+                        messages.error(request, 'Station not approved')
                 else:
-                    messages.error(request,'Invalid Password')
+                    messages.error(request, 'Invalid Password')
+            
             except login.DoesNotExist:
-                messages.error(request,'User does not exist')
+                messages.error(request, 'User does not exist')
         else:
-            return render(request,'login.html',{'form': form})
-
-
+            return render(request, 'login.html', {'form': form})
     else:
-        form=login_check()
-    return render(request,'login.html',{'form': form})
+        form = login_check()
+    return render(request, 'login.html', {'form': form})
+
 
 
 
@@ -133,16 +147,23 @@ def staffreg(request):
         form=stafform(request.POST)
         logins=loginForm(request.POST)
         if form.is_valid() and logins.is_valid():
-            a=logins.save(commit=False)
-            a.usertype=1
-            a.save()
-            b=form.save(commit=False)
-            selected_station = form.cleaned_data['staff_station'] 
-            b.staff_station = selected_station
-            
-            b.staff_login_id = a
-            b.save()
-            return redirect('home')
+            try:
+                a=logins.save(commit=False)
+                a.usertype=1
+                a.save()
+                b=form.save(commit=False)
+                selected_station = form.cleaned_data['staff_station'] 
+                b.staff_station = selected_station
+                
+                b.staff_login_id = a
+                b.save()
+                messages.success(request, 'Staff registration successful!')
+                return redirect('home')
+            except Exception as e:
+                messages.error(request, f'Staff registration failed: {e}')
+        else:
+            messages.error(request, 'Form validation failed. Please check the input fields.')
+    
     else:
          form=stafform()
          logins=loginForm()
@@ -418,6 +439,7 @@ def view_petition(request):
         staff_stations = staff.staff_station  
         petitions = petition.objects.filter(login_id=staff_stations)
         user_details = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
+    
 
         return render(request, 'staffview_petition.html', {
             'petitions': petitions,
@@ -467,19 +489,24 @@ def file_fir(request, id):
 def station_view_petition(request):
     staffid = request.session.get('staffid')
 
-    if not staffid:  # If user is not logged in
-        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    if not staffid:
+        return redirect('login')
     else:
         station = get_object_or_404(login, id=staffid)
         staff = get_object_or_404(staff_reg, staff_login_id=station.id)
         staff_stations = staff.staff_station  
         petitions = petition.objects.filter(login_id=staff_stations)
         user_details = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
+
+        # Pop flag to show modal only once
+        show_modal = request.session.pop('staff_already_assigned', False)
+
         return render(request, 'station_petitionview.html', {
             'petitions': petitions,
-            'user_details': user_details
-        }
-        )
+            'user_details': user_details,
+            'show_modal': show_modal
+        })
+
 
 def station_fir_view(request):
     station = request.session.get('stationid')
@@ -818,34 +845,56 @@ def adminstationreject(request,id):
     return redirect('admin_stationview')
 
 def logouts(request):
+    
     logout(request)
     return redirect('home')
 
 
-def assign_staff(request,id):
-    # Get the station ID from the session
+def assign_staff(request, id):
     data1 = request.session.get('stationid')
-    petitionid = get_object_or_404(petition,id=id)  
+    petitionid = get_object_or_404(petition, id=id)
 
-
-    if not data1:  # If user is not logged in
-        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    if not data1:
+        return redirect('login')
     else:
         staffdata = get_object_or_404(login, id=data1)
         data = staff_reg.objects.filter(staff_station=staffdata)
-        return render(request, 'assign_staff.html', {'details': data , 'petition':petitionid.id} )
+        
+        if staff_assign.objects.filter(petition_id=petitionid).exists():
+            request.session['staff_already_assigned'] = True  # Set flag
+            return redirect('petitionview')
+
+        return render(request, 'assign_staff.html', {'details': data , 'petition': petitionid.id})
     
 def assign_staff_process(request,staffid,petitionid):
     id_petition = get_object_or_404(petition,id=petitionid)
     staff = get_object_or_404(staff_reg,id=staffid) 
-    staff_assign.objects.create(
+    if staff_assign.objects.filter(staff_id=staff,petition_id=id_petition).exists():
+        messages.error(request, 'Staff is already assigned')
+        return redirect('petitionview')
+    else:
+        staff_assign.objects.create(
         staff_id = staff,
         petition_id = id_petition
     )
 
     return redirect('petitionview') 
 
+# def assign_staff_process(request, staffid, petitionid):
+#     id_petition = get_object_or_404(petition, id=petitionid)
+#     staff = get_object_or_404(staff_reg, id=staffid)
 
+#     # Check if already assigned
+#     if staff_assign.objects.filter(staff_id=staff, petition_id=id_petition).exists():
+#         messages.error(request, 'Staff is already assigned')
+#     else:
+#         staff_assign.objects.create(
+#             staff_id=staff,
+#             petition_id=id_petition
+#         )
+#         messages.success(request, 'Staff assigned successfully')
+
+#     return redirect('petitionview')
 
 
 def view_assigned_petition(request):

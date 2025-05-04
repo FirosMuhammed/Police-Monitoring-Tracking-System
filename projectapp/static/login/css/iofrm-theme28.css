@@ -35,15 +35,20 @@ body {
 }
 
 .website-logo .logo {
-    background-image: url("../images/logo-light.svg");
+    margin-left: 10px;
+    margin-top: 3px;
+    background-image: url("../images/logoo.png");
 }
 
 .website-logo .logo img {
-    width: 100px;
+    
+    width: 61px;
 }
 
 .website-logo-inside img {
-    width: 100px;
+    margin-left: 10px;
+    
+    width: 70px;
 }
 
 .website-logo-inside .logo {
@@ -92,7 +97,7 @@ body {
 
 .img-holder .bg {
     opacity: 0.23;
-    background-image: url("../images/img1.jpg");
+    background-image: url("../images/bg.png");
 }
 
 .img-holder .bottom-view {
