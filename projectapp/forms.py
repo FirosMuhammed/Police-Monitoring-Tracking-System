@@ -97,11 +97,21 @@ class user_email_form(forms.ModelForm):
         fields=['email']
 
 class stafform(forms.ModelForm):
+    staff_station = forms.ModelChoiceField(
+        queryset=police_station.objects.all(),
+        empty_label="Select station",
+        label="Station"
+    )
+
     class Meta:
-        model=staff_reg
-        station = forms.ModelChoiceField(queryset=police_station.objects.all(),empty_label="select station")
-        fields=['staff_name','staff_address','staff_district','staff_city','staff_contact','staff_dob','staff_designation','gender','staff_station']
-        widget = {'staff_dob':forms.TextInput(attrs={'type':'date'}) }
+        model = staff_reg
+        fields = [
+            'staff_name', 'staff_address', 'staff_district', 'staff_city',
+            'staff_contact', 'staff_dob', 'staff_designation', 'gender', 'staff_station'
+        ]
+        widgets = {
+            'staff_dob': forms.TextInput(attrs={'type': 'date'})
+        }
 
 
     def clean_staff_contact(self):
@@ -208,4 +218,5 @@ class ReplyEnquiry(forms.ModelForm):
 
 
         
-       
+class FirCheckForm(forms.Form):
+    Case_description = forms.CharField(widget=forms.Textarea)

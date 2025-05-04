@@ -14,8 +14,8 @@ class police_station(models.Model):
     login_id = models.OneToOneField('login', on_delete=models.CASCADE, related_name='station_as_loginid')
 
     def __str__(self):
-        
-        return self.addressline1
+        return f"{self.station_id} - {self.addressline1}"
+
 
 
 class login(models.Model):

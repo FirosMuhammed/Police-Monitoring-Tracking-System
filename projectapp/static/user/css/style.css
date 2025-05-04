@@ -2743,9 +2743,9 @@ revievs
 .mil-revi-pagination .swiper-pagination-bullet .mil-custom-dot.mil-slide-1 {
   background-image: url(../img/faces/customers/1.jpg);
 }
-.mil-revi-pagination .swiper-pagination-bullet .mil-custom-dot.mil-slide-2 {
+/* .mil-revi-pagination .swiper-pagination-bullet .mil-custom-dot.mil-slide-2 {
   background-image: url(../img/faces/customers/2.jpg);
-}
+} */
 .mil-revi-pagination .swiper-pagination-bullet .mil-custom-dot.mil-slide-3 {
   background-image: url(../img/faces/customers/3.jpg);
 }

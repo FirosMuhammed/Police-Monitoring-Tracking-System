@@ -87,7 +87,7 @@ a:hover {
                     {% endwith %}
 
                     <td class="action-buttons">
-                        <a href="{% url 'stationview_fir' %}" class="btn btn-primary">View FIR</a>
+                        <a href="{% url 'stationview_fir' petition.id  %}" class="btn btn-primary">View FIR</a>
                     </td>
                 </tr>
             {% endfor %}

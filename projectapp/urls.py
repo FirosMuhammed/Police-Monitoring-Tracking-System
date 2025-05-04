@@ -38,7 +38,7 @@ urlpatterns = [
     path('petitionview' ,views.view_petition, name='petitionview'),
     path('fir/<int:id>/', views.file_fir, name='file_fir'),
     path('petitionview_station' ,views.station_view_petition, name='petitionview_station'),
-    path('stationview_fir' ,views.station_fir_view, name='stationview_fir'),
+    path('stationview_fir/<int:id>/' ,views.station_fir_view, name='stationview_fir'),
     path('case_status/<int:petition_id>' ,views.case_status, name='case_status'),
     path('petitionview_public' ,views.public_view_petition, name='petitionview_public'),
     path('petition_edit/<int:id>' ,views.edit_petition, name='petition_edit'),
@@ -64,6 +64,9 @@ urlpatterns = [
     path('assign_staff/<int:id>',views.assign_staff,name='assign_staff'),
     path('assign_staff_process/<int:staffid>/<int:petitionid>/',views.assign_staff_process,name='assign_staff_process'),
     path('view_assigned_petition',views.view_assigned_petition,name='view_assigned_petition'),
+
+    path('load_criminals/',views.face_recognition_view, name='load_criminals'),
+    path('match_fir', views.match_fir, name='match_fir'),
 
 
 

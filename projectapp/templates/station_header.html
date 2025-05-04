@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{% static 'user/css/plugins/fancybox.min.css' %}">
     <!-- ashley scss -->
     <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
     <!-- page name -->
 
 
@@ -127,9 +129,21 @@
                                     </li>
 
                                     <li class="mil-has-children">
-                                        <a href="{% url 'petitionview_station' %}">Crime Files and Petitions</a>
+                                        <a href="{% url 'petitionview_station' %}">Crime Files and FIR</a>
                                     </li>
                                 </li>
+
+                                <li class="mil-has-children">
+                                    <a href="{% url 'load_criminals' %}">Face Recognition</a>
+                        
+                                </li>
+
+                                <li class="mil-has-children">
+                                    <a href="{% url 'match_fir' %}">Crime Matching</a>
+                        
+                                </li>
+
+
                                 <li class="mil-has-children">
                                     <a href="{% url 'logout' %}">Logout</a>
                                    
@@ -258,6 +272,7 @@
                     </div>
                 </div> -->
                 <!-- banner end -->
+                 <br><br><br><br>
 {% block content %}
 
 
