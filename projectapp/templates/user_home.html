@@ -249,11 +249,11 @@
                                     </div>
                                 </div>
 
-                                <a href="services.html" class="mil-button mil-arrow-place mil-btn-space">
+                                <a href="#about" class="mil-button mil-arrow-place mil-btn-space">
                                     <span>What we do</span>
                                 </a>
 
-                                <a href="portfolio-1.html" class="mil-link mil-muted mil-arrow-place">
+                                <a href="#works" class="mil-link mil-muted mil-arrow-place">
                                     <span>View works</span>
                                 </a>
 
@@ -316,7 +316,7 @@
                 <!-- about end -->
 
                 <!-- services -->
-                <section class="mil-dark-bg">
+                <section class="mil-dark-bg" id="works">
                     <div class="mi-invert-fix">
                         <div class="mil-animation-frame">
                             <div class="mil-animation mil-position-1 mil-scale" data-value-1="2.4" data-value-2="1.4" style="top: 300px; right: -100px"></div>
@@ -328,7 +328,7 @@
                                 <div class="row">
                                     <div class="col-lg-10">
 
-                                        <span class="mil-suptitle mil-light-soft mil-suptitle-right mil-up">Professionals focused on helping your brand<br> grow and move forward.</span>
+                                        <!-- <span class="mil-suptitle mil-light-soft mil-suptitle-right mil-up">Professionals focused on helping your brand<br> grow and move forward.</span> -->
 
                                     </div>
                                 </div>
@@ -336,13 +336,13 @@
                                 <div class="mil-complex-text justify-content-center mil-up mil-mb-15">
 
                                     <span class="mil-text-image"><img src="{% static 'user/img/photo/2.jpg' %}" alt="team"></span>
-                                    <h2 class="mil-h1 mil-muted mil-center">Unique <span class="mil-thin">Ideas</span></h2>
+                                    <h2 class="mil-h1 mil-muted mil-center">Unique <span class="mil-thin">Tools</span></h2>
 
                                 </div>
                                 <div class="mil-complex-text justify-content-center mil-up">
 
-                                    <h2 class="mil-h1 mil-muted mil-center">For Your <span class="mil-thin">Business.</span></h2>
-                                    <a href="services.html" class="mil-services-button mil-button mil-arrow-place"><span>What we do</span></a>
+                                    <h2 class="mil-h1 mil-muted mil-center">For You. <span class="mil-thin"></span></h2>
+                                    <a href="#about" class="mil-services-button mil-button mil-arrow-place"><span>What we do</span></a>
 
                                 </div>
                             </div>
@@ -350,8 +350,8 @@
                             <div class="row mil-services-grid m-0">
                                 <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
 
-                                    <a href="service.html" class="mil-service-card-sm mil-up">
-                                        <h5 class="mil-muted mil-mb-30">Branding and <br>Identity Design</h5>
+                                    <a href="{% url 'userprofile' %}" class="mil-service-card-sm mil-up">
+                                        <h5 class="mil-muted mil-mb-30">Manage and <br>Handle Your Profile</h5>
                                         <p class="mil-light-soft mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
                                         <div class="mil-button mil-icon-button-sm mil-arrow-place"></div>
                                     </a>
@@ -359,27 +359,27 @@
                                 </div>
                                 <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
 
-                                    <a href="service.html" class="mil-service-card-sm mil-up">
-                                        <h5 class="mil-muted mil-mb-30">Website Design <br>and Development</h5>
-                                        <p class="mil-light-soft mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                    <a href="{% url 'criminals_userview' %}" class="mil-service-card-sm mil-up">
+                                        <h5 class="mil-muted mil-mb-30"> View Criminal <br>Lists</h5>
+                                        <p class="mil-light-soft mil-mb-30">View the most wanted criminals around you.</p>
                                         <div class="mil-button mil-icon-button-sm mil-arrow-place"></div>
                                     </a>
 
                                 </div>
                                 <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
 
-                                    <a href="service.html" class="mil-service-card-sm mil-up">
-                                        <h5 class="mil-muted mil-mb-30">Advertising and <br>Marketing Campaigns</h5>
-                                        <p class="mil-light-soft mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                    <a href="{% url 'station_search' %}" class="mil-service-card-sm mil-up">
+                                        <h5 class="mil-muted mil-mb-30"> Search <br>Stations Around You</h5>
+                                        <p class="mil-light-soft mil-mb-30">Find stations around you for services.</p>
                                         <div class="mil-button mil-icon-button-sm mil-arrow-place"></div>
                                     </a>
 
                                 </div>
                                 <div class="col-md-6 col-lg-3 mil-services-grid-item p-0">
 
-                                    <a href="service.html" class="mil-service-card-sm mil-up">
-                                        <h5 class="mil-muted mil-mb-30">Creative Consulting <br>and Development</h5>
-                                        <p class="mil-light-soft mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                    <a href="{% url 'complaint_form' %}" class="mil-service-card-sm mil-up">
+                                        <h5 class="mil-muted mil-mb-30">Register Your  <br>Complaints </h5>
+                                        <p class="mil-light-soft mil-mb-30">Need help? Reach out to us with your complaints!</p>
                                         <div class="mil-button mil-icon-button-sm mil-arrow-place"></div>
                                     </a>
 
@@ -406,7 +406,6 @@
 
                                 <p class="mil-up mil-mb-60">Together, our  team is committed to delivering impactful work that exceeds expectations.</p>
 
-                                <div class="mil-up"><a href="team.html" class="mil-button mil-arrow-place mil-mb-60"><span>Read more</span></a></div>
 
                                 <h4 class="mil-up"><span class="mil-thin">"Mridhu </span> Bhave  <br><span class="mil-thin">Dhrida </span> Kruthye"</h4>
                             </div>
@@ -506,7 +505,7 @@
             <!-- team end -->
 
                 <!-- reviews -->
-                <section class="mil-soft-bg">
+                <!-- <section class="mil-soft-bg">
                     <div class="container mil-p-120-120">
 
                         <div class="row">
@@ -549,7 +548,7 @@
                                                 <p class="mil-text-xl mil-up">I had the pleasure of working with this creative agency, and I must say, they truly impressed me. They consistently think outside the box, resulting in impressive and impactful work. I highly recommend this agency for their consistent delivery of exceptional creative solutions.</p>
                                             </div> -->
                                         <!-- </div> -->
-                                        <div class="swiper-slide">
+                                        <!-- <div class="swiper-slide">
                                             <div class="mil-review-frame mil-center" data-swiper-parallax="-200" data-swiper-parallax-opacity="0">
                                                 <h5 class="mil-up mil-mb-10">Sarah Newman</h5>
                                                 <p class="mil-mb-5 mil-upper mil-up mil-mb-30">Envato market</p>
@@ -590,12 +589,12 @@
                             </div>
                         </div>
 
-                    </div>
-                </section>
+                    </div> -->
+                <!-- </section> -->
                 <!-- reviews end -->
 
                 <!-- partners -->
-                <div class="mil-soft-bg">
+                <!-- <div class="mil-soft-bg">
                     <div class="container mil-p-0-120">
 
                         <div class="swiper-container mil-infinite-show mil-up">
@@ -616,7 +615,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
                 <!-- partners end -->
 
                 <!-- blog -->
@@ -624,14 +623,14 @@
                     <div class="container mil-p-120-60">
                         <div class="row align-items-center mil-mb-30">
                             <div class="col-lg-6 mil-mb-30">
-                                <h3 class="mil-up">Popular Publications:</h3>
+                                <h3 class="mil-up">Popular Initiatives:</h3>
                             </div>
                             <div class="col-lg-6 mil-mb-30">
-                                <div class="mil-adaptive-right mil-up">
+                                <!-- <div class="mil-adaptive-right mil-up">
                                     <a href="blog.html" class="mil-link mil-dark mil-arrow-place">
                                         <span>View all</span>
                                     </a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="row">
@@ -639,18 +638,20 @@
 
                                 <a href="publication.html" class="mil-blog-card mil-mb-60">
                                     <div class="mil-cover-frame mil-up">
-                                        <img src="{% static 'user/img/blog/1.jpg' %}" alt="cover">
+                                        <img src="{% static 'user/img/blog/pinkpolice.jpg' %}" alt="cover">
                                     </div>
                                     <div class="mil-post-descr">
                                         <div class="mil-labels mil-up mil-mb-30">
-                                            <div class="mil-label mil-upper mil-accent">TECHNOLOGY</div>
-                                            <div class="mil-label mil-upper">may 24 2023</div>
+                                            <div class="mil-label mil-upper mil-accent">INITIATIVE</div>
+                                            <div class="mil-label mil-upper">July 19 2021</div>
                                         </div>
-                                        <h4 class="mil-up mil-mb-30">How to Become a Graphic Designer in 10 Simple Steps</h4>
-                                        <p class="mil-post-text mil-up mil-mb-30">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius sequi commodi dignissimos optio, beatae, eos necessitatibus nisi. Nam cupiditate consectetur nostrum qui! Repellat natus nulla, nisi aliquid, asperiores impedit tempora sequi est reprehenderit cumque explicabo, dicta. Rem nihil ullam totam ea voluptas quibusdam repudiandae id ut at iure! Totam, a!</p>
-                                        <div class="mil-link mil-dark mil-arrow-place mil-up">
-                                            <span>Read more</span>
-                                        </div>
+                                        <h4 class="mil-up mil-mb-30">Chief Minister, flagged off
+                                            vehicles earmarked for pink patrol teams</h4>
+                                        <p class="mil-post-text mil-up mil-mb-30">Pink Protection Project, a new initiative of the Kerala Police to ensure the
+                                            safety of women, has been launched.</p>
+                                        <!-- <div class="mil-link mil-dark mil-arrow-place mil-up"> -->
+                                            <!-- <span>Read more</span> -->
+                                        <!-- </div> -->
                                     </div>
                                 </a>
 
@@ -659,18 +660,18 @@
 
                                 <a href="publication.html" class="mil-blog-card mil-mb-60">
                                     <div class="mil-cover-frame mil-up">
-                                        <img src="{% static 'user/img/blog/2.jpg' %}" alt="cover">
+                                        <img src="{% static 'user/img/blog/jana.jpg' %}" alt="cover">
                                     </div>
                                     <div class="mil-post-descr">
                                         <div class="mil-labels mil-up mil-mb-30">
-                                            <div class="mil-label mil-upper mil-accent">TECHNOLOGY</div>
-                                            <div class="mil-label mil-upper">may 24 2023</div>
+                                            <div class="mil-label mil-upper mil-accent">INITIATIVE</div>
+                                            <div class="mil-label mil-upper">February 25 2013</div>
                                         </div>
-                                        <h4 class="mil-up mil-mb-30">16 Best Graphic Design Online and Offline Courses</h4>
-                                        <p class="mil-post-text mil-up mil-mb-30">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius sequi commodi dignissimos optio, beatae, eos necessitatibus nisi. Nam cupiditate consectetur nostrum qui! Repellat natus nulla, nisi aliquid, asperiores impedit tempora sequi est reprehenderit cumque explicabo, dicta. Rem nihil ullam totam ea voluptas quibusdam repudiandae id ut at iure! Totam, a!</p>
-                                        <div class="mil-link mil-dark mil-arrow-place mil-up">
+                                        <h4 class="mil-up mil-mb-30">Janamaithri Suraksha Project</h4>
+                                        <p class="mil-post-text mil-up mil-mb-30"> Janamaithri Suraksha Project of Kerala Police is a path breaking project which aims to effectively bridge the gap between police and public .</p>
+                                        <!-- <div class="mil-link mil-dark mil-arrow-place mil-up">
                                             <span>Read more</span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </a>
 
@@ -687,7 +688,7 @@
                             <div class="row justify-content-between">
                                 <div class="col-md-4 col-lg-4 mil-mb-60">
 
-                                    <div class="mil-muted mil-logo mil-up mil-mb-30">KP.</div>
+                                    <div class="mil-muted mil-logo mil-up mil-mb-30">POLICE MONITORING & TRACKING SYSTEM</div>
 
                                     <!-- <p class="mil-light-soft mil-up mil-mb-30">Subscribe our newsletter:</p> -->
 
@@ -704,19 +705,22 @@
                                             <nav class="mil-footer-menu mil-mb-60">
                                                 <ul>
                                                     <li class="mil-up mil-active">
-                                                        <a href="home-1.html">Home</a>
+                                                        <a href="#top">Homepage</a>
                                                     </li>
                                                     <li class="mil-up">
-                                                        <a href="portfolio-1.html">Portfolio</a>
+                                                        <a href="{% url 'userprofile' %}">Profile</a>
                                                     </li>
                                                     <li class="mil-up">
-                                                        <a href="services.html">Services</a>
+                                                        <a href="{% url 'criminals_userview' %}">Criminals</a>
                                                     </li>
                                                     <li class="mil-up">
-                                                        <a href="contact.html">Contact</a>
+                                                        <a href="{% url 'station_search' %}">Police Stations</a>
                                                     </li>
                                                     <li class="mil-up">
-                                                        <a href="blog.html">Blog</a>
+                                                        <a href="{% url 'complaint_form' %}">Complaints</a>
+                                                    </li>
+                                                    <li class="mil-up">
+                                                        <a href="{% url 'logout' %}">Logout</a>
                                                     </li>
                                                 </ul>
                                             </nav>

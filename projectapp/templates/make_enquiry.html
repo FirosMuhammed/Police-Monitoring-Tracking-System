@@ -3,42 +3,56 @@
 {% load static %}
 
 <html>
-    <head>
-        <title>Enquiries</title>
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-        <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+<head>
+    <title>Station Search</title>
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <style>
+        .alert {
+            padding: 10px;
+            margin: 20px auto;
+            width: 80%;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            text-align: center;
+        }
 
-    </head>
-x   <body>
-    <center>   
-        <table class="form-class">
-        <h2>Enquiries</h2>
-        <br><br>
+        .alert-error, .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
 
-        <form method="POST">
+        <h2>Enquiry Form</h2>
+        <br>
+
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-           
-        <tr>
-            <td><label>Enquiry</label></td>
-            <td>{{forms.enquiry}}</td>
-        </tr>
-
-       
-       
-        <tr>
-            
-            <td colspan="2">    
-                <div style="text-align: center;">
-                    <br><br>
-                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 0 auto;">Submit</button>
-            </div>
-
-            </td>
-        </tr>   
-    </form>
-</table>   
- </center>
- 
-    </body>
+            <table class="form-class">
+                <tr>
+                    <td><label>Enquiry</label></td>
+                    <td>{{ forms.enquiry }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn btn-primary" style="width: 100px;">Submit</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</body>
 </html>
 {% endblock %}

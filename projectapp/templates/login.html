@@ -45,7 +45,7 @@
     {% endif %}
     <div class="form-body">
         <div class="website-logo">
-            <a href="index.html">
+            <a href="{% url 'home' %}">
                 <div class="logo">
                     <img class="logo-size" src="{% static 'login/images/logoo.png' %}" alt="">
                 </div>
@@ -74,9 +74,9 @@
                                 <button type="submit" class="ibtn">Login</button>
                             </div>
                         </form>
-                        <div class="other-links">
+                        <!-- <div class="other-links">
                             <span>Or login with</span><a href="#">Google</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

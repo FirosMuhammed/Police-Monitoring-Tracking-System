@@ -248,17 +248,17 @@
 {% endblock %}
 <br><br>
 <!-- footer -->
-  <footer class="mil-dark-bg">
+<footer class="mil-dark-bg">
     <div class="mi-invert-fix">
         <div class="container mil-p-120-60">
             <div class="row justify-content-between">
                 <div class="col-md-4 col-lg-4 mil-mb-60">
 
-                    <div class="mil-muted mil-logo mil-up mil-mb-30">KP.</div>
+                    <div class="mil-muted mil-logo mil-up mil-mb-30">POLICE MONITORING & TRACKING SYSTEM</div>
 
-                    <!-- <p class="mil-light-soft mil-up mil-mb-30">Subscribe our newsletter:</p>
+                    <!-- <p class="mil-light-soft mil-up mil-mb-30">Subscribe our newsletter:</p> -->
 
-                    <form class="mil-subscribe-form mil-up">
+                    <!-- <form class="mil-subscribe-form mil-up">
                         <input type="text" placeholder="Enter our email">
                         <button type="submit" class="mil-button mil-icon-button-sm mil-arrow-place"></button>
                     </form> -->
@@ -283,7 +283,10 @@
                                         <a href="{% url 'station_search' %}">Police Stations</a>
                                     </li>
                                     <li class="mil-up">
-                                        <a href="complaint_form">Complaints</a>
+                                        <a href="{% url 'complaint_form' %}">Complaints</a>
+                                    </li>
+                                    <li class="mil-up">
+                                        <a href="{% url 'logout' %}">Logout</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -331,13 +334,12 @@
                         <div class="mil-mb-30">
                             <ul class="mil-social-icons mil-up">
                                 <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-behance"></i></a></li>
-
-<li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-dribbble"></i></a></li>
+                                <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-dribbble"></i></a></li>
                                 <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-twitter"></i></a></li>
                                 <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-github"></i></a></li>
                             </ul>
                         </div>
-                        <p class="mil-light-soft mil-up">© Copyright 2023 - Mil. All Rights Reserved.</p>
+                        <p class="mil-light-soft mil-up">© Copyright 2023 -  All Rights Reserved.</p>
                     </div>
 
                 </div>

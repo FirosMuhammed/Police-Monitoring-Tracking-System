@@ -70,7 +70,7 @@
         <div class="mil-menu-frame">
             <!-- frame clone -->
              <div class="mil-frame-top">
-                <a href="home-1.html" class="mil-logo">A.</a>
+                <a href="{% url 'staffhome' %}" class="mil-logo">KP.</a>
                 <div class="mil-menu-btn">
                     <span></span>
                 </div>
@@ -117,7 +117,7 @@
                                     <!-- <li class="mil-has-children">
                                         <a href="#">Public Petitions</a>
                                         <ul> -->
-                                            <li><a href="{% url 'petitionview' %}">View Petitions</a></li>
+                                            <!-- <li><a href="{% url 'petitionview' %}">View Petitions</a></li> -->
                                             <!-- <li><a href="publication.html">Publication</a></li> -->
                                         <!-- </ul>
                                     </li> -->
@@ -131,14 +131,14 @@
                                        
                                     </li>
                                     
-                                    <li class="mil-has-children">
+                                    <!-- <li class="mil-has-children">
                                         <a href="#.">Other pages</a>
                                         <ul>
                                             <li><a href="team.html">Team</a></li>
                                             <li><a href="contact.html">Contact</a></li>
                                             <li><a href="404.html">404</a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </nav>
 
@@ -214,7 +214,7 @@
         <!-- frame -->
         <div class="mil-frame">
             <div class="mil-frame-top">
-                <a href="home-1.html" class="mil-logo">A.</a>
+                <a href="#top" class="mil-logo">KP.</a>
                 <div class="mil-menu-btn">
                     <span></span>
                 </div>
@@ -260,20 +260,20 @@
 
 <br><br>
 <!-- footer -->
-  <footer class="mil-dark-bg">
+<footer class="mil-dark-bg">
     <div class="mi-invert-fix">
         <div class="container mil-p-120-60">
             <div class="row justify-content-between">
                 <div class="col-md-4 col-lg-4 mil-mb-60">
 
-                    <div class="mil-muted mil-logo mil-up mil-mb-30">Ashley.</div>
+                    <div class="mil-muted mil-logo mil-up mil-mb-30">POLICE MONITORING & TRACKING SYSTEM</div>
 
-                    <p class="mil-light-soft mil-up mil-mb-30">Subscribe our newsletter:</p>
+                    <!-- <p class="mil-light-soft mil-up mil-mb-30">Subscribe our newsletter:</p>
 
                     <form class="mil-subscribe-form mil-up">
                         <input type="text" placeholder="Enter our email">
                         <button type="submit" class="mil-button mil-icon-button-sm mil-arrow-place"></button>
-                    </form>
+                    </form> -->
 
                 </div>
                 <div class="col-md-7 col-lg-6">
@@ -283,25 +283,28 @@
                             <nav class="mil-footer-menu mil-mb-60">
                                 <ul>
                                     <li class="mil-up mil-active">
-                                        <a href="home-1.html">Home</a>
+                                        <a href="{% url 'staffhome' %}">Homepage</a>
                                     </li>
                                     <li class="mil-up">
-                                        <a href="portfolio-1.html">Portfolio</a>
+                                        <a href="{% url 'staffprofile' %}">Profile</a>
                                     </li>
                                     <li class="mil-up">
-                                        <a href="services.html">Services</a>
+                                        <a href="{% url 'uploadcriminals' %}">Update Criminals</a>
                                     </li>
                                     <li class="mil-up">
-                                        <a href="contact.html">Contact</a>
+                                        <a href="{% url 'view_assigned_petition' %}">Assigned Duties</a>
                                     </li>
+                                   
                                     <li class="mil-up">
-                                        <a href="blog.html">Blog</a>
+                                        <a href="{% url 'logout' %}">Logout </a>
                                     </li>
+                                    
+                                    
                                 </ul>
                             </nav>
 
                         </div>
-                        <div class="col-md-6 col-lg-5">
+                        <!-- <div class="col-md-6 col-lg-5">
 
                             <ul class="mil-menu-list mil-up mil-mb-60">
                                 <li><a href="#." class="mil-light-soft">Privacy Policy</a></li>
@@ -310,7 +313,7 @@
                                 <li><a href="#." class="mil-light-soft">Careers</a></li>
                             </ul>
 
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -322,16 +325,16 @@
 
                         <div class="col-md-6 col-lg-5 mil-mb-60">
 
-                            <h6 class="mil-muted mil-up mil-mb-30">Canada</h6>
+                            <h6 class="mil-muted mil-up mil-mb-30">Kerala</h6>
 
-                            <p class="mil-light-soft mil-up">71 South Los Carneros Road, California <span class="mil-no-wrap">+51 174 705 812</span></p>
+                            <!-- <p class="mil-light-soft mil-up">71 South Los Carneros Road, California <span class="mil-no-wrap">+51 174 705 812</span></p> -->
 
                         </div>
                         <div class="col-md-6 col-lg-5 mil-mb-60">
 
-                            <h6 class="mil-muted mil-up mil-mb-30">Germany</h6>
+                            <h6 class="mil-muted mil-up mil-mb-30">India</h6>
 
-                            <p class="mil-light-soft mil-up">Leehove 40, 2678 MC De Lier, Netherlands <span class="mil-no-wrap">+31 174 705 811</span></p>
+                            <!-- <p class="mil-light-soft mil-up">Leehove 40, 2678 MC De Lier, Netherlands <span class="mil-no-wrap">+31 174 705 811</span></p> -->
 
                         </div>
                     </div>
@@ -343,19 +346,17 @@
                         <div class="mil-mb-30">
                             <ul class="mil-social-icons mil-up">
                                 <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-behance"></i></a></li>
-
-<li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-dribbble"></i></a></li>
+                                <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-dribbble"></i></a></li>
                                 <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-twitter"></i></a></li>
                                 <li><a href="#." target="_blank" class="social-icon"> <i class="fab fa-github"></i></a></li>
                             </ul>
                         </div>
-                        <p class="mil-light-soft mil-up">© Copyright 2023 - Mil. All Rights Reserved.</p>
+                        <p class="mil-light-soft mil-up">© Copyright 2023 -  All Rights Reserved.</p>
                     </div>
 
                 </div>
             </div>
         </div>
-    </div>
 </footer>
 <!-- footer end -->
 

@@ -1,6 +1,7 @@
 {% extends 'station_header.html' %}
 {% block content %}
 {% load static %}
+{% load custom_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,15 +42,13 @@
         }
 
         a {
-    text-decoration: none;
-    color: black; /* Optional: Set a color for the link */
-}
+            text-decoration: none;
+            color: black;
+        }
 
-/* Optional: Remove underline on hover */
-a:hover {
-    text-decoration: none;
-}
-
+        a:hover {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -74,9 +73,7 @@ a:hover {
                     <th>Case Status</th>
                     <th>User Name</th>
                     <th>User Contact</th>
-                    <th></th>
-                    <!-- <th></th>
-                    <th></th> -->
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -93,31 +90,18 @@ a:hover {
                     <td>{{ petition.total_value_property }}</td>
                     <td>{{ petition.case_status }}</td>
 
-                    {% with user_details|dictsort:"login_userid.id"|first as user %}
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.contact }}</td>
+                    {% with user=user_details_dict|dict_get:petition.login_userid.id %}
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.contact }}</td>
                     {% endwith %}
 
-                    <!-- <td >
-                        <a href="fir/{{ petition.id }}" class="btn btn-custom btn-create-fir">Create FIR</a>
-                    </td>
                     <td>
-                        <a href="case_status/{{ petition.id }}" class="btn btn-custom btn-status">Status</a>
-                    </td>  -->
-                    <!-- <td >
-                        <a href="{% url 'assign_staff' petition.id %}" class="btn btn-custom btn-create-fir">Assign Staff</a>
-                    </td> -->
-
-
-                    <td>
-                        {% if petition. %}
+                        {% if petition.id in assigned_petition_ids %}
                             <button class="btn btn-secondary" disabled>Staff Assigned</button>
                         {% else %}
                             <a href="{% url 'assign_staff' petition.id %}" class="btn btn-custom btn-create-fir">Assign Staff</a>
                         {% endif %}
                     </td>
-
-
                 </tr>
                 {% endfor %}
             </tbody>
@@ -127,5 +111,4 @@ a:hover {
 
 </body>
 </html>
-
 {% endblock %}

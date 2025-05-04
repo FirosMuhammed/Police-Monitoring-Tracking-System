@@ -39,6 +39,15 @@
         .btn-status:hover {
             background-color: #218838;
         }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -48,7 +57,7 @@
     <br><br><br>
     
     <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover">
+        <table class="table table-bordered table-striped table-hover" border="1">
             <thead class="table-dark">
                 <tr>
                     <th>Case</th>
@@ -65,7 +74,6 @@
                     <th>User Contact</th>
                     <th></th>
                     <th></th>
-                    
                 </tr>
             </thead>
             <tbody>
@@ -87,7 +95,13 @@
                     <td>{{ petition.petition_id.login_userid.user_as_loginid.contact }}</td>
             
                     <td>
-                        <a href="fir/{{ petition.petition_id.id }}" class="btn btn-custom btn-create-fir">Create FIR</a>
+                        {% if petition.petition_id.is_fir_created %}
+                            <!-- If FIR is created, show this text and disable the button -->
+                            <button class="btn btn-secondary" disabled>FIR Created</button>
+                        {% else %}
+                            <!-- Else show "Create FIR" button -->
+                            <a href="{% url 'file_fir' petition.petition_id.id %}" class="btn btn-custom btn-create-fir">Create FIR</a>
+                        {% endif %}
                     </td>
                     <td>
                         <a href="case_status/{{ petition.petition_id.id }}" class="btn btn-custom btn-status">Status</a>
@@ -95,7 +109,6 @@
                 </tr>
                 {% endfor %}
             </tbody>
-            
         </table>
     </div>
 </div>

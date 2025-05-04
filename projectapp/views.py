@@ -163,32 +163,46 @@ def station_profile(request):
             form2 = station_email_form(instance=login_details)
         return render(request,'edit_station.html',{'form' : form,'form2' : form2})
 
+# In your staffreg view
 def staffreg(request):
-    if request.method=='POST':
-        form=stafform(request.POST)
-        logins=loginForm(request.POST)
+    if request.method == 'POST':
+        form = stafform(request.POST)
+        logins = loginForm(request.POST)
+
         if form.is_valid() and logins.is_valid():
             try:
-                a=logins.save(commit=False)
-                a.usertype=1
+                # Save the login instance for the staff (usertype = 1)
+                a = logins.save(commit=False)
+                a.usertype = 1
                 a.save()
-                b=form.save(commit=False)
-                selected_station = form.cleaned_data['staff_station'] 
-                b.staff_station = selected_station
-                
+
+                # Save the staff registration form (without committing to DB yet)
+                b = form.save(commit=False)
+
+                # Fix: Get the related login instance from the selected police station
+                selected_station = form.cleaned_data['staff_station']  # this is a police_station instance
+                b.staff_station = selected_station.login_id  # Assign the login instance associated with the police_station
+
+                # Save the staff form with the associated login
                 b.staff_login_id = a
                 b.save()
+
                 messages.success(request, 'Staff registration successful!')
                 return redirect('home')
+
             except Exception as e:
                 messages.error(request, f'Staff registration failed: {e}')
+
         else:
             messages.error(request, 'Form validation failed. Please check the input fields.')
-    
+
     else:
-         form=stafform()
-         logins=loginForm()
-    return render(request,'staff_reg.html',{'forms':form,'log':logins})
+        form = stafform()
+        logins = loginForm()
+
+    return render(request, 'staff_reg.html', {'forms': form, 'log': logins})
+
+
 
 
 def staff_home(request):
@@ -319,8 +333,13 @@ def admin_complaintview(request):
 
 
 def user_criminal_view(request):
-    data = criminals.objects.all()
-    return render(request,'view_criminal_details.html',{'details' : data})
+    # data = staff_reg.objects.all()
+    data1 = request.session.get('userid')
+    if not data1:  # If user is not logged in
+        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
+    else:
+        data = criminals.objects.all()
+        return render(request,'view_criminal_details.html',{'details' : data})
 
 def staff_view(request):
     # Get the station ID from the session
@@ -415,15 +434,29 @@ def edit_duty(request,id):
 
 
 def search_stations(request):
-    query=request.GET.get('q','')
-    results=police_station.objects.all()
+    data = request.session.get('userid')
+    if not data:  # If user is not logged in
+        return redirect('login')
+
+    query = request.GET.get('q', '')
+    results = police_station.objects.all()
+
     if query:
-        results=results.filter(
+        results = results.filter(
             Q(addressline1__icontains=query) |
             Q(district__icontains=query) |
-            Q(city__icontains=query) 
+            Q(city__icontains=query)
         )
-    return render(request,'search_station.html', {'results': results, 'query':query})
+
+    show_alert = request.session.pop('enquiry_success', False)
+
+    return render(request, 'search_station.html', {
+        'results': results,
+        'query': query,
+        'show_alert': show_alert
+    })
+
+
     
 
 def file_petition(request, id):
@@ -451,26 +484,33 @@ def file_petition(request, id):
 
 
 
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import login, police_station, petition, user_reg
+
 def view_petition(request):
     staffid = request.session.get('stationid')
-    print(staffid)
-    if not staffid:  # If user is not logged in
-        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
- 
-    station = get_object_or_404(login, id=staffid)
-    print(station)
-    staff = get_object_or_404(police_station, login_id=station) 
-    print(staff)
-    petitions = petition.objects.filter(login_id=station)
-    print(petitions)
-    user_details = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
+    if not staffid:
+        return redirect('login')
 
+    station = get_object_or_404(login, id=staffid)
+    staff = get_object_or_404(police_station, login_id=station)
+    petitions = petition.objects.filter(login_id=station)
+
+    # Check which petitions already have assigned staff
+    assigned_petitions = staff_assign.objects.filter(petition_id__in=petitions)
+    assigned_petition_ids = {assignment.petition_id.id for assignment in assigned_petitions}
+
+    # User data mapping
+    user_qs = user_reg.objects.filter(login_userid__in=petitions.values_list('login_userid', flat=True))
+    user_details_dict = {user.login_userid_id: user for user in user_qs}
 
     return render(request, 'staffview_petition.html', {
         'petitions': petitions,
-        'user_details': user_details
-    }
-    )
+        'user_details_dict': user_details_dict,
+        'assigned_petition_ids': assigned_petition_ids
+    })
+
+
 
     
 
@@ -666,27 +706,41 @@ def reply_complaint(request,id):
 
 
 
-def make_enquiry(request, login_id):
-    user_id=request.session.get('userid')
-    if not user_id:  # If user is not logged in
-        return redirect('login')  # Redirect to login page (update 'login' with your login URL name)
-    else:
-        login_details=get_object_or_404(login,id=user_id)
-        station = get_object_or_404(login,id=login_id)
-        # print(login_details.id)
-        # print(station.login_id)
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from .models import login
+from .forms import EnquiryForm
 
-        if request.method == 'POST':
-            form = EnquiryForm(request.POST, request.FILES)
-            if form.is_valid():
-                a=form.save(commit=False)
-                a.user_id=login_details
-                a.station_id=station
+# In views.py
+def make_enquiry(request, login_id):
+    user_id = request.session.get('userid')
+    if not user_id:
+        return redirect('login')
+
+    login_details = get_object_or_404(login, id=user_id)
+    station = get_object_or_404(login, id=login_id)
+
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                a = form.save(commit=False)
+                a.user_id = login_details
+                a.station_id = station
                 a.save()
-                return redirect('station_search') 
+                # Set the flag for successful enquiry submission
+                request.session['enquiry_success'] = True  
+                return redirect('station_search')
+            except Exception as e:
+                messages.error(request, f"Failed to send enquiry: {str(e)}")
         else:
-            form = EnquiryForm()
-        return render(request, 'make_enquiry.html', {'forms': form})
+            messages.error(request, "Form validation failed.")
+    else:
+        form = EnquiryForm()
+
+    return render(request, 'make_enquiry.html', {'forms': form})
+
+
 
 
 
@@ -880,17 +934,17 @@ def assign_staff(request, id):
     data1 = request.session.get('stationid')
     petitionid = get_object_or_404(petition, id=id)
 
-    if not data1:
-        return redirect('login')
-    else:
-        staffdata = get_object_or_404(login, id=data1)
-        data = staff_reg.objects.filter(staff_station=staffdata)
+    # if not data1:
+    #     return redirect('login')
+    # else:
+    staffdata = get_object_or_404(login, id=data1)
+    data = staff_reg.objects.filter(staff_station=staffdata)
         
-        if staff_assign.objects.filter(petition_id=petitionid).exists():
-            request.session['staff_already_assigned'] = True  # Set flag
-            return redirect('petitionview')
+    if staff_assign.objects.filter(petition_id=petitionid).exists():
+        request.session['staff_already_assigned'] = True  # Set flag
+        return redirect('petitionview')
 
-        return render(request, 'assign_staff.html', {'details': data , 'petition': petitionid.id})
+    return render(request, 'assign_staff.html', {'details': data , 'petition': petitionid.id})
     
 def assign_staff_process(request,staffid,petitionid):
     id_petition = get_object_or_404(petition,id=petitionid)
@@ -923,11 +977,24 @@ def assign_staff_process(request,staffid,petitionid):
 #     return redirect('petitionview')
 
 
+# Update the view
+# Update the view
 def view_assigned_petition(request):
     data = request.session.get('staffid')
-    staff = get_object_or_404(staff_reg, staff_login_id=data)
-    petition_data = staff_assign.objects.filter(staff_id=staff).select_related('petition_id__login_userid')
-    return render(request, 'assigned_petitions.html', {'data': petition_data})
+    if not data:  # If user is not logged in
+        return redirect('login')
+    else:
+        staff = get_object_or_404(staff_reg, staff_login_id=data)
+        petition_data = staff_assign.objects.filter(staff_id=staff).select_related('petition_id__login_userid')
+
+        # Check if the FIR is created for each petition
+        for petition in petition_data:
+            # Check if FIR exists for the petition using the reverse relationship (fir_set)
+            petition.petition_id.is_fir_created = fir.objects.filter(public_petition_id=petition.petition_id).exists()
+
+        return render(request, 'assigned_petitions.html', {'data': petition_data})
+
+
   
     
 import cv2,os
@@ -1100,6 +1167,15 @@ def match_fir(request):
     }
     
     return render(request, 'FIRcheck.html', context)
+
+
+
+
+
+
+def admin_dashboard(request):
+    user_count = login.objects.filter(usertype=3).count()  # Adjust filter as needed
+    return render(request, 'admin_home.html', {'user_count': user_count})
 
 
 
